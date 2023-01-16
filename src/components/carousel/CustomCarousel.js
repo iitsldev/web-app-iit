@@ -33,7 +33,7 @@ function CustomCarousel() {
     $(window).on('load resize orientationchange', normalizeSlideHeights);
     setTimeout(() => {
       normalizeSlideHeights();
-    }, 350);
+    }, 400);
     return () => {
       $(window).off('load resize orientationchange');
     };
