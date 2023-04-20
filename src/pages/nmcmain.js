@@ -44,10 +44,28 @@ export default function NMCMain() {
           <Tab eventKey="English" title="English">
             <h5>Calling Applications for the Nissayamuttaka Course (NmC)</h5>
             <p>
+            The first semester of the Nissayamuttaka monastic training program 
+            conducted by the International Institute of Theravada is going to be 
+            successfully completed in a few days.
+            </p>
+            <p>
+              At the beginning of the second semester, we have decided to provide 
+              the opportunity for a few more students to join the program at the request of many.
+            </p>
+            <p>
+            Monks who have a strong desire to engage in this program can fill the form below 
+            and <a href="#submit"><strong>submit</strong></a> the application before <strong>30th of April.</strong>
+            </p>
+            <p>
+            The recruitment is done after an entrance exam on basic Pali and 
+            Dhamma-Vinaya knowledge. We provide the books to be studied for the exam.
+            </p>
+          {/*<p>
               The International Institute of Theravada is calling applications
               for the Nissayamuttaka monastic education program which will be
               commencing from December 2022.
-            </p>
+            </p> */}
+            <h5>Course Details</h5>
             <p>
               This program is designed to impart knowledge on Theravada
               teachings in bhikkhus and sāmaṇeras and to train them in monastic
@@ -215,11 +233,11 @@ export default function NMCMain() {
                   including copy of your photo.
                 </li>
               </ul>
-              <p>
+              <p id="submit">
                 - Application Form:
                 <Button
                   variant="link"
-                  href="https://drive.google.com/uc?export=download&id=1yru07fK9JoW9uiYKLeoQFWgBp4XAhkaX"
+                  href="https://drive.google.com/uc?export=download&id=1OdY7Q64MDvG3PXCbpg77XUNi8a4lIsX8"
                   target="_blank"
                 >
                   Download Form
@@ -278,7 +296,7 @@ export default function NMCMain() {
             </p>
             <p>
               <b>
-                - Deadline for application submission is 30th of September 2022.
+                - Deadline for application submission is 30th of April 2023.
                 <br />- During the first six years of the course new
                 recruitments will not be done.
               </b>
@@ -287,10 +305,24 @@ export default function NMCMain() {
           <Tab eventKey="Sinhala" title="සිංහල">
             <h5>නිශ්‍රය මුක්තක පාඨමාලාව (NmC) සඳහා අයදුම්පත් කැඳවීම</h5>
             <p>
+            අන්තර්ජාතික ථෙරවාද ධර්මායතනය විසින් පවත්වනු ලබන නිස්සයමුත්තක 
+            භික්ෂු පුහුණු වැඩසටහනේ පළමු සය මස තව දින කිහිපයකින් සාර්ථකව අවසන් වීමට නියමිත ය. 
+            </p>
+            <p>
+            බොහෝ දෙනා කළ ඉල්ලීම මත දෙවැනි සය මස ආරම්භයේ දී තවත් සිසුන් 
+            කිහිප නමකට ධර්මායතනයට සම්බන්ධ වීම සඳහා අවස්ථාව සලසා දීමට තීරණය කළෙමු. 
+            </p>
+            <p>
+            පර්යාප්ති ප්‍රතිපත්ති ශාසනික කටයුතුවල යෙදීමට දැඩි ඕනෑකමක් ඇති භික්ෂු 
+            සාමණේරයන් වහන්සේලා වෙබ් අඩවියේ ඇති <a href="#submit_sinhala"><strong>පෝරමය</strong></a> පුරවා  
+            <strong> අප්‍රේල් මස 30</strong> වන දිනට පෙර යොමු කරන්න. 
+            </p>
+            {/* <p>
               අන්තර්ජාතික ථේරවාද ධර්මායතනය විසින් 2022 දෙසැම්බර් මාසයේ ආරම්භ
               කරනු ලැබෙන නිශ්‍රය මුක්තක භික්ෂු අධ්‍යාපන වැඩසටහන සඳහා අයදුම්පත්
               කැඳවනු ලැබේ.
-            </p>
+            </p> */}
+            <h5>පාඨමාලාව</h5>
             <p>
               මෙය භික්ෂු සාමණේරයන් වහන්සේලා ධර්ම විනය දැනුමෙන් සහ ආරාමීය
               පුහුණුවෙන් පෝෂණය කොට “නිශ්‍රය මුක්තක” භික්ෂුවක් සතුව තිබිය යුතු
@@ -447,11 +479,11 @@ export default function NMCMain() {
               </li>
             </ul>
 
-            <p>
+            <p id="submit_sinhala">
               - අයදුම්පත:
               <Button
                 variant="link"
-                href="https://drive.google.com/uc?export=download&id=1ockGbt6-kAzW3J3TP8IKTVpTPwwcVXdc"
+                href="https://drive.google.com/uc?export=download&id=1ZWiCNAVnMKea4gEn4oD3kjYKHyhBdvWC"
                 target="_blank"
               >
                 අයදුම්පත බා ගත කර ගන්න
@@ -509,7 +541,7 @@ export default function NMCMain() {
               </Button>
             </p>
             <p>
-              <b>- අයදුම්පත් භාර ගන්නා අවසාන දිනය - 2022 සැප්තැම්බර් මස 30.</b>
+              <b>- අයදුම්පත් භාර ගන්නා අවසාන දිනය - 2023 අප්‍රේල් මස 30.</b>
               <br />
               <b>
                 - පලමු වසර 6 සදහා පාඨමාලාව අතරතුර අලුතින් බදවාගැනීම් සිදු නොකෙරේ.
