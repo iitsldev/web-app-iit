@@ -281,7 +281,7 @@ export default function NMCMain() {
                 </p>
                 <Button
                   variant="primary"
-                  href="https://forms.gle/TrK87pYRfcyZ3R3J8"
+                  href="https://forms.gle/zaTTWjU3F1Pb1Fp46"
                   target="_blank"
                 >
                   Go to Form
@@ -483,7 +483,7 @@ export default function NMCMain() {
               - අයදුම්පත:
               <Button
                 variant="link"
-                href="https://drive.google.com/uc?export=download&id=1ZWiCNAVnMKea4gEn4oD3kjYKHyhBdvWC"
+                href="https://forms.gle/r6vYrEiuXyDb5KRV7"
                 target="_blank"
               >
                 අයදුම්පත බා ගත කර ගන්න
