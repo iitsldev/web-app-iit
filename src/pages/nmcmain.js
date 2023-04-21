@@ -42,7 +42,7 @@ export default function NMCMain() {
           className="mb-3"
         >
           <Tab eventKey="English" title="English">
-            <h5>Calling Applications for the Nissayamuttaka Course (NmC)</h5>
+            <h5>Calling Applications for the Nissayamuttaka Program (Nm Program)</h5>
             <p>
             The first semester of the Nissayamuttaka monastic training program 
             conducted by the International Institute of Theravada is going to be 
