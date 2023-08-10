@@ -59,7 +59,7 @@ export default function NMCMain() {
             </p>
             <p>
             Monks who have a strong desire to engage in this program can fill the form below 
-            and <a href="#submit"><strong>submit</strong></a> the application before <strong>July 31, 2023.</strong>
+            and <a href="#submit"><strong>submit</strong></a> the application before <strong>August 20, 2023.</strong>
             </p>
 
           {/*<p>
@@ -298,7 +298,7 @@ export default function NMCMain() {
             </p>
             <p>
               <b>
-                - Deadline for application submission is 31th of July 2023.
+                - Deadline for application submission is extended until the 20th of August 2023.
                 {/*<br />- During the first six years of the course new
                 recruitments will not be done. */}
               </b>
@@ -321,7 +321,7 @@ export default function NMCMain() {
             <p>
             පර්යාප්ති ප්‍රතිපත්ති ශාසනික කටයුතුවල යෙදීමට දැඩි ඕනෑකමක් ඇති භික්ෂු 
             සාමණේරයන් වහන්සේලා වෙබ් අඩවියේ ඇති <a href="#submit_sinhala"><strong>පෝරමය</strong></a> පුරවා  
-            <strong>2023 ජූලි මස 31</strong> වන දිනට පෙර යොමු කරන්න. 
+            <strong>2023 අගෝස්තු මස 20</strong> වන දිනට පෙර යොමු කරන්න. 
             </p>
             {/* <p>
               අන්තර්ජාතික ථේරවාද ධර්මායතනය විසින් 2022 දෙසැම්බර් මාසයේ ආරම්භ
@@ -547,7 +547,7 @@ export default function NMCMain() {
               </Button>
             </p>
             <p>
-              <b>- අයදුම්පත් භාර ගන්නා අවසාන දිනය - 2023 ජූලි මස 31.</b>
+              <b>- අයදුම්පත් භාර ගන්නා අවසාන දිනය 2023 අගෝස්තු මස 20 තෙක් දීර්ඝ කර ඇත.</b>
               <br />
               {/*<b>
                 - පලමු වසර 6 සදහා පාඨමාලාව අතරතුර අලුතින් බදවාගැනීම් සිදු නොකෙරේ.
