@@ -142,7 +142,7 @@ export default function Institute() {
             />
           </Col> */}
 
-          <Col key="8">
+         {/* <Col key="8">
             <AcademicProfile
               body="Diploma in Buddha
               Dhamma at the International Theravāda Buddhist Missionary
@@ -155,7 +155,7 @@ export default function Institute() {
               profileImage="/profilepic/SumedhalokaThero.webp"
               title="Head of the Language Department"
             />
-          </Col>
+          </Col>*/}
 
           <Col key="9">
             <AcademicProfile
@@ -173,7 +173,7 @@ export default function Institute() {
             />
           </Col>
 
-          <Col key="10">
+          {/* <Col key="10">
             <AcademicProfile
               body="Diploma in
               Buddha Dhamma, International Theravāda Buddhist
@@ -185,7 +185,7 @@ export default function Institute() {
               profileImage="/profilepic/SangarathanaThero.webp"
               title="Head in Monastic Well-Being"
             />
-          </Col>
+          </Col> */}
         </Row>
 
         <Row key="11" className="inst-academic-row">
