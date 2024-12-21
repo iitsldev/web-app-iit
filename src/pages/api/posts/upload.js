@@ -44,8 +44,8 @@ export default async function handler(req, res) {
 
             // Send back Cloudinary response (URL and other details)
             res.status(200).json({
-                url: result.secure_url,  // The secure URL of the uploaded image
-                public_id: result.public_id, // Cloudinary public ID of the image
+                url: result.secure_url,
+                public_id: result.public_id,
                 width: result.width, // Image width
                 height: result.height, // Image height
             });
