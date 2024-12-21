@@ -1,0 +1,64 @@
+.newsAndEventsPostTitle {
+  font-size: 36px;
+  font-weight: bold;
+  color: #532F00;
+  margin-bottom: 10px;
+}
+
+.newsAndEventsPostSubTitle {
+  font-size: 16px;
+  color: #616057;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.typeNews,
+.typeEvent {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.typeNews {
+  background-color: #FFD607;
+  color: #532F00;
+}
+
+.typeEvent {
+  background-color: #532F00;
+  color: #FFD607;
+}
+
+.newsAndEventsPostRow {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.newsAndEventsPostRowImg {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.newsAndEventsPostRowText {
+  flex: 1;
+}
+
+.newsAndEventsPostPara {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #545454;
+  white-space: pre-wrap;
+}
+
+@media (min-width: 768px) {
+  .newsAndEventsPostRow {
+    flex-direction: row;
+  }
+
+  .newsAndEventsPostRowImg {
+    width: 40%;
+  }
+}

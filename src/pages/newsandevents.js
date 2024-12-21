@@ -1,47 +1,52 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import * as fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-//import TimeLine from '../components/timelineComponent/TimelineComponent';
 import { Chrono } from 'react-chrono';
 import { Container } from 'react-bootstrap';
 import MainLayoutSection from '../components/maincommonlayout/MainCommonLayoutSection';
-import newsAndEvents from '../data/newsAndEventsData.json';
-import React, { useState } from 'react';
 
-export default function NewsAndEvents() {
-  const { t, lang } = useTranslation();
+export default function NewsAndEvents({ newsAndEvents }) {
+  const { t } = useTranslation();
   const router = useRouter();
 
-  var array = [];
-  newsAndEvents.map((element, index) => {
-    if (element.type.indexOf('Event') > -1) {
-      var item = {};
-      item.title = element.date;
-      item.cardTitle = element.title;
-      item.cardDetailedText = element.description;
-      item.dateStr = element.dateStr;
-      item.url = 'http://www.history.com'; // '/newsandevents/' + index +1;
-      item.media = {
+  // Transform the data for Chrono timeline
+  const timelineItems = newsAndEvents
+    .filter(item => item.type === 'Event')
+    .map(element => ({
+      title: element.date,
+      cardTitle: element.title,
+      cardDetailedText: element.description,
+      dateStr: element.dateStr,
+      url: `/newsandevents/${element.slug}`,
+      media: element.image ? {
         type: 'IMAGE',
         source: {
           url: element.image,
         },
-      };
-      array.push(item);
-    }
-  });
+      } : null
+    }))
+    .sort((a, b) => new Date(b.dateStr) - new Date(a.dateStr));
 
-  const [arrayNews, setArrayNews] = useState([]);
-  const [arrayEvents, setArrayEvents] = useState([]);
-
-  var newArr = array.sort(function (a, b) {
-    return new Date(b.dateStr) - new Date(a.dateStr);
-  });
-
-  arrayEvents.sort(function (a, b) {
-    return new Date(b.dateStr) - new Date(a.dateStr);
-  });
+  const newsItems = newsAndEvents
+    .filter(item => item.type === 'News')
+    .map(element => ({
+      title: element.date,
+      cardTitle: element.title,
+      cardDetailedText: element.description,
+      dateStr: element.dateStr,
+      url: `/newsandevents/${element.slug}`,
+      media: element.image ? {
+        type: 'IMAGE',
+        source: {
+          url: element.image,
+        },
+      } : null
+    }))
+    .sort((a, b) => new Date(b.dateStr) - new Date(a.dateStr));
 
   return (
     <div>
@@ -61,8 +66,25 @@ export default function NewsAndEvents() {
           <Container className="news-and-events-container-timeline">
             <p className="news-and-events-chrono-title">Timeline</p>
             <Chrono
-              items={newArr}
+              items={timelineItems}
               mode="HORIZONTAL"
+              theme={{
+                primary: '#532F00',
+                secondary: '#FFD607',
+                cardBgColor: 'transparent',
+                cardForeColor: '#545454',
+                titleColor: '#616057',
+              }}
+            />
+            {/* <TimeLine /> */}
+          </Container>
+        </div>
+        <div>
+          <Container className="news-and-events-container-timeline">
+            <p className="news-and-events-chrono-title">Timeline</p>
+            <Chrono
+              items={newsItems}
+              mode="VERTICAL"
               theme={{
                 primary: '#532F00',
                 secondary: '#FFD607',
@@ -81,12 +103,30 @@ export default function NewsAndEvents() {
   );
 }
 
-export async function getServerSideProps(context) {
-  // const products = await fetch('https://fakestoreapi.com/products')
-  // .then(res=>res.json());
+export async function getStaticProps() {
+  const newsDirectory = path.join(process.cwd(), 'news_events');
+  const filenames = fs.readdirSync(newsDirectory);
+
+  const newsAndEvents = filenames.map(filename => {
+    const filePath = path.join(newsDirectory, filename);
+    const fileContents = fs.readFileSync(filePath, 'utf8');
+    const { data, content } = matter(fileContents);
+
+    // Generate slug from filename (remove .md and get the rest)
+    const slug = filename.replace(/\.md$/, '');
+
+    return {
+      slug,
+      content: content.trim(),
+      ...data
+    };
+  });
+
   return {
     props: {
-      //products
+      newsAndEvents
     },
+    // Revalidate every hour
+    revalidate: 3600
   };
 }
