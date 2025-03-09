@@ -1,11 +1,10 @@
 import React from 'react';
 import { Container, Row, Card } from 'react-bootstrap';
-import newsAndEvents from '../../data/newsAndEventsData.json';
 import styles from './NewsAndEvents.module.css';
 import Carousel from 'react-multi-carousel';
 import { CustomButtonGroup } from '../customarrow/CustomArrows';
 
-const NewsAndEventsComponent = () => {
+const NewsAndEventsComponent = ({ newsAndEvents }) => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -26,8 +25,7 @@ const NewsAndEventsComponent = () => {
   };
 
   const renderCard = (card, index) => {
-
-const indexval = index;
+    const indexval = index;
     return (
       <Card
         className={styles.cardBody}
@@ -43,13 +41,13 @@ const indexval = index;
           <span className={styles.typeEvent}> {card.type}</span>
         )}
         <Card.Subtitle className={styles.custSubTitle}>
-          {card.date}
+          {card.date.slice(0, 10)}
         </Card.Subtitle>
         <Card.Title className={styles.custTitle}>{card.title}</Card.Title>
         <Card.Text className={styles.custDescription}>
-          {`${card.description.slice(0, 200)}...`}
+          {`${card.description.replace(/<[^>]*>/g, '').slice(0, 200)}...`}
         </Card.Text>
-        <Card.Link href={`/newsandevents/${indexval}`} target="_blank">Read more...</Card.Link>
+        <Card.Link href={`/newsandevents/${card.id}`} target="_blank">Read more...</Card.Link>
       </Card>
     );
   };

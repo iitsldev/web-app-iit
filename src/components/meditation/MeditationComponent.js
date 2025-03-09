@@ -2,13 +2,11 @@ import React, { useRef } from 'react';
 import { Container } from 'react-bootstrap';
 import styles from './MeditationComponent.module.css';
 import VideoCardComponent from '../videoCardComponent/videoCardComponent';
-import cardInfo from '../../data/meditationData.json';
 import Slider from '../slider/slider';
 
-function MeditationComponent() {
-  // Create an array for card components to view in
-  // card slider.
-  const cards = cardInfo.map((data, index) => {
+function MeditationComponent({ meditations }) {
+  // Create an array for card components to view in card slider
+  const cards = meditations.map((data, index) => {
     return <VideoCardComponent key={index} cardData={data} />;
   });
 
@@ -31,7 +29,7 @@ function MeditationComponent() {
     <div>
       <Container>
         <div className={styles.meditationHelp}>
-          Are you looking for guidance for your mediation? IIT is willing to render a helping hand in your noble quest.
+          Are you looking for guidance for your meditation? IIT is willing to render a helping hand in your noble quest.
         </div>
         <div className={styles.meditationContainer} id="samatha-meditation">
           <div className={styles.meditationInnerContainer}>

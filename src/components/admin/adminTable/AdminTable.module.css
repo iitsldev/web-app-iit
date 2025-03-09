@@ -1,0 +1,10 @@
+.adminTable {
+    margin-bottom: 0;
+}
+
+/* Add to existing media queries */
+@media (max-width: 575px) {
+    .adminTable {
+        font-size: 0.875rem;
+    }
+}

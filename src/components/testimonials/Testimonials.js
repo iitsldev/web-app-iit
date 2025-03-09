@@ -1,31 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Carousel, Row, Col } from 'react-bootstrap';
-import data from '../../data/testimonialsData.json';
+import React, { useEffect } from 'react';
+import { Carousel } from 'react-bootstrap';
 import styles from './Testimonials.module.css';
 import ReactPlayer from 'react-player';
-import { BsFillChatRightQuoteFill } from 'react-icons/bs';
 import $ from 'jquery';
+import sanitizeHtml from 'sanitize-html';
 
-const Testomonials = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [playLabel, setPlayLable] = useState('Play');
-
-  const handlePlaying = () => {
-    if (isPlaying) {
-      setIsPlaying(false);
-      setPlayLable('Play');
-    } else {
-      setIsPlaying(true);
-      setPlayLable('Stop');
-    }
-  };
-
+const Testimonials = ({ testimonials }) => {
   function normalizeSlideHeights() {
     $('.testimonial-carousel.carousel').each(function () {
       var items = $('.carousel-item', this);
-      // reset the height
       items.css('height', 'auto');
-      // set the height
       var maxHeight = Math.max.apply(
         null,
         items
@@ -51,7 +35,7 @@ const Testomonials = () => {
   const renderCarousel = (item, index) => {
     return (
       <Carousel.Item key={index}>
-        <div className="testomonials-main">
+        <div className="testimonials-main">
           <div className="player-wrapper">
             <ReactPlayer
               width="100%"
@@ -61,7 +45,6 @@ const Testomonials = () => {
               className="react-player"
             />
           </div>
-
           <div
             className="testimonial-caption"
             style={{
@@ -79,9 +62,13 @@ const Testomonials = () => {
               alt="Quote"
             />
             <div>{item.quote}</div>
+            <div
+              style={{ color: '#ccc', fontSize: '1.5rem' }}
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.description) }} />
+
           </div>
         </div>
-      </Carousel.Item>
+      </Carousel.Item >
     );
   };
 
@@ -91,8 +78,9 @@ const Testomonials = () => {
       style={{ background: '#532F00', width: '100%', height: '100%' }}
       interval={null}
     >
-      {data.map(renderCarousel)}
+      {testimonials.map(renderCarousel)}
     </Carousel>
   );
 };
-export default Testomonials;
+
+export default Testimonials;

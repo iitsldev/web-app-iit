@@ -1,56 +1,57 @@
+import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import * as fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-import { Chrono } from 'react-chrono';
-import { Container } from 'react-bootstrap';
+import { Container, Card, Pagination } from 'react-bootstrap';
 import MainLayoutSection from '../components/maincommonlayout/MainCommonLayoutSection';
+import React, { useState, useEffect } from 'react';
+import styles from './newsandevents/NewsAndEventPost.module.css';
+import Link from 'next/link';
 
-export default function NewsAndEvents({ newsAndEvents }) {
-  const { t } = useTranslation();
+export default function NewsAndEvents({ initialNewsAndEvents = [] }) {
+  const { t, lang } = useTranslation();
   const router = useRouter();
+  const [newsAndEvents, setNewsAndEvents] = useState(initialNewsAndEvents || []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10;
 
-  // Transform the data for Chrono timeline
-  const timelineItems = newsAndEvents
-    .filter(item => item.type === 'Event')
-    .map(element => ({
-      title: element.date,
-      cardTitle: element.title,
-      cardDetailedText: element.description,
-      dateStr: element.dateStr,
-      url: `/newsandevents/${element.slug}`,
-      media: element.image ? {
-        type: 'IMAGE',
-        source: {
-          url: element.image,
-        },
-      } : null
-    }))
-    .sort((a, b) => new Date(b.dateStr) - new Date(a.dateStr));
+  // Format date
+  function formatDateTime(isoString) {
+    const date = new Date(isoString);
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+    return date.toLocaleString('en-US', options);
+  }
 
-  const newsItems = newsAndEvents
-    .filter(item => item.type === 'News')
-    .map(element => ({
-      title: element.date,
-      cardTitle: element.title,
-      cardDetailedText: element.description,
-      dateStr: element.dateStr,
-      url: `/newsandevents/${element.slug}`,
-      media: element.image ? {
-        type: 'IMAGE',
-        source: {
-          url: element.image,
-        },
-      } : null
-    }))
-    .sort((a, b) => new Date(b.dateStr) - new Date(a.dateStr));
+  // Pagination logic
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = Array.isArray(newsAndEvents)
+    ? newsAndEvents.slice(indexOfFirstPost, indexOfLastPost)
+    : [];
+  const totalPages = Math.ceil((newsAndEvents?.length || 0) / postsPerPage);
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div>
-      <title>News and Events</title>
+      <Head>
+        <title>News and Events</title>
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="News and Events from the International Institute of Theravada"
+        />
+      </Head>
       <div className="navbarCarouselWrapper institute">
         <Header />
         <MainLayoutSection
@@ -61,72 +62,96 @@ export default function NewsAndEvents({ newsAndEvents }) {
         />
       </div>
 
-      <div>
-        <div className="news-and-events-chrono-container">
-          <Container className="news-and-events-container-timeline">
-            <p className="news-and-events-chrono-title">Timeline</p>
-            <Chrono
-              items={timelineItems}
-              mode="HORIZONTAL"
-              theme={{
-                primary: '#532F00',
-                secondary: '#FFD607',
-                cardBgColor: 'transparent',
-                cardForeColor: '#545454',
-                titleColor: '#616057',
-              }}
+      <Container className={styles.newsContainer}>
+        {currentPosts.length > 0 ? (
+          currentPosts.map((post) => (
+            <Card key={post.id} className={styles.postCard}>
+              {post.image && (
+                <Card.Img
+                  variant="top"
+                  src={post.image}
+                  alt={post.title}
+                  className={styles.postImage}
+                />
+              )}
+              <Card.Body>
+                <div className={styles.postMeta}>
+                  <span className={styles.postDate}>
+                    {formatDateTime(post.date)}
+                  </span>
+                  <span className={styles.postType}>{post.type}</span>
+                </div>
+                <Card.Title className={styles.postTitle}>
+                  <Link href={`/newsandevents/${post.id}`} target="_blank">{post.title}</Link>
+                </Card.Title>
+                <Card.Text
+                  className={styles.postDescription}
+                  dangerouslySetInnerHTML={{ __html: post.description }}
+                />
+              </Card.Body>
+            </Card>
+          ))
+        ) : (
+          <p className={styles.noPosts}>No posts available.</p>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <Pagination className={styles.pagination}>
+            <Pagination.Prev
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
             />
-            {/* <TimeLine /> */}
-          </Container>
-        </div>
-        <div>
-          <Container className="news-and-events-container-timeline">
-            <p className="news-and-events-chrono-title">Timeline</p>
-            <Chrono
-              items={newsItems}
-              mode="VERTICAL"
-              theme={{
-                primary: '#532F00',
-                secondary: '#FFD607',
-                cardBgColor: 'transparent',
-                cardForeColor: '#545454',
-                titleColor: '#616057',
-              }}
+            {Array.from({ length: totalPages }, (_, i) => (
+              <Pagination.Item
+                key={i + 1}
+                active={i + 1 === currentPage}
+                onClick={() => handlePageChange(i + 1)}
+              >
+                {i + 1}
+              </Pagination.Item>
+            ))}
+            <Pagination.Next
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
             />
-            {/* <TimeLine /> */}
-          </Container>
-        </div>
-      </div>
+          </Pagination>
+        )}
+      </Container>
 
       <Footer />
     </div>
   );
 }
 
-export async function getStaticProps() {
-  const newsDirectory = path.join(process.cwd(), 'news_events');
-  const filenames = fs.readdirSync(newsDirectory);
-
-  const newsAndEvents = filenames.map(filename => {
-    const filePath = path.join(newsDirectory, filename);
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const { data, content } = matter(fileContents);
-
-    // Generate slug from filename (remove .md and get the rest)
-    const slug = filename.replace(/\.md$/, '');
-
+export async function getServerSideProps(context) {
+  try {
+    const response = await fetch('http://localhost:3000/api/news-and-events'); // Fixed API endpoint
+    if (!response.ok) {
+      console.error(`Failed to fetch news and events: ${response.status}`);
+      return {
+        props: {
+          initialNewsAndEvents: [],
+        },
+      };
+    }
+    const newsAndEvents = await response.json();
     return {
-      slug,
-      content: content.trim(),
-      ...data
+      props: {
+        initialNewsAndEvents: newsAndEvents
+          .sort((a, b) => new Date(b.date) - new Date(a.date)) // Sort by date descending
+          .map((item) => ({
+            ...item,
+            date: item.date,
+          })),
+      },
     };
-  });
-
-  return {
-    props: {
-      newsAndEvents
-    },
-    // Revalidate every hour
-    revalidate: 3600
-  };
+  } catch (error) {
+    console.error('Error fetching news and events:', error);
+    return {
+      props: {
+        initialNewsAndEvents: [],
+      },
+    };
+  }
 }
