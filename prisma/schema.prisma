@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Mission {
+  id    Int     @id @default(autoincrement())
+  image String
+  text  String
+}
+
+model Card {
+  id          Int     @id @default(autoincrement())
+  title       String
+  image       String
+  description String
+  link        String
+  color       String
+  titleColor  String
+  arrowColor  String
+}
+
+model NavigationItem {
+  id       Int     @id @default(autoincrement())
+  title    String
+  htmlId   String
+  category String
+}
+
+model DhammaLecture {
+  id    Int     @id @default(autoincrement())
+  title String
+  body  String
+  image String
+  link  String
+}
+
+model FAQ {
+  id       Int     @id @default(autoincrement())
+  question String
+  answer   String
+}
+
+model Meditation {
+  id    Int     @id @default(autoincrement())
+  title String
+  body  String
+  link  String
+  image String
+}
+
+model NewsAndEvent {
+  id          Int      @id @default(autoincrement())
+  title       String
+  type        String
+  date        DateTime // Changed from dateStr String
+  description String
+  image       String?
+}
+
+model OurFocus {
+  id    Int     @id @default(autoincrement())
+  title String
+  body  String
+  image String
+  link  String
+}
+
+model Testimonial {
+  id          Int     @id @default(autoincrement())
+  quote       String
+  author      String
+  image       String
+  description String
+  video       String
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String // Store hashed password
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

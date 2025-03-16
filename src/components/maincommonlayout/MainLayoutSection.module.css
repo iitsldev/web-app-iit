@@ -34,14 +34,18 @@
 .headerImageContainer {
   grid-area: b;
   max-width: 644px;
+  max-height: 644px;
   align-self: end;
   padding-right: 5%;
 }
 
 .headerImage {
   width: 100%;
-  height: auto;
+  aspect-ratio: 1 / 1;
   position: relative;
+  border-radius: 50%;
+  object-fit: cover;
+  max-width: 100%;
 }
 
 .bannerTextOne {
@@ -104,15 +108,19 @@
     height: 550px;
     background-position: 88% 100%;
   }
+
   .headerImageContainer {
     max-width: 500px;
   }
+
   .bannerTextOne {
     font: normal normal bold 55px/60px Raleway;
   }
+
   .bannerTextTwo {
     font: normal normal bold 35px/50px Raleway;
   }
+
   .bannerTextThree {
     font: normal normal normal 25px/40px Raleway;
   }
@@ -123,19 +131,24 @@
     height: 500px;
     background-position: 85% 100%;
   }
+
   .motoContainer {
     padding-left: 30px;
     padding-right: 10px;
   }
+
   .headerImageContainer {
     max-width: 450px;
   }
+
   .bannerTextOne {
     font: normal normal bold 50px/55px Raleway;
   }
+
   .bannerTextTwo {
     font: normal normal bold 30px/45px Raleway;
   }
+
   .bannerTextThree {
     font: normal normal normal 20px/30px Raleway;
   }
@@ -146,15 +159,19 @@
     height: 420px;
     background-position: 75% 100%;
   }
+
   .headerImageContainer {
     max-width: 400px;
   }
+
   .bannerTextOne {
     font: normal normal bold 45px/40px Raleway;
   }
+
   .bannerTextTwo {
     font: normal normal bold 25px/35px Raleway;
   }
+
   .bannerTextThree {
     font: normal normal normal 18px/25px Raleway;
   }
@@ -164,6 +181,7 @@
   .headerBackground {
     height: 390px;
   }
+
   .headerImageContainer {
     max-width: 380px;
   }
@@ -173,15 +191,19 @@
   .headerBackground {
     height: 350px;
   }
+
   .headerImageContainer {
     max-width: 300px;
   }
+
   .bannerTextOne {
     font: normal normal bold 40px/35px Raleway;
   }
+
   .bannerTextTwo {
     font: normal normal bold 20px/30px Raleway;
   }
+
   .bannerTextThree {
     font: normal normal normal 15px/20px Raleway;
   }
@@ -193,18 +215,21 @@
     background-size: 150%;
     background-position: 75% 130%;
   }
+
   .headerContainer {
     grid-template-columns: repeat(1, 100%);
     grid-template-areas:
       'b'
       'a';
   }
+
   .bannerTextOne {
     color: #000000;
     font: normal normal bold 24px/29px Raleway;
     opacity: 0.44;
     margin: 0;
   }
+
   .bannerTextTwo {
     display: none;
   }

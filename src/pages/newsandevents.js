@@ -1,51 +1,57 @@
+import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
-//import TimeLine from '../components/timelineComponent/TimelineComponent';
-import { Chrono } from 'react-chrono';
-import { Container } from 'react-bootstrap';
+import { Container, Card, Pagination } from 'react-bootstrap';
 import MainLayoutSection from '../components/maincommonlayout/MainCommonLayoutSection';
-import newsAndEvents from '../data/newsAndEventsData.json';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import styles from './newsandevents/NewsAndEventPost.module.css';
+import Link from 'next/link';
 
-export default function NewsAndEvents() {
+export default function NewsAndEvents({ initialNewsAndEvents = [] }) {
   const { t, lang } = useTranslation();
   const router = useRouter();
+  const [newsAndEvents, setNewsAndEvents] = useState(initialNewsAndEvents || []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10;
 
-  var array = [];
-  newsAndEvents.map((element, index) => {
-    if (element.type.indexOf('Event') > -1) {
-      var item = {};
-      item.title = element.date;
-      item.cardTitle = element.title;
-      item.cardDetailedText = element.description;
-      item.dateStr = element.dateStr;
-      item.url = 'http://www.history.com'; // '/newsandevents/' + index +1;
-      item.media = {
-        type: 'IMAGE',
-        source: {
-          url: element.image,
-        },
-      };
-      array.push(item);
-    }
-  });
+  // Format date
+  function formatDateTime(isoString) {
+    const date = new Date(isoString);
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+    return date.toLocaleString('en-US', options);
+  }
 
-  const [arrayNews, setArrayNews] = useState([]);
-  const [arrayEvents, setArrayEvents] = useState([]);
+  // Pagination logic
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = Array.isArray(newsAndEvents)
+    ? newsAndEvents.slice(indexOfFirstPost, indexOfLastPost)
+    : [];
+  const totalPages = Math.ceil((newsAndEvents?.length || 0) / postsPerPage);
 
-  var newArr = array.sort(function (a, b) {
-    return new Date(b.dateStr) - new Date(a.dateStr);
-  });
-
-  arrayEvents.sort(function (a, b) {
-    return new Date(b.dateStr) - new Date(a.dateStr);
-  });
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div>
-      <title>News and Events</title>
+      <Head>
+        <title>News and Events</title>
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="News and Events from the International Institute of Theravada"
+        />
+      </Head>
       <div className="navbarCarouselWrapper institute">
         <Header />
         <MainLayoutSection
@@ -56,25 +62,62 @@ export default function NewsAndEvents() {
         />
       </div>
 
-      <div>
-        <div className="news-and-events-chrono-container">
-          <Container className="news-and-events-container-timeline">
-            <p className="news-and-events-chrono-title">Timeline</p>
-            <Chrono
-              items={newArr}
-              mode="HORIZONTAL"
-              theme={{
-                primary: '#532F00',
-                secondary: '#FFD607',
-                cardBgColor: 'transparent',
-                cardForeColor: '#545454',
-                titleColor: '#616057',
-              }}
+      <Container className={styles.newsContainer}>
+        {currentPosts.length > 0 ? (
+          currentPosts.map((post) => (
+            <Card key={post.id} className={styles.postCard}>
+              {post.image && (
+                <Card.Img
+                  variant="top"
+                  src={post.image}
+                  alt={post.title}
+                  className={styles.postImage}
+                />
+              )}
+              <Card.Body>
+                <div className={styles.postMeta}>
+                  <span className={styles.postDate}>
+                    {formatDateTime(post.date)}
+                  </span>
+                  <span className={styles.postType}>{post.type}</span>
+                </div>
+                <Card.Title className={styles.postTitle}>
+                  <Link href={`/newsandevents/${post.id}`} target="_blank">{post.title}</Link>
+                </Card.Title>
+                <Card.Text
+                  className={styles.postDescription}
+                  dangerouslySetInnerHTML={{ __html: post.description }}
+                />
+              </Card.Body>
+            </Card>
+          ))
+        ) : (
+          <p className={styles.noPosts}>No posts available.</p>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <Pagination className={styles.pagination}>
+            <Pagination.Prev
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
             />
-            {/* <TimeLine /> */}
-          </Container>
-        </div>
-      </div>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <Pagination.Item
+                key={i + 1}
+                active={i + 1 === currentPage}
+                onClick={() => handlePageChange(i + 1)}
+              >
+                {i + 1}
+              </Pagination.Item>
+            ))}
+            <Pagination.Next
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            />
+          </Pagination>
+        )}
+      </Container>
 
       <Footer />
     </div>
@@ -82,11 +125,33 @@ export default function NewsAndEvents() {
 }
 
 export async function getServerSideProps(context) {
-  // const products = await fetch('https://fakestoreapi.com/products')
-  // .then(res=>res.json());
-  return {
-    props: {
-      //products
-    },
-  };
+  try {
+    const response = await fetch('http://localhost:3000/api/news-and-events'); // Fixed API endpoint
+    if (!response.ok) {
+      console.error(`Failed to fetch news and events: ${response.status}`);
+      return {
+        props: {
+          initialNewsAndEvents: [],
+        },
+      };
+    }
+    const newsAndEvents = await response.json();
+    return {
+      props: {
+        initialNewsAndEvents: newsAndEvents
+          .sort((a, b) => new Date(b.date) - new Date(a.date)) // Sort by date descending
+          .map((item) => ({
+            ...item,
+            date: item.date,
+          })),
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching news and events:', error);
+    return {
+      props: {
+        initialNewsAndEvents: [],
+      },
+    };
+  }
 }

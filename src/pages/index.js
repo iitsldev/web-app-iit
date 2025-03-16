@@ -7,8 +7,9 @@ import Header from '../components/header/Header';
 import NewsAndEventsComponent from '../components/newsandevents/NewsAndEventsComponent';
 import Footer from '../components/footer/Footer';
 import Testimonials from '../components/testimonials/Testimonials';
+import GeneralFAQ from '../components/generalfaq/GeneralFAQ';
 
-export default function Home() {
+export default function Home({ faqs, testimonials, newsAndEvents }) {
   const { t, lang } = useTranslation();
   const router = useRouter();
 
@@ -20,7 +21,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="international institute of theravada"
+          content="International Institute of Theravada"
         />
       </Head>
 
@@ -32,13 +33,49 @@ export default function Home() {
       </div>
 
       <CardDeckComponent />
-      <NewsAndEventsComponent />
-      <Testimonials />
+      <NewsAndEventsComponent newsAndEvents={newsAndEvents} />
+      <Testimonials testimonials={testimonials} />
 
-      {/* Remove below div when GeneralFAQ section added*/}
+      {/* Remove below div when GeneralFAQ section added */}
       <div className="mt-4"></div>
-      {/* <GeneralFAQ /> */}
+      <GeneralFAQ faqs={faqs} />
       <Footer />
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const responseGeneralFAQ = await fetch('http://localhost:3000/api/general-faqs');
+  const responseTestimonials = await fetch('http://localhost:3000/api/testimonials');
+  const responseNewsAndEvents = await fetch('http://localhost:3000/api/news-and-events');
+
+  let faqs = [];
+  let testimonials = [];
+  let newsAndEvents = [];
+
+  if (!responseGeneralFAQ.ok) {
+    console.error(`Failed to fetch FAQs: ${responseGeneralFAQ.status}`);
+  } else {
+    faqs = await responseGeneralFAQ.json();
+  }
+
+  if (!responseTestimonials.ok) {
+    console.error(`Failed to fetch testimonials: ${responseTestimonials.status}`);
+  } else {
+    testimonials = await responseTestimonials.json();
+  }
+
+  if (!responseNewsAndEvents.ok) {
+    console.error(`Failed to fetch news and events: ${responseNewsAndEvents.status}`);
+  } else {
+    newsAndEvents = await responseNewsAndEvents.json();
+  }
+
+  return {
+    props: {
+      faqs,
+      testimonials,
+      newsAndEvents,
+    },
+  };
 }

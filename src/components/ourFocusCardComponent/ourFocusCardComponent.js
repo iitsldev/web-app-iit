@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './ourFocusCardComponent.module.css';
+import sanitizeHtml from 'sanitize-html'
 
 function OurFocusCardComponent(props) {
   function goToYoutubePlaylist(linkToYourtube) {
@@ -17,7 +18,7 @@ function OurFocusCardComponent(props) {
           <img src={props.cardData.image} className={styles.ourFocusImage} />
         </div>
         <div className={styles.ourFocusHeader}>{props.cardData.title}</div>
-        <div className={styles.ourFocusDetails}>{props.cardData.body}</div>
+        <div className={styles.ourFocusDetails} dangerouslySetInnerHTML={{ __html: sanitizeHtml(props.cardData.body) }}></div>
       </div>
     </div>
   );

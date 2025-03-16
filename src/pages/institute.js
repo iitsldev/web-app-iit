@@ -5,11 +5,10 @@ import Header from '../components/header/Header';
 import Footer from '../components/footer/Footer';
 import NavigationCommonLayout from '../components/navigationcommonlayout/NavigationCommonLayout';
 import { Container, Row, Col } from 'react-bootstrap';
-import { instituteList } from '../data/commonLayoutNavigationData';
 import MainLayoutSection from '../components/maincommonlayout/MainCommonLayoutSection';
 import AcademicProfile from '../components/academicprofile/AcademicProfile';
 
-export default function Institute() {
+export default function Institute({ instituteList }) {
   const { t, lang } = useTranslation();
   const router = useRouter();
 
@@ -34,7 +33,6 @@ export default function Institute() {
         backgroundImg="url(/Ellipse-4.svg)"
       />
       <NavigationCommonLayout navigationList={instituteList} />
-
       <Container>
         <div className="inst-academic-header" id="academy">
           Academy
@@ -142,7 +140,7 @@ export default function Institute() {
             />
           </Col> */}
 
-         {/* <Col key="8">
+          {/* <Col key="8">
             <AcademicProfile
               body="Diploma in Buddha
               Dhamma at the International Theravāda Buddhist Missionary
@@ -326,19 +324,17 @@ export default function Institute() {
           </div>
         </div>
       </Container>
-
       <Footer />
     </div>
   );
 }
 
 export async function getServerSideProps(context) {
-  // const products = await fetch('https://fakestoreapi.com/products')
-  // .then(res=>res.json());
-
+  const response = await fetch('http://localhost:3000/api/navigation/institute');
+  const instituteList = await response.json();
   return {
     props: {
-      //products
+      instituteList,
     },
   };
 }

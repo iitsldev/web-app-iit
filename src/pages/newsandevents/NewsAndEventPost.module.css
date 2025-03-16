@@ -1,0 +1,275 @@
+/* Updated CSS */
+.postContainer {
+  min-height: calc(100vh - 200px);
+  /* Adjust based on header/footer height */
+  padding: 3rem 15px;
+  background: #fff;
+  margin: 0;
+}
+
+.postContent {
+  padding: 2rem;
+  background: #fff;
+}
+
+.postImage {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.postTextWrapper {
+  padding: 0 1rem;
+}
+
+.postTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #132072;
+  margin-bottom: 1rem;
+}
+
+.postSubtitle {
+  font-size: 1.25rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.postText {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+/* Recent Section */
+.recentContainer {
+  padding: 3rem 15px;
+  background: #f8f9fa;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #132072;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.recentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 0 15px;
+}
+
+.recentItem {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.recentItem:hover {
+  transform: translateY(-5px);
+}
+
+.recentItemInner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.recentImageWrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  /* 16:9 Aspect Ratio */
+}
+
+.recentImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recentContent {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.recentDate {
+  font-size: 0.875rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+
+.recentTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #132072;
+  margin-bottom: 0.75rem;
+}
+
+.recentDescription {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.recentLink {
+  color: #025BC1;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.recentLink:hover {
+  text-decoration: underline;
+  color: #013a7d;
+}
+
+.typeNews,
+.typeEvent {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.typeNews {
+  background: #025BC1;
+}
+
+.typeEvent {
+  background: #FFD426;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .postTitle {
+    font-size: 2rem;
+  }
+
+  .postSubtitle {
+    font-size: 1rem;
+  }
+
+  .postText {
+    font-size: 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .recentGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* for news and event listsing */
+
+.newsContainer {
+  padding: 3rem 0;
+  max-width: 800px;
+  /* Narrower for vertical focus */
+}
+
+.postCard {
+  margin-bottom: 2rem;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.postCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.postImage {
+  height: 300px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.postMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.postDate {
+  color: #666;
+}
+
+.postType {
+  background: #FFD607;
+  color: #532F00;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.postTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #532F00;
+  margin-bottom: 1rem;
+}
+
+.postDescription {
+  color: #545454;
+  line-height: 1.6;
+}
+
+.postDescription p {
+  margin: 0;
+}
+
+.noPosts {
+  text-align: center;
+  color: #666;
+  font-size: 1.2rem;
+  padding: 2rem 0;
+}
+
+.pagination {
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #532F00;
+  border-color: #532F00;
+  color: #FFD607;
+}
+
+.pagination .page-link {
+  color: #532F00;
+  border-radius: 8px;
+  margin: 0 0.2rem;
+  transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover {
+  color: #FFD607;
+  background-color: #532F00;
+}
