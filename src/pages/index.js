@@ -42,3 +42,39 @@ export default function Home() {
     </div>
   );
 }
+
+export async function getServerSideProps(context) {
+  const responseGeneralFAQ = await fetch(`${process.env.API_BASE_URL}/api/general-faqs`);
+  const responseTestimonials = await fetch(`${process.env.API_BASE_URL}/api/testimonials`);
+  const responseNewsAndEvents = await fetch(`${process.env.API_BASE_URL}/api/news-and-events`);
+
+  let faqs = [];
+  let testimonials = [];
+  let newsAndEvents = [];
+
+  if (!responseGeneralFAQ.ok) {
+    console.error(`Failed to fetch FAQs: ${responseGeneralFAQ.status}`);
+  } else {
+    faqs = await responseGeneralFAQ.json();
+  }
+
+  if (!responseTestimonials.ok) {
+    console.error(`Failed to fetch testimonials: ${responseTestimonials.status}`);
+  } else {
+    testimonials = await responseTestimonials.json();
+  }
+
+  if (!responseNewsAndEvents.ok) {
+    console.error(`Failed to fetch news and events: ${responseNewsAndEvents.status}`);
+  } else {
+    newsAndEvents = await responseNewsAndEvents.json();
+  }
+
+  return {
+    props: {
+      faqs,
+      testimonials,
+      newsAndEvents,
+    },
+  };
+}

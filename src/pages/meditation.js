@@ -6,7 +6,7 @@ import Footer from '../components/footer/Footer';
 import MainLayoutSection from '../components/maincommonlayout/MainCommonLayoutSection';
 import MeditationComponent from '../components/meditation/MeditationComponent';
 
-export default function Meditation() {
+export default function Meditation({ meditations }) {
   const { t, lang } = useTranslation();
   const router = useRouter();
 
@@ -31,10 +31,10 @@ export default function Meditation() {
         description="Meditation is a part of daily life of anyone who is seeking spiritual fulfilment."
         photo="/Meditate.png"
         backgroundImg="url(/Ellipse-7.svg)"
-        // info="Are you looking for guidance for your mediation? IIT is willing to render a helping hand in your noble quest."
+      // info="Are you looking for guidance for your mediation? IIT is willing to render a helping hand in your noble quest."
       />
 
-      <MeditationComponent />
+      <MeditationComponent meditations={meditations} />
 
       <Footer />
     </div>
@@ -42,12 +42,19 @@ export default function Meditation() {
 }
 
 export async function getServerSideProps(context) {
-  // const products = await fetch('https://fakestoreapi.com/products')
-  // .then(res=>res.json());
-
+  const response = await fetch('http://localhost:3000/api/meditations');
+  if (!response.ok) {
+    console.error(`Failed to fetch meditations: ${response.status}`);
+    return {
+      props: {
+        meditations: [],
+      },
+    };
+  }
+  const meditations = await response.json();
   return {
     props: {
-      //products
+      meditations,
     },
   };
 }

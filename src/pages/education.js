@@ -113,9 +113,22 @@ export default function Education() {
 }
 
 export async function getServerSideProps(context) {
+<<<<<<< Updated upstream
   // const products = await fetch('https://fakestoreapi.com/products')
   // .then(res=>res.json());
 
+=======
+  const response = await fetch(`${process.env.API_BASE_URL}/api/dhamma-lectures`);
+  if (!response.ok) {
+    console.error(`Failed to fetch dhamma lectures: ${response.status}`);
+    return {
+      props: {
+        dhammaLectures: [], // Return empty array on failure
+      },
+    };
+  }
+  const dhammaLectures = await response.json();
+>>>>>>> Stashed changes
   return {
     props: {
       //products
