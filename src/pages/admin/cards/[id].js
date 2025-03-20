@@ -1,5 +1,5 @@
 // pages/api/admin/cards/[id].js
-import prisma from "../../../models/db";
+import { prisma } from "../../../models/db";
 
 export default async function handler(req, res) {
     const { id } = req.query;

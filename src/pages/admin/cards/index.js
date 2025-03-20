@@ -1,5 +1,5 @@
 // pages/api/admin/cards/index.js
-import prisma from "../../../models/db";
+import { prisma } from "../../../models/db";
 
 export default async function handler(req, res) {
     if (req.method === "GET") {
