@@ -42,8 +42,6 @@ export default function Home() {
     </div>
   );
 }
-<<<<<<< Updated upstream
-=======
 
 export async function getServerSideProps(context) {
   const responseGeneralFAQ = await fetch(`${process.env.API_BASE_URL}/api/general-faqs`);
@@ -80,4 +78,3 @@ export async function getServerSideProps(context) {
     },
   };
 }
->>>>>>> Stashed changes

@@ -43,10 +43,6 @@ export default function AboutUs() {
 }
 
 export async function getServerSideProps(context) {
-<<<<<<< Updated upstream
-  // const products = await fetch('https://fakestoreapi.com/products')
-  // .then(res=>res.json());
-=======
   const aboutUsResponse = await fetch(`${process.env.API_BASE_URL}/api/navigation/aboutUs`);
   const missionsResponse = await fetch(`${process.env.API_BASE_URL}/api/missions`);
   const ourFocusResponse = await fetch(`${process.env.API_BASE_URL}/api/our-focus`);
@@ -72,7 +68,6 @@ export async function getServerSideProps(context) {
   } else {
     ourFocus = await ourFocusResponse.json();
   }
->>>>>>> Stashed changes
 
   return {
     props: {

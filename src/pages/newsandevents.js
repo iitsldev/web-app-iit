@@ -82,16 +82,6 @@ export default function NewsAndEvents() {
 }
 
 export async function getServerSideProps(context) {
-<<<<<<< Updated upstream
-  // const products = await fetch('https://fakestoreapi.com/products')
-  // .then(res=>res.json());
-  return {
-    props: {
-      //products
-    },
-  };
-}
-=======
   try {
     const response = await fetch(`${process.env.API_BASE_URL}/api/news-and-events`); // Fixed API endpoint
     if (!response.ok) {
@@ -122,4 +112,3 @@ export async function getServerSideProps(context) {
     };
   }
 }
->>>>>>> Stashed changes
