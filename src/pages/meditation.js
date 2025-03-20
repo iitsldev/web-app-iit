@@ -42,9 +42,22 @@ export default function Meditation() {
 }
 
 export async function getServerSideProps(context) {
+<<<<<<< Updated upstream
   // const products = await fetch('https://fakestoreapi.com/products')
   // .then(res=>res.json());
 
+=======
+  const response = await fetch(`${process.env.API_BASE_URL}/api/meditations`);
+  if (!response.ok) {
+    console.error(`Failed to fetch meditations: ${response.status}`);
+    return {
+      props: {
+        meditations: [],
+      },
+    };
+  }
+  const meditations = await response.json();
+>>>>>>> Stashed changes
   return {
     props: {
       //products

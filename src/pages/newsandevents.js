@@ -82,6 +82,7 @@ export default function NewsAndEvents() {
 }
 
 export async function getServerSideProps(context) {
+<<<<<<< Updated upstream
   // const products = await fetch('https://fakestoreapi.com/products')
   // .then(res=>res.json());
   return {
@@ -90,3 +91,35 @@ export async function getServerSideProps(context) {
     },
   };
 }
+=======
+  try {
+    const response = await fetch(`${process.env.API_BASE_URL}/api/news-and-events`); // Fixed API endpoint
+    if (!response.ok) {
+      console.error(`Failed to fetch news and events: ${response.status}`);
+      return {
+        props: {
+          initialNewsAndEvents: [],
+        },
+      };
+    }
+    const newsAndEvents = await response.json();
+    return {
+      props: {
+        initialNewsAndEvents: newsAndEvents
+          .sort((a, b) => new Date(b.date) - new Date(a.date)) // Sort by date descending
+          .map((item) => ({
+            ...item,
+            date: item.date,
+          })),
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching news and events:', error);
+    return {
+      props: {
+        initialNewsAndEvents: [],
+      },
+    };
+  }
+}
+>>>>>>> Stashed changes

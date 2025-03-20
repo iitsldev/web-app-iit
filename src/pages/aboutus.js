@@ -43,8 +43,36 @@ export default function AboutUs() {
 }
 
 export async function getServerSideProps(context) {
+<<<<<<< Updated upstream
   // const products = await fetch('https://fakestoreapi.com/products')
   // .then(res=>res.json());
+=======
+  const aboutUsResponse = await fetch(`${process.env.API_BASE_URL}/api/navigation/aboutUs`);
+  const missionsResponse = await fetch(`${process.env.API_BASE_URL}/api/missions`);
+  const ourFocusResponse = await fetch(`${process.env.API_BASE_URL}/api/our-focus`);
+
+  let aboutUsList = [];
+  let missions = [];
+  let ourFocus = [];
+
+  if (!aboutUsResponse.ok) {
+    console.error(`Failed to fetch aboutUsList: ${aboutUsResponse.status}`);
+  } else {
+    aboutUsList = await aboutUsResponse.json();
+  }
+
+  if (!missionsResponse.ok) {
+    console.error(`Failed to fetch missions: ${missionsResponse.status}`);
+  } else {
+    missions = await missionsResponse.json();
+  }
+
+  if (!ourFocusResponse.ok) {
+    console.error(`Failed to fetch our focus: ${ourFocusResponse.status}`);
+  } else {
+    ourFocus = await ourFocusResponse.json();
+  }
+>>>>>>> Stashed changes
 
   return {
     props: {
