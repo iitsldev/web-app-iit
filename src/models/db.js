@@ -109,6 +109,16 @@ export async function getTestimonials() {
   }
 }
 
+export async function getAcademicProfiles() {
+  try {
+    const profiles = await prisma.academicProfile.findMany();
+    return profiles;
+  } catch (error) {
+    console.error('Error fetching academic profiles:', error);
+    throw error;
+  }
+}
+
 export async function getUserByUsername(username) {
   try {
     const user = await prisma.user.findUnique({

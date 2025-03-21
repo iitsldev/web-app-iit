@@ -333,6 +333,51 @@ async function main() {
     }
   ];
 
+  const academicProfilesData = [
+    {
+      name: "Ven Werapitiye Dewānanda Thera",
+      title: "President of the IIT",
+      body: "BA & MA in Buddha Dhamma at the International Theravāda Buddhist Missionary University, Yangon. BA (Hon) in Sanskrit at the University of Peradeniya, Vidyanidhi Panditha Vidyodaya Parivena, extensive experiences in propagating Buddhist teachings in both Australia and Hawaii.",
+      profileImage: "/profilepic/DewanandaThero.webp"
+    },
+    {
+      name: "Ven Watagoda Maggavihari Thera",
+      title: "Vice-President of the IIT",
+      body: "BA & MA in Buddha Dhamma at the International Theravāda Buddhist Missionary University, Yangon. Also undergone monastic training under the Thai Forest Tradition. He is a well talented Abhidhamma teacher, and ‘Fundamentals of Theravada Doctrine’, a course designed by him, is getting famous among both clergy and laity alike in both local and international arenas.",
+      profileImage: "/profilepic/MaggavihariThero.webp"
+    },
+    {
+      name: "Ven Matugama Dhammanisanti Thera",
+      title: "Head in Monastic Duties",
+      body: "An experienced Abhidhamma teacher currently conducting basic and advanced Abhidhamma courses and Pali courses for lay devotees in Colombo for more than six years.",
+      profileImage: "/profilepic/DhammanisanthiThero.webp"
+    },
+    {
+      name: "Ven Ududigana Siddhatthālaṅkāra Thera",
+      title: "Secretary of the IIT and Head of the Vinaya Department",
+      body: "BA in Buddha Dhamma at the International Theravāda Buddhist Missionary University, Yangon. The first Sri Lankan to pass all the three stages in both Sāsnālaṅkāra (Sāmaṇejo) and Vinayavidu Traditional Buddhist Examinations in Myanmar. Venerable Siddhatthālaṅkāra is well-known for his extensive knowledge in Theravada Vinaya. He serves as the Head of the Vinaya Department of IIT. Currently Venerable Siddhattha is completing his Master’s degree in Buddha Dhamma at the Shan State Buddhist University, Myanmar.",
+      profileImage: "/profilepic/SiddaththaThero.webp"
+    },
+    {
+      name: "Ven Labunoruwe Dhammavihari Thera",
+      title: "",
+      body: "Passed the Vinayācariya and Abhidhammācariya examinations held under the Srī Kaḷyāṇī Yogāśrama Saṃsthā, Rāmañña Mahānikāya, Sri Lanka. He was a Vinaya teacher at the Nā-Uyana Forest Monastery, Sri Lanka for many years and has trained number of young monks for the higher ordination, upasampadā.",
+      profileImage: "/profilepic/DhammavihariThero.webp"
+    },
+    {
+      name: "Ven Deniyaye Upasama Thera",
+      title: "Head of the Abhidhamma Department",
+      body: "He has studies the Abhidhamma with specialization in the Paṭṭhānappakaraṇa, the seventh and most profound book in the basket of Abhidhamma and had taught Abhidhamma in Burmese language in Myanmar and also in Sinhala at several Sri Lankan monastic education institutes. He is arguably the best academic in the field of Paṭṭhāna studies currently in Sri Lanka. Venerable Upasama heads the Abhidhamma Department of IIT.",
+      profileImage: "/profilepic/UpasamaThero.webp"
+    },
+    {
+      name: "Ven Palmadulle Vijitānandābhivaṃsa Thera",
+      title: "Vice Secretary of the IIT and Head of the Pāḷi, Sanskrit and Prakrit Department",
+      body: "Sakyasīha Dhammācariya (Mandalay Abhivaṃsa), Sāsanadhaja Dhammācariya and MA in Pali at the Post Graduate University, Kelaniya, Sri Lanka.",
+      body2: "One of the most academically celebrated Sri Lankan Buddhist monks studied in Myanmar. Successfully completed the first stage of the well-celebrated Sakyasīha Dhammācariaya Examination (known as the Mandalay Abhivaṃsa Examination) becoming the second Sri Lankan to make this achievement. Only about six hundred monks have passed the first level of the Abhivaṃsa Examination, in Myanmar, throughout its history of more than a century. He has also passed one of the three subjects of the second stage of the Sakyasīha Dhammācariya (Abhivaṃsa) Examination. Venerable Vijitānanda has also successfully passed the Sāsanadhaja Dhammācariya Examination in Myanmar. He is currently a Dhamma teacher at the well-celebrated Yuwa Mā Pariyatti Center, Ein Sein, Yangon. He has also earned a MA in Pali from the Post Graduate University, Kelaniya Sri Lanka and also a Diploma in Psychology.",
+      profileImage: "/profilepic/VijithanandaThero.webp"
+    }
+  ];
   await prisma.mission.deleteMany();
   await prisma.card.deleteMany();
   await prisma.navigationItem.deleteMany();
@@ -343,7 +388,11 @@ async function main() {
   await prisma.ourFocus.deleteMany();
   await prisma.testimonial.deleteMany();
   await prisma.user.deleteMany(); // Clear existing users
+<<<<<<< HEAD
 
+=======
+  await prisma.academicProfile.deleteMany();
+>>>>>>> # new file: .env new file: prisma/.fuse_hidden0000e60000000002 new file: prisma/dev.db new file: prisma/dev1.db new file: prisma/migrations/20250320165625_/migration.sql new file: prisma/schema.prisma new file: prisma/seed.js new file: src/models/db.js modified: src/pages/aboutus.js new file: src/pages/api/academic-profiles.js modified: src/pages/education.js modified: src/pages/index.js modified: src/pages/institute.js new file: src/pages/institute_old.js modified: src/pages/meditation.js modified: src/pages/newsandevents.js new file: src/pages/newsandevents/[slug].js
 
 
   await prisma.mission.createMany({ data: missionData });
@@ -357,6 +406,10 @@ async function main() {
   await prisma.newsAndEvent.createMany({ data: newsAndEventsData });
   await prisma.ourFocus.createMany({ data: ourFocusData });
   await prisma.testimonial.createMany({ data: testimonialsData });
+<<<<<<< HEAD
+=======
+  await prisma.academicProfile.createMany({ data: academicProfilesData });
+>>>>>>> # new file: .env new file: prisma/.fuse_hidden0000e60000000002 new file: prisma/dev.db new file: prisma/dev1.db new file: prisma/migrations/20250320165625_/migration.sql new file: prisma/schema.prisma new file: prisma/seed.js new file: src/models/db.js modified: src/pages/aboutus.js new file: src/pages/api/academic-profiles.js modified: src/pages/education.js modified: src/pages/index.js modified: src/pages/institute.js new file: src/pages/institute_old.js modified: src/pages/meditation.js modified: src/pages/newsandevents.js new file: src/pages/newsandevents/[slug].js
   //for User table
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash('iitmonk', saltRounds); // Default password: admin123
