@@ -79,6 +79,17 @@ model Testimonial {
   video       String
 }
 
+model AcademicProfile {
+  id           Int      @id @default(autoincrement())
+  name         String
+  title        String
+  body         String
+  body2        String?  // Optional second body field
+  profileImage String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   username  String   @unique
