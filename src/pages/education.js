@@ -7,32 +7,29 @@ import MainLayoutSection from '../components/maincommonlayout/MainCommonLayoutSe
 import EducationComponent from '../components/education/EducationComponent';
 import Slider from '../components/slider/slider';
 import OurFocusCardComponent from '../components/ourFocusCardComponent/ourFocusCardComponent';
-import cardInfo from '../data/educationDhammaList.json';
 import styles from '../components/aboutUsComponent/aboutUsComponent.module.css';
 import React, { useRef } from 'react';
 
-export default function Education() {
-  // Create an array for card components to view in
-  // card slider.
-  const cards = cardInfo.map((data, index) => {
+export default function Education({ dhammaLectures }) {
+  // Create an array for card components to view in card slider
+  const cards = dhammaLectures.map((data, index) => {
     return <OurFocusCardComponent key={index} cardData={data} />;
   });
 
-    // Reference to the Slider component
-    const sliderRef = useRef();
+  // Reference to the Slider component
+  const sliderRef = useRef();
 
-    const slideLeft = () => {
-      if (sliderRef.current) {
-        sliderRef.current.slideLeft();
-      }
-    };
-  
-    const slideRight = () => {
-      if (sliderRef.current) {
-        sliderRef.current.slideRight();
-      }
-    };
-  
+  const slideLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slideLeft();
+    }
+  };
+
+  const slideRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slideRight();
+    }
+  };
 
   const { t, lang } = useTranslation();
   const router = useRouter();
@@ -113,12 +110,7 @@ export default function Education() {
 }
 
 export async function getServerSideProps(context) {
-<<<<<<< Updated upstream
-  // const products = await fetch('https://fakestoreapi.com/products')
-  // .then(res=>res.json());
-
-=======
-  const response = await fetch(`${process.env.API_BASE_URL}/api/dhamma-lectures`);
+  const response = await fetch('http://localhost:3000/api/dhamma-lectures');
   if (!response.ok) {
     console.error(`Failed to fetch dhamma lectures: ${response.status}`);
     return {
@@ -128,10 +120,9 @@ export async function getServerSideProps(context) {
     };
   }
   const dhammaLectures = await response.json();
->>>>>>> Stashed changes
   return {
     props: {
-      //products
+      dhammaLectures,
     },
   };
 }

@@ -5,7 +5,7 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import MainLayoutSection from '../../components/maincommonlayout/MainCommonLayoutSection';
 import { Container, Row, Col } from 'react-bootstrap';
-import styles from './NewsAndEventPost.module.css';
+import styles from './newsAndEventsPost.module.css';
 import sanitizeHtml from 'sanitize-html';
 
 export default function NewsAndEventPost({ post, recentPosts = [] }) {  // Default to empty array
