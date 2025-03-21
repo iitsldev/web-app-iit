@@ -125,23 +125,9 @@ export default function NewsAndEvents({ initialNewsAndEvents = [] }) {
 }
 
 export async function getServerSideProps(context) {
-<<<<<<< HEAD
-  try {
-    const response = await fetch('http://localhost:3000/api/news-and-events'); // Fixed API endpoint
-=======
-<<<<<<< Updated upstream
-  // const products = await fetch('https://fakestoreapi.com/products')
-  // .then(res=>res.json());
-  return {
-    props: {
-      //products
-    },
-  };
-}
-=======
+
   try {
     const response = await fetch(`${process.env.API_BASE_URL}/api/news-and-events`); // Fixed API endpoint
->>>>>>> # new file: .env new file: prisma/.fuse_hidden0000e60000000002 new file: prisma/dev.db new file: prisma/dev1.db new file: prisma/migrations/20250320165625_/migration.sql new file: prisma/schema.prisma new file: prisma/seed.js new file: src/models/db.js modified: src/pages/aboutus.js new file: src/pages/api/academic-profiles.js modified: src/pages/education.js modified: src/pages/index.js modified: src/pages/institute.js new file: src/pages/institute_old.js modified: src/pages/meditation.js modified: src/pages/newsandevents.js new file: src/pages/newsandevents/[slug].js
     if (!response.ok) {
       console.error(`Failed to fetch news and events: ${response.status}`);
       return {
@@ -169,9 +155,4 @@ export async function getServerSideProps(context) {
       },
     };
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> Stashed changes
->>>>>>> # new file: .env new file: prisma/.fuse_hidden0000e60000000002 new file: prisma/dev.db new file: prisma/dev1.db new file: prisma/migrations/20250320165625_/migration.sql new file: prisma/schema.prisma new file: prisma/seed.js new file: src/models/db.js modified: src/pages/aboutus.js new file: src/pages/api/academic-profiles.js modified: src/pages/education.js modified: src/pages/index.js modified: src/pages/institute.js new file: src/pages/institute_old.js modified: src/pages/meditation.js modified: src/pages/newsandevents.js new file: src/pages/newsandevents/[slug].js

@@ -388,11 +388,7 @@ async function main() {
   await prisma.ourFocus.deleteMany();
   await prisma.testimonial.deleteMany();
   await prisma.user.deleteMany(); // Clear existing users
-<<<<<<< HEAD
-
-=======
   await prisma.academicProfile.deleteMany();
->>>>>>> # new file: .env new file: prisma/.fuse_hidden0000e60000000002 new file: prisma/dev.db new file: prisma/dev1.db new file: prisma/migrations/20250320165625_/migration.sql new file: prisma/schema.prisma new file: prisma/seed.js new file: src/models/db.js modified: src/pages/aboutus.js new file: src/pages/api/academic-profiles.js modified: src/pages/education.js modified: src/pages/index.js modified: src/pages/institute.js new file: src/pages/institute_old.js modified: src/pages/meditation.js modified: src/pages/newsandevents.js new file: src/pages/newsandevents/[slug].js
 
 
   await prisma.mission.createMany({ data: missionData });
@@ -406,10 +402,7 @@ async function main() {
   await prisma.newsAndEvent.createMany({ data: newsAndEventsData });
   await prisma.ourFocus.createMany({ data: ourFocusData });
   await prisma.testimonial.createMany({ data: testimonialsData });
-<<<<<<< HEAD
-=======
   await prisma.academicProfile.createMany({ data: academicProfilesData });
->>>>>>> # new file: .env new file: prisma/.fuse_hidden0000e60000000002 new file: prisma/dev.db new file: prisma/dev1.db new file: prisma/migrations/20250320165625_/migration.sql new file: prisma/schema.prisma new file: prisma/seed.js new file: src/models/db.js modified: src/pages/aboutus.js new file: src/pages/api/academic-profiles.js modified: src/pages/education.js modified: src/pages/index.js modified: src/pages/institute.js new file: src/pages/institute_old.js modified: src/pages/meditation.js modified: src/pages/newsandevents.js new file: src/pages/newsandevents/[slug].js
   //for User table
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash('iitmonk', saltRounds); // Default password: admin123

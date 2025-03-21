@@ -105,11 +105,7 @@ export async function getServerSideProps(context) {
 
     try {
         // Fetch the specific post
-<<<<<<< HEAD
-        const postResponse = await fetch(`http://localhost:3000/api/news-and-events?id=${slug}`);
-=======
         const postResponse = await fetch(`${process.env.API_BASE_URL}/api/news-and-events?id=${slug}`);
->>>>>>> # new file: .env new file: prisma/.fuse_hidden0000e60000000002 new file: prisma/dev.db new file: prisma/dev1.db new file: prisma/migrations/20250320165625_/migration.sql new file: prisma/schema.prisma new file: prisma/seed.js new file: src/models/db.js modified: src/pages/aboutus.js new file: src/pages/api/academic-profiles.js modified: src/pages/education.js modified: src/pages/index.js modified: src/pages/institute.js new file: src/pages/institute_old.js modified: src/pages/meditation.js modified: src/pages/newsandevents.js new file: src/pages/newsandevents/[slug].js
         if (!postResponse.ok) {
             console.error(`Failed to fetch post: ${postResponse.status}`);
             return { notFound: true };
@@ -118,11 +114,7 @@ export async function getServerSideProps(context) {
 
         // Fetch recent posts with error handling
         const recentPostsResponse = await fetch(
-<<<<<<< HEAD
-            `http://localhost:3000/api/news-and-events?limit=10`
-=======
             `${process.env.API_BASE_URL}/api/news-and-events?limit=10`
->>>>>>> # new file: .env new file: prisma/.fuse_hidden0000e60000000002 new file: prisma/dev.db new file: prisma/dev1.db new file: prisma/migrations/20250320165625_/migration.sql new file: prisma/schema.prisma new file: prisma/seed.js new file: src/models/db.js modified: src/pages/aboutus.js new file: src/pages/api/academic-profiles.js modified: src/pages/education.js modified: src/pages/index.js modified: src/pages/institute.js new file: src/pages/institute_old.js modified: src/pages/meditation.js modified: src/pages/newsandevents.js new file: src/pages/newsandevents/[slug].js
         );
         let recentPosts = [];
 
