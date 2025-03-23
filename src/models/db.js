@@ -1,13 +1,31 @@
 import { PrismaClient } from '@prisma/client';
+import fs from 'fs/promises';
 
 const prisma = new PrismaClient();
+
+// Unified error logging function
+async function logError(message, error) {
+  const timestamp = new Date().toISOString();
+  const logEntry = `${timestamp} - ${message}: ${error.message}\nStack: ${error.stack || 'No stack trace'}\n\n`;
+  const logFilePath = '/tmp/errors.log';
+
+  // Log to console
+  console.error(`${message}:`, error);
+
+  // Save to file
+  try {
+    await fs.appendFile(logFilePath, logEntry, 'utf8');
+  } catch (fsError) {
+    console.error('Failed to write error to /tmp/errors.log:', fsError);
+  }
+}
 
 export async function getMissions() {
   try {
     const missions = await prisma.mission.findMany();
     return missions;
   } catch (error) {
-    console.error('Error fetching missions:', error);
+    await logError('Error fetching missions', error);
     throw error;
   }
 }
@@ -17,7 +35,7 @@ export async function getCards() {
     const cards = await prisma.card.findMany();
     return cards;
   } catch (error) {
-    console.error('Error fetching cards:', error);
+    await logError('Error fetching cards', error);
     throw error;
   }
 }
@@ -29,7 +47,7 @@ export async function getAboutUsList() {
     });
     return items.map(item => ({ title: item.title, id: item.htmlId }));
   } catch (error) {
-    console.error('Error fetching aboutUs list:', error);
+    await logError('Error fetching aboutUs list', error);
     throw error;
   }
 }
@@ -41,7 +59,7 @@ export async function getInstituteList() {
     });
     return items.map(item => ({ title: item.title, id: item.htmlId }));
   } catch (error) {
-    console.error('Error fetching institute list:', error);
+    await logError('Error fetching institute list', error);
     throw error;
   }
 }
@@ -53,7 +71,7 @@ export async function getEduList() {
     });
     return items.map(item => ({ title: item.title, id: item.htmlId }));
   } catch (error) {
-    console.error('Error fetching edu list:', error);
+    await logError('Error fetching edu list', error);
     throw error;
   }
 }
@@ -63,7 +81,7 @@ export async function getDhammaLectures() {
     const lectures = await prisma.dhammaLecture.findMany();
     return lectures;
   } catch (error) {
-    console.error('Error fetching dhamma lectures:', error);
+    await logError('Error fetching dhamma lectures', error);
     throw error;
   }
 }
@@ -73,7 +91,7 @@ export async function getFAQs() {
     const faqs = await prisma.FAQ.findMany();
     return faqs;
   } catch (error) {
-    console.error('Error fetching FAQs:', error);
+    await logError('Error fetching FAQs', error);
     throw error;
   }
 }
@@ -83,18 +101,17 @@ export async function getMeditations() {
     const meditations = await prisma.meditation.findMany();
     return meditations;
   } catch (error) {
-    console.error('Error fetching meditations:', error);
+    await logError('Error fetching meditations', error);
     throw error;
   }
 }
-
 
 export async function getOurFocus() {
   try {
     const ourFocus = await prisma.ourFocus.findMany();
     return ourFocus;
   } catch (error) {
-    console.error('Error fetching our focus:', error);
+    await logError('Error fetching our focus', error);
     throw error;
   }
 }
@@ -104,7 +121,7 @@ export async function getTestimonials() {
     const testimonials = await prisma.testimonial.findMany();
     return testimonials;
   } catch (error) {
-    console.error('Error fetching testimonials:', error);
+    await logError('Error fetching testimonials', error);
     throw error;
   }
 }
@@ -114,7 +131,7 @@ export async function getAcademicProfiles() {
     const profiles = await prisma.academicProfile.findMany();
     return profiles;
   } catch (error) {
-    console.error('Error fetching academic profiles:', error);
+    await logError('Error fetching academic profiles', error);
     throw error;
   }
 }
@@ -126,12 +143,12 @@ export async function getUserByUsername(username) {
     });
     return user;
   } catch (error) {
-    console.error('Error fetching user:', error);
+    await logError('Error fetching user', error);
     throw error;
   }
 }
 
-//CRUID for all tables.
+// CRUD for all tables
 export async function createItem(model, data) {
   try {
     if (model === 'newsAndEvent') {
@@ -139,7 +156,7 @@ export async function createItem(model, data) {
     }
     return await prisma[model].create({ data });
   } catch (error) {
-    console.error(`Error creating ${model}:`, error);
+    await logError(`Error creating ${model}`, error);
     throw error;
   }
 }
@@ -148,7 +165,7 @@ export async function getItems(model, options = {}) {
   try {
     return await prisma[model].findMany(options);
   } catch (error) {
-    console.error(`Error fetching ${model}:`, error);
+    await logError(`Error fetching ${model}`, error);
     throw error;
   }
 }
@@ -163,7 +180,7 @@ export async function updateItem(model, id, data) {
       data,
     });
   } catch (error) {
-    console.error(`Error updating ${model}:`, error);
+    await logError(`Error updating ${model}`, error);
     throw error;
   }
 }
@@ -176,7 +193,7 @@ export async function getItemById(model, id) {
     if (!item) throw new Error(`${model} not found`);
     return item;
   } catch (error) {
-    console.error(`Error fetching ${model} by ID:`, error);
+    await logError(`Error fetching ${model} by ID`, error);
     throw error;
   }
 }
@@ -187,7 +204,7 @@ export async function deleteItem(model, id) {
       where: { id: parseInt(id) },
     });
   } catch (error) {
-    console.error(`Error deleting ${model}:`, error);
+    await logError(`Error deleting ${model}`, error);
     throw error;
   }
 }
@@ -203,11 +220,11 @@ export async function getNewsAndEvents({ id, type, limit } = {}) {
 
     return await getItems('newsAndEvent', {
       where: filters,
-      orderBy: { date: 'desc' }, // Changed from dateStr
+      orderBy: { date: 'desc' },
       take: limit ? parseInt(limit) : undefined,
     });
   } catch (error) {
-    console.error('Error fetching news and events:', error);
+    await logError('Error fetching news and events', error);
     throw error;
   }
 }
