@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-import { logError } from './logger';
 
 const prisma = new PrismaClient();
 
@@ -8,6 +7,7 @@ export async function getMissions() {
     const missions = await prisma.mission.findMany();
     return missions;
   } catch (error) {
+    const { logError } = await import('./logger'); // Dynamic import
     await logError('Error fetching missions', error);
     throw error;
   }
@@ -18,6 +18,7 @@ export async function getCards() {
     const cards = await prisma.card.findMany();
     return cards;
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching cards', error);
     throw error;
   }
@@ -30,6 +31,7 @@ export async function getAboutUsList() {
     });
     return items.map(item => ({ title: item.title, id: item.htmlId }));
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching aboutUs list', error);
     throw error;
   }
@@ -42,6 +44,7 @@ export async function getInstituteList() {
     });
     return items.map(item => ({ title: item.title, id: item.htmlId }));
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching institute list', error);
     throw error;
   }
@@ -54,6 +57,7 @@ export async function getEduList() {
     });
     return items.map(item => ({ title: item.title, id: item.htmlId }));
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching edu list', error);
     throw error;
   }
@@ -64,6 +68,7 @@ export async function getDhammaLectures() {
     const lectures = await prisma.dhammaLecture.findMany();
     return lectures;
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching dhamma lectures', error);
     throw error;
   }
@@ -74,6 +79,7 @@ export async function getFAQs() {
     const faqs = await prisma.FAQ.findMany();
     return faqs;
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching FAQs', error);
     throw error;
   }
@@ -84,6 +90,7 @@ export async function getMeditations() {
     const meditations = await prisma.meditation.findMany();
     return meditations;
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching meditations', error);
     throw error;
   }
@@ -94,6 +101,7 @@ export async function getOurFocus() {
     const ourFocus = await prisma.ourFocus.findMany();
     return ourFocus;
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching our focus', error);
     throw error;
   }
@@ -104,6 +112,7 @@ export async function getTestimonials() {
     const testimonials = await prisma.testimonial.findMany();
     return testimonials;
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching testimonials', error);
     throw error;
   }
@@ -114,6 +123,7 @@ export async function getAcademicProfiles() {
     const profiles = await prisma.academicProfile.findMany();
     return profiles;
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching academic profiles', error);
     throw error;
   }
@@ -126,6 +136,7 @@ export async function getUserByUsername(username) {
     });
     return user;
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching user', error);
     throw error;
   }
@@ -135,10 +146,11 @@ export async function getUserByUsername(username) {
 export async function createItem(model, data) {
   try {
     if (model === 'newsAndEvent') {
-      data.date = new Date(data.date); // Convert string to Date object
+      data.date = new Date(data.date);
     }
     return await prisma[model].create({ data });
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError(`Error creating ${model}`, error);
     throw error;
   }
@@ -148,6 +160,7 @@ export async function getItems(model, options = {}) {
   try {
     return await prisma[model].findMany(options);
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError(`Error fetching ${model}`, error);
     throw error;
   }
@@ -156,13 +169,14 @@ export async function getItems(model, options = {}) {
 export async function updateItem(model, id, data) {
   try {
     if (model === 'newsAndEvent') {
-      data.date = new Date(data.date); // Convert string to Date object
+      data.date = new Date(data.date);
     }
     return await prisma[model].update({
       where: { id: parseInt(id) },
       data,
     });
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError(`Error updating ${model}`, error);
     throw error;
   }
@@ -176,6 +190,7 @@ export async function getItemById(model, id) {
     if (!item) throw new Error(`${model} not found`);
     return item;
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError(`Error fetching ${model} by ID`, error);
     throw error;
   }
@@ -187,6 +202,7 @@ export async function deleteItem(model, id) {
       where: { id: parseInt(id) },
     });
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError(`Error deleting ${model}`, error);
     throw error;
   }
@@ -205,6 +221,7 @@ export async function getNewsAndEvents({ id, type, limit } = {}) {
       take: limit ? parseInt(limit) : undefined,
     });
   } catch (error) {
+    const { logError } = await import('./logger');
     await logError('Error fetching news and events', error);
     throw error;
   }
