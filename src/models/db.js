@@ -1,24 +1,7 @@
 import { PrismaClient } from '@prisma/client';
-import fs from 'fs/promises';
+import { logError } from './logger';
 
 const prisma = new PrismaClient();
-
-// Unified error logging function
-async function logError(message, error) {
-  const timestamp = new Date().toISOString();
-  const logEntry = `${timestamp} - ${message}: ${error.message}\nStack: ${error.stack || 'No stack trace'}\n\n`;
-  const logFilePath = '/tmp/errors.log';
-
-  // Log to console
-  console.error(`${message}:`, error);
-
-  // Save to file
-  try {
-    await fs.appendFile(logFilePath, logEntry, 'utf8');
-  } catch (fsError) {
-    console.error('Failed to write error to /tmp/errors.log:', fsError);
-  }
-}
 
 export async function getMissions() {
   try {
@@ -214,10 +197,8 @@ export async function getNewsAndEvents({ id, type, limit } = {}) {
     if (id) {
       return await getItemById('newsAndEvent', id);
     }
-
     const filters = {};
     if (type) filters.type = type;
-
     return await getItems('newsAndEvent', {
       where: filters,
       orderBy: { date: 'desc' },
