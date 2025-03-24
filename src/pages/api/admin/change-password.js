@@ -1,4 +1,4 @@
-import { prisma } from '../../../lib/prisma';
+import { prisma } from '../../../models/db'
 import { adminAuthMiddleware } from '../../../middleware/auth';
 import bcrypt from 'bcrypt';
 
