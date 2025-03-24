@@ -26,7 +26,7 @@ export default function AdminLogin() {
             }
 
             // On success, redirect to admin dashboard
-            router.push('/admin');
+            router.push('/iitadmin');
         } catch (err) {
             setError(err.message);
         }

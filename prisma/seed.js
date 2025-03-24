@@ -403,14 +403,15 @@ async function main() {
   await prisma.ourFocus.createMany({ data: ourFocusData });
   await prisma.testimonial.createMany({ data: testimonialsData });
   await prisma.academicProfile.createMany({ data: academicProfilesData });
-  //for User table
+  // for User table
   const saltRounds = 10;
-  const hashedPassword = await bcrypt.hash('iitmonk', saltRounds); // Default password: admin123
+  const hashedPassword = await bcrypt.hash('iitmonk', saltRounds); // Default password: iitmonk
 
   await prisma.user.create({
     data: {
       username: 'admin',
       password: hashedPassword,
+      role: 'admin', // Added role field
     },
   });
   console.log('Database seeded successfully');

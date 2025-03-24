@@ -8,7 +8,7 @@ export function adminAuthMiddleware(handler) {
         if (!cookies.adminAuth || cookies.adminAuth !== 'true') {
             return {
                 redirect: {
-                    destination: '/admin/login',
+                    destination: '/iitadmin/login',
                     permanent: false,
                 },
             };

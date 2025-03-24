@@ -8,8 +8,13 @@ import {
     Navbar,
     Button,
     NavbarBrand,
+    Modal
 } from 'react-bootstrap';
 import { adminAuthMiddleware } from '../../middleware/auth';
+import Sidebar from '../../components/admin/Sidebar/Sidebar';
+import Header from '../../components/admin/Header/Header';
+import Content from '../../components/admin/Content/Content';
+import AdminForm from '../../components/admin/adminForm/AdminForm';
 import styles from './AdminDashboard.module.css';
 import {
     FaBullseye,
@@ -22,9 +27,9 @@ import {
     FaEye,
     FaComments,
     FaBars,
+    FaUserPlus,
+    FaKey
 } from 'react-icons/fa';
-import AdminTable from '../../components/admin/adminTable/AdminTable';
-import AdminForm from '../../components/admin/adminForm/AdminForm';
 
 const sections = [
     { key: 'Mission', label: 'Missions', icon: <FaBullseye />, apiModel: 'mission' },
@@ -48,9 +53,9 @@ const modelFields = {
         { key: 'image', label: 'Image', type: 'file', required: true },
         { key: 'description', label: 'Description', type: 'text', required: true },
         { key: 'link', label: 'Link', type: 'text', required: false },
-        { key: 'color', label: 'Title', type: 'text', required: false },
-        { key: 'titleColor', label: 'Title', type: 'text', required: false },
-        { key: 'arrowColor', label: 'Title', type: 'text', required: false },
+        { key: 'color', label: 'Color', type: 'text', required: false },
+        { key: 'titleColor', label: 'Title Color', type: 'text', required: false },
+        { key: 'arrowColor', label: 'Arrow Color', type: 'text', required: false },
     ],
     NavigationItem: [
         { key: 'title', label: 'Title', type: 'text', required: true },
@@ -95,13 +100,27 @@ const modelFields = {
     ],
 };
 
-export default function AdminDashboard() {
+const userFields = [
+    { key: 'username', label: 'Username', type: 'text', required: true },
+    { key: 'password', label: 'Password', type: 'password', required: true },
+    { key: 'role', label: 'Role', type: 'select', required: true, options: ['user', 'admin'] }
+];
+
+const passwordFields = [
+    { key: 'currentPassword', label: 'Current Password', type: 'password', required: true },
+    { key: 'newPassword', label: 'New Password', type: 'password', required: true },
+    { key: 'confirmPassword', label: 'Confirm New Password', type: 'password', required: true }
+];
+
+export default function AdminDashboard({ user }) {
     const router = useRouter();
     const [activeSection, setActiveSection] = useState('NewsAndEvent');
     const [items, setItems] = useState({});
     const [loading, setLoading] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [editItem, setEditItem] = useState(null);
+    const [showAddUserModal, setShowAddUserModal] = useState(false);
+    const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 
     const activeModel = sections.find((section) => section.key === activeSection)?.apiModel;
 
@@ -129,7 +148,7 @@ export default function AdminDashboard() {
 
     const handleLogout = async () => {
         await fetch('/api/admin/logout', { method: 'POST' });
-        router.push('/admin/login');
+        router.push('/iitadmin/login');
     };
 
     const handleEdit = (item) => {
@@ -208,6 +227,39 @@ export default function AdminDashboard() {
         }
     };
 
+    const handleAddUser = async (data) => {
+        try {
+            const res = await fetch('/api/admin/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            if (!res.ok) throw new Error('Failed to add user');
+            setShowAddUserModal(false);
+            alert('User added successfully');
+        } catch (error) {
+            alert('Error adding user: ' + error.message);
+        }
+    };
+
+    const handleChangePassword = async (data) => {
+        if (data.newPassword !== data.confirmPassword) {
+            alert('New passwords do not match');
+            return;
+        }
+        try {
+            const res = await fetch('/api/admin/change-password', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+            if (!res.ok) throw new Error('Failed to change password');
+            setShowChangePasswordModal(false);
+            alert('Password changed successfully');
+        } catch (error) {
+            alert('Error changing password: ' + error.message);
+        }
+    };
 
     return (
         <Container fluid className={styles.dashboard}>
@@ -235,72 +287,101 @@ export default function AdminDashboard() {
 
             <Row className={styles.mainRow}>
                 <Col md={3} lg={2} className={`${styles.sidebar} d-none d-sm-block`}>
-                    <Navbar className={styles.sidebarNav}>
-                        <Nav className="flex-column">
-                            <Navbar.Brand className={styles.brand}>Admin Panel</Navbar.Brand>
-                            {sections.map((section) => (
-                                <Nav.Link
-                                    key={section.key}
-                                    className={`${styles.navLink} ${activeSection === section.key ? styles.active : ''}`}
-                                    onClick={() => setActiveSection(section.key)}
-                                >
-                                    <span className={styles.icon}>{section.icon}</span>
-                                    <span className={styles.label}>{section.label}</span>
-                                </Nav.Link>
-                            ))}
-                        </Nav>
-                    </Navbar>
+                    <Sidebar
+                        activeSection={activeSection}
+                        setActiveSection={setActiveSection}
+                    />
                 </Col>
 
                 <Col md={9} lg={10} className={styles.mainContent}>
-                    <div className={`${styles.header} d-none d-sm-flex`}>
-                        <h1 className={styles.headerTitle}>Admin Dashboard</h1>
-                        <Button variant="outline-danger" onClick={handleLogout}>
-                            Logout
-                        </Button>
-                    </div>
-                    <div className={styles.content}>
-                        <Button
-                            variant="primary"
-                            className="m-3"
-                            onClick={() => {
-                                setEditItem(null);
-                                setShowForm(true);
-                            }}
-                        >
-                            Add New
-                        </Button>
-                        <Button
-                            variant="danger"
-                            className="m-3"
-                            onClick={handleCleanup}
-                        >
-                            Clean Up Unused Images
-                        </Button>
-                    </div>
-
-                    <AdminTable
-                        items={items[activeSection] || []}
-                        fields={modelFields[activeSection]}
+                    <Header
+                        user={user}
+                        onLogout={handleLogout}
+                        onAddUser={() => setShowAddUserModal(true)}
+                        onChangePassword={() => setShowChangePasswordModal(true)}
+                    />
+                    <Content
+                        activeSection={activeSection}
+                        items={items}
+                        loading={loading}
+                        onAddNew={() => {
+                            setEditItem(null);
+                            setShowForm(true);
+                        }}
+                        onCleanup={handleCleanup}
                         onEdit={handleEdit}
                         onDelete={handleDelete}
-                        loading={loading}
-                    />
-                    <AdminForm
-                        show={showForm}
-                        onHide={() => setShowForm(false)}
-                        onSubmit={handleFormSubmit}
-                        initialData={editItem}
-                        fields={modelFields[activeSection]}
+                        showForm={showForm}
+                        setShowForm={setShowForm}
+                        editItem={editItem}
+                        onFormSubmit={handleFormSubmit}
+                        modelFields={modelFields}
                     />
                 </Col>
             </Row>
-        </Container >
+
+            {user?.role === 'admin' && (
+                <>
+                    <Modal show={showAddUserModal} onHide={() => setShowAddUserModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Add New User</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <AdminForm
+                                show={true}
+                                onHide={() => setShowAddUserModal(false)}
+                                onSubmit={handleAddUser}
+                                fields={userFields}
+                            />
+                        </Modal.Body>
+                    </Modal>
+
+                    <Modal show={showChangePasswordModal} onHide={() => setShowChangePasswordModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Change Password</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <AdminForm
+                                show={true}
+                                onHide={() => setShowChangePasswordModal(false)}
+                                onSubmit={handleChangePassword}
+                                fields={passwordFields}
+                            />
+                        </Modal.Body>
+                    </Modal>
+                </>
+            )}
+        </Container>
     );
 }
 
 export const getServerSideProps = adminAuthMiddleware(async (context) => {
+    const { getUserByUsername } = await import('../../models/db');
+    const jwt = require('jsonwebtoken');
+    const token = context.req.cookies.adminAuth;
+    if (!token) {
+        return {
+            redirect: {
+                destination: '/iitadmin/login',
+                permanent: false,
+            },
+        };
+    }
+    let decoded;
+    try {
+        decoded = jwt.verify(token, process.env.JWT_SECRET || 'IIT_SECRET');
+    } catch (error) {
+        return {
+            redirect: {
+                destination: '/iitadmin/login',
+                permanent: false,
+            },
+        };
+    }
+    const user = await getUserByUsername(decoded.username);
     return {
-        props: {},
+        props: {
+            user: JSON.parse(JSON.stringify(user))
+        },
     };
 });
