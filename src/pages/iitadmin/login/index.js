@@ -25,8 +25,8 @@ export default function AdminLogin() {
                 throw new Error(data.error || 'Login failed');
             }
 
-            // On success, redirect to admin dashboard
-            router.push('/iitadmin');
+            // Force full page reload instead of client-side navigation
+            window.location.href = '/iitadmin'; // Replace router.push
         } catch (err) {
             setError(err.message);
         }

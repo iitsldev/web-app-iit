@@ -359,29 +359,47 @@ export const getServerSideProps = adminAuthMiddleware(async (context) => {
     const { getUserByUsername } = await import('../../models/db');
     const jwt = require('jsonwebtoken');
     const token = context.req.cookies.adminAuth;
+
+    console.log('Token received:', token); // Debug
+
     if (!token) {
+        console.log('No token, redirecting to login');
         return {
             redirect: {
-                destination: '/iitadmin/login',
+                destination: '/admin/login',
                 permanent: false,
             },
         };
     }
+
     let decoded;
     try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET || 'IIT_SECRET');
+        decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+        console.log('Decoded token:', decoded); // Debug
     } catch (error) {
+        console.error('JWT verification error:', error.message); // Debug
         return {
             redirect: {
-                destination: '/iitadmin/login',
+                destination: '/admin/login',
                 permanent: false,
             },
         };
     }
+
     const user = await getUserByUsername(decoded.username);
+    if (!user) {
+        console.log('User not found, redirecting to login');
+        return {
+            redirect: {
+                destination: '/admin/login',
+                permanent: false,
+            },
+        };
+    }
+
     return {
         props: {
-            user: JSON.parse(JSON.stringify(user))
+            user: JSON.parse(JSON.stringify(user)),
         },
     };
 });
