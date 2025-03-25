@@ -1,6 +1,5 @@
 import { PrismaClient } from '@prisma/client';
 
-// Initialize Prisma Client (this will only run on the server)
 const prisma = new PrismaClient();
 
 export async function getServerSideProps() {
@@ -11,41 +10,35 @@ export async function getServerSideProps() {
     };
 
     try {
-        // Test 1: Connect to DB
         log('Attempting to connect to database...');
         await prisma.$connect();
         log('Database connected successfully');
 
-        // Test 2: Create
-        log('Creating an FAQ record...');
-        const created = await prisma.fAQ.create({
+        log('Creating a Mission record...');
+        const created = await prisma.mission.create({
             data: {
-                question: 'What is the meaning of life?',
-                answer: 'To seek happiness and understanding.',
+                image: 'test-image.jpg',
+                text: 'Test mission text',
             },
         });
-        log(`Created FAQ: ${JSON.stringify(created)}`);
+        log(`Created Mission: ${JSON.stringify(created)}`);
 
-        // Test 3: Read
-        log('Fetching all FAQ records...');
-        const allFAQs = await prisma.fAQ.findMany();
-        log(`Found FAQs: ${JSON.stringify(allFAQs)}`);
+        log('Fetching all Mission records...');
+        const allMissions = await prisma.mission.findMany();
+        log(`Found Missions: ${JSON.stringify(allMissions)}`);
 
-        // Test 4: Update
-        log(`Updating FAQ with id ${created.id}...`);
-        const updated = await prisma.fAQ.update({
+        log(`Updating Mission with id ${created.id}...`);
+        const updated = await prisma.mission.update({
             where: { id: created.id },
-            data: { answer: 'To pursue wisdom and compassion.' },
+            data: { text: 'Updated mission text' },
         });
-        log(`Updated FAQ: ${JSON.stringify(updated)}`);
+        log(`Updated Mission: ${JSON.stringify(updated)}`);
 
-        // Test 5: Delete
-        log(`Deleting FAQ with id ${created.id}...`);
-        const deleted = await prisma.fAQ.delete({
+        log(`Deleting Mission with id ${created.id}...`);
+        const deleted = await prisma.mission.delete({
             where: { id: created.id },
         });
-        log(`Deleted FAQ: ${JSON.stringify(deleted)}`);
-
+        log(`Deleted Mission: ${JSON.stringify(deleted)}`);
     } catch (error) {
         log(`Error: ${error.message}`);
     } finally {
@@ -53,7 +46,6 @@ export async function getServerSideProps() {
         log('Database disconnected');
     }
 
-    // Pass logs to the page as props
     return {
         props: {
             logs,
@@ -64,7 +56,7 @@ export async function getServerSideProps() {
 export default function TestDB({ logs }) {
     return (
         <div>
-            <h1>Database Test Page (FAQ Table)</h1>
+            <h1>Database Test Page (Mission Table)</h1>
             <h2>Logs:</h2>
             <pre>{logs.join('\n')}</pre>
         </div>

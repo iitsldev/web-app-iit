@@ -24,6 +24,6 @@ export default adminAuthMiddleware(async function handler(req, res) {
         });
         res.status(201).json({ message: 'User created successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Error creating user' });
+        res.status(500).json({ error: 'Error creating user', message: error.message });
     }
 });
