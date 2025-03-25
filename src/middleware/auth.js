@@ -1,19 +1,13 @@
-import { parseCookies } from 'nookies';
-
 export function adminAuthMiddleware(handler) {
-    return async (context) => {
-        const { req } = context;
-        const cookies = parseCookies(context); // Pass context to parseCookies
+    return async (req, res) => {
+        const cookies = parseCookies({ req });
 
         if (!cookies.adminAuth) {
-            return {
-                redirect: {
-                    destination: '/iitadmin/login',
-                    permanent: false,
-                },
-            };
+            return res.status(401).json({ error: 'Unauthorized - Please log in' });
         }
 
-        return handler(context);
+        // Attach user to req object if needed (e.g., from token or session)
+        req.user = { role: 'admin' }; // Example; replace with actual logic
+        return handler(req, res);
     };
 }
