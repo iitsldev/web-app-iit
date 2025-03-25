@@ -366,7 +366,7 @@ export const getServerSideProps = adminAuthMiddleware(async (context) => {
         console.log('No token, redirecting to login');
         return {
             redirect: {
-                destination: '/admin/login',
+                destination: '/iitadmin/login',
                 permanent: false,
             },
         };
@@ -374,13 +374,13 @@ export const getServerSideProps = adminAuthMiddleware(async (context) => {
 
     let decoded;
     try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key');
+        decoded = jwt.verify(token, process.env.JWT_SECRET || 'IIT_SECRET');
         console.log('Decoded token:', decoded); // Debug
     } catch (error) {
         console.error('JWT verification error:', error.message); // Debug
         return {
             redirect: {
-                destination: '/admin/login',
+                destination: '/iitadmin/login',
                 permanent: false,
             },
         };
@@ -391,7 +391,7 @@ export const getServerSideProps = adminAuthMiddleware(async (context) => {
         console.log('User not found, redirecting to login');
         return {
             redirect: {
-                destination: '/admin/login',
+                destination: '/iitadmin/login',
                 permanent: false,
             },
         };
