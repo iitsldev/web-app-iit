@@ -5,7 +5,7 @@ export function adminAuthMiddleware(handler) {
         const { req } = context;
         const cookies = parseCookies(context); // Pass context to parseCookies
 
-        if (!cookies.adminAuth || cookies.adminAuth !== 'true') {
+        if (!cookies.adminAuth) {
             return {
                 redirect: {
                     destination: '/iitadmin/login',

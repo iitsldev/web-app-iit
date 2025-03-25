@@ -360,8 +360,6 @@ export const getServerSideProps = adminAuthMiddleware(async (context) => {
     const jwt = require('jsonwebtoken');
     const token = context.req.cookies.adminAuth;
 
-    console.log('Token received:', token); // Debug
-
     if (!token) {
         console.log('No token, redirecting to login');
         return {
