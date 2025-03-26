@@ -30,6 +30,11 @@ export async function getServerSideProps() {
         logs.push(`${new Date().toISOString()} - ${message}`);
     };
 
+    let prismaCreateTime = null;
+    let prismaReadTime = null;
+    let prismaUpdateTime = null;
+    let prismaDeleteTime = null;
+
     try {
         // PRISMA OPERATIONS
         log('\n=== Starting Prisma Operations ===');
@@ -46,13 +51,13 @@ export async function getServerSideProps() {
                     text: 'Test mission Prisma text',
                 },
             });
-            const prismaCreateTime = performance.now() - prismaCreateStart;
+            prismaCreateTime = performance.now() - prismaCreateStart;
             log(`Prisma: Created Mission in ${prismaCreateTime}ms: ${JSON.stringify(prismaCreated)}`);
 
             // Prisma Read
             const prismaReadStart = performance.now();
             const prismaMissions = await prisma.mission.findMany();
-            const prismaReadTime = performance.now() - prismaReadStart;
+            prismaReadTime = performance.now() - prismaReadStart;
             log(`Prisma: Found ${prismaMissions.length} Mission in ${prismaReadTime}ms`);
 
             // Prisma Update
@@ -61,7 +66,7 @@ export async function getServerSideProps() {
                 where: { id: prismaCreated.id },
                 data: { text: 'Updated Prisma text' },
             });
-            const prismaUpdateTime = performance.now() - prismaUpdateStart;
+            prismaUpdateTime = performance.now() - prismaUpdateStart;
             log(`Prisma: Updated Mission in ${prismaUpdateTime}ms: ${JSON.stringify(prismaUpdated)}`);
 
             // Prisma Delete
@@ -69,7 +74,7 @@ export async function getServerSideProps() {
             const prismaDeleted = await prisma.mission.delete({
                 where: { id: prismaCreated.id },
             });
-            const prismaDeleteTime = performance.now() - prismaDeleteStart;
+            prismaDeleteTime = performance.now() - prismaDeleteStart;
             log(`Prisma: Deleted Mission in ${prismaDeleteTime}ms: ${JSON.stringify(prismaDeleted)}`);
         } catch (prismaError) {
             log(`Prisma Error: ${prismaError.message}`);

@@ -5,7 +5,9 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "seed": "node prisma/seed.js"
+    "pseed": "node prisma/seed.js",
+    "kseed": "node knex/seed.js",
+    "kmigrate": "knex migrate:latest --knexfile knex/knexfile.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.772.0",
@@ -52,6 +54,7 @@
     "react-player": "2.9.0",
     "react-redux": "7.2.5",
     "sanitize-html": "^2.14.0",
+    "sqlite3": "^5.1.7",
     "swiper": "8.4.5",
     "typescript": "^5.8.2",
     "ua-parser-js": "1.0.2",

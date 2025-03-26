@@ -7,25 +7,27 @@ import {
     getItemById,
     updateItem,
     deleteItem,
-    prisma,
+    knex,
 } from '../../models/db';
 
 async function cleanupUnusedImages() {
     try {
         const modelsWithImages = ['newsAndEvent', 'card', 'ourFocus', 'testimonial'];
 
-        // Debug: Verify Prisma models exist
         modelsWithImages.forEach((model) => {
-            if (!prisma[model]) {
+            if (!knex(model)) {
                 console.error(`Model ${model} not found in Prisma client`);
             }
         });
 
         const imagePromises = modelsWithImages.map((model) =>
-            prisma[model].findMany({
-                select: { image: true },
-                where: { image: { not: null } }, // Simplified syntax
-            })
+            // prisma[model].findMany({
+            //     select: { image: true },
+            //     where: { image: { not: null } }, // Simplified syntax
+            // })
+            knex(model)
+                .select('image')
+                .whereNotNull('image')
         );
         const imageResults = await Promise.all(imagePromises);
         const usedImages = imageResults
@@ -63,15 +65,15 @@ export default async function handler(req, res) {
 
     const { model } = req.query;
     const validModels = [
-        'mission',
-        'card',
-        'navigationItem',
-        'dhammaLecture',
-        'faq',
-        'meditation',
-        'newsAndEvent',
-        'ourFocus',
-        'testimonial',
+        'Mission',
+        'Card',
+        'NavigationItem',
+        'DhammaLecture',
+        'FAQ',
+        'Meditation',
+        'NewsAndEvent',
+        'OurFocus',
+        'Testimonial',
     ];
 
     if (!validModels.includes(model)) {

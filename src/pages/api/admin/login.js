@@ -1,4 +1,4 @@
-import { prisma } from '../../../models/db';
+import { getUserByUsername } from '../../../models/db';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { setCookie } from 'nookies';
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     const { username, password } = req.body;
 
     try {
-        const user = await prisma.user.findUnique({ where: { username } });
+        const user = await getUserByUsername(username);
         if (!user) {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
         console.log('Generated token:', token); // Debug log
         setCookie({ res }, 'token', token, {
-            maxAge: 30 * 24 * 60 * 60,
+            maxAge: 30 * 24 * 60 * 60, // 30 days
             path: '/',
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production', // Secure in production

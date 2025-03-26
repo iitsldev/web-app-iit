@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { prisma } from '../models/db';
+// import { prisma } from '../models/db';
+import { knex } from '../models/db'
 
 export async function cleanupUnusedImages() {
     try {
@@ -9,10 +10,11 @@ export async function cleanupUnusedImages() {
 
         // Get all image paths from the database
         const imagePromises = modelsWithImages.map((model) =>
-            prisma[model].findMany({
-                select: { image: true },
-                where: { image: { not: null } },
-            })
+            // prisma[model].findMany({
+            //     select: { image: true },
+            //     where: { image: { not: null } },
+            // })
+            knex(model).select('image').whereNotNull('image')
         );
         const imageResults = await Promise.all(imagePromises);
         const usedImages = imageResults

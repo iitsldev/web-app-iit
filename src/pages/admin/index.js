@@ -50,9 +50,9 @@ const modelFields = {
         { key: 'image', label: 'Image', type: 'file', required: true },
         { key: 'description', label: 'Description', type: 'text', required: true },
         { key: 'link', label: 'Link', type: 'text', required: false },
-        { key: 'color', label: 'Title', type: 'text', required: false },
-        { key: 'titleColor', label: 'Title', type: 'text', required: false },
-        { key: 'arrowColor', label: 'Title', type: 'text', required: false },
+        { key: 'color', label: 'color', type: 'text', required: false },
+        { key: 'titleColor', label: 'Title Color', type: 'text', required: false },
+        { key: 'arrowColor', label: 'Arrow Color', type: 'text', required: false },
     ],
     NavigationItem: [
         { key: 'title', label: 'Title', type: 'text', required: true },
@@ -112,7 +112,7 @@ export default function AdminDashboard() {
     });
 
 
-    const activeModel = sections.find((section) => section.key === activeSection)?.apiModel;
+    const activeModel = sections.find((section) => section.key === activeSection)?.key;
 
     useEffect(() => {
         if (!activeModel) return;
