@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 // MySQL pure queries setup
 import mysql from 'mysql2/promise';
 
-connection = {
+const connection = {
     host: process.env.DB_HOST || 'rds-theravado-com-iit.cdrks5iijrux.ap-southeast-1.rds.amazonaws.com',
     user: process.env.DB_USER || 'admin',
     password: process.env.DB_PASSWORD || 'WSxpW29Gqz47QnQ',
@@ -53,7 +53,7 @@ export async function getServerSideProps() {
             const prismaReadStart = performance.now();
             const prismaMissions = await prisma.mission.findMany();
             const prismaReadTime = performance.now() - prismaReadStart;
-            log(`Prisma: Found ${prismaMissions.length} Missions in ${prismaReadTime}ms`);
+            log(`Prisma: Found ${prismaMissions.length} Mission in ${prismaReadTime}ms`);
 
             // Prisma Update
             const prismaUpdateStart = performance.now();
@@ -86,29 +86,29 @@ export async function getServerSideProps() {
         log('MySQL: Creating a Mission record...');
         const mysqlCreateStart = performance.now();
         const [mysqlCreateRes] = await mysqlConn.query(
-            'INSERT INTO missions (image, text) VALUES (?, ?)',
+            'INSERT INTO Mission (image, text) VALUES (?, ?)',
             ['test-image-mysql.jpg', 'Test mission MySQL text']
         );
         const [mysqlCreated] = await mysqlConn.query(
-            'SELECT * FROM missions WHERE id = LAST_INSERT_ID()'
+            'SELECT * FROM Mission WHERE id = LAST_INSERT_ID()'
         );
         const mysqlCreateTime = performance.now() - mysqlCreateStart;
         log(`MySQL: Created Mission in ${mysqlCreateTime}ms: ${JSON.stringify(mysqlCreated[0])}`);
 
         // MySQL Read
         const mysqlReadStart = performance.now();
-        const [mysqlReadRes] = await mysqlConn.query('SELECT * FROM missions');
+        const [mysqlReadRes] = await mysqlConn.query('SELECT * FROM Mission');
         const mysqlReadTime = performance.now() - mysqlReadStart;
-        log(`MySQL: Found ${mysqlReadRes.length} Missions in ${mysqlReadTime}ms`);
+        log(`MySQL: Found ${mysqlReadRes.length} Mission in ${mysqlReadTime}ms`);
 
         // MySQL Update
         const mysqlUpdateStart = performance.now();
         const [mysqlUpdateRes] = await mysqlConn.query(
-            'UPDATE missions SET text = ? WHERE id = ?',
+            'UPDATE Mission SET text = ? WHERE id = ?',
             ['Updated MySQL text', mysqlCreated[0].id]
         );
         const [mysqlUpdated] = await mysqlConn.query(
-            'SELECT * FROM missions WHERE id = ?',
+            'SELECT * FROM Mission WHERE id = ?',
             [mysqlCreated[0].id]
         );
         const mysqlUpdateTime = performance.now() - mysqlUpdateStart;
@@ -117,7 +117,7 @@ export async function getServerSideProps() {
         // MySQL Delete
         const mysqlDeleteStart = performance.now();
         const [mysqlDeleteRes] = await mysqlConn.query(
-            'DELETE FROM missions WHERE id = ?',
+            'DELETE FROM Mission WHERE id = ?',
             [mysqlCreated[0].id]
         );
         const mysqlDeleteTime = performance.now() - mysqlDeleteStart;
@@ -129,9 +129,9 @@ export async function getServerSideProps() {
         // Knex Create
         log('Knex: Creating a Mission record...');
         const knexCreateStart = performance.now();
-        const knexCreatedIds = await knexDb('missions')
+        const knexCreatedIds = await knexDb(' Mission')
             .insert({ image: 'test-image-knex.jpg', text: 'Test mission Knex text' });
-        const knexCreated = await knexDb('missions')
+        const knexCreated = await knexDb(' Mission')
             .where('id', knexCreatedIds[0])
             .first();
         const knexCreateTime = performance.now() - knexCreateStart;
@@ -139,16 +139,16 @@ export async function getServerSideProps() {
 
         // Knex Read
         const knexReadStart = performance.now();
-        const knexMissions = await knexDb('missions').select('*');
+        const knexMissions = await knexDb(' Mission').select('*');
         const knexReadTime = performance.now() - knexReadStart;
-        log(`Knex: Found ${knexMissions.length} Missions in ${knexReadTime}ms`);
+        log(`Knex: Found ${knexMissions.length} Mission in ${knexReadTime}ms`);
 
         // Knex Update
         const knexUpdateStart = performance.now();
-        await knexDb('missions')
+        await knexDb(' Mission')
             .where({ id: knexCreated.id })
             .update({ text: 'Updated Knex text' });
-        const knexUpdated = await knexDb('missions')
+        const knexUpdated = await knexDb(' Mission')
             .where({ id: knexCreated.id })
             .first();
         const knexUpdateTime = performance.now() - knexUpdateStart;
@@ -156,7 +156,7 @@ export async function getServerSideProps() {
 
         // Knex Delete
         const knexDeleteStart = performance.now();
-        await knexDb('missions')
+        await knexDb(' Mission')
             .where({ id: knexCreated.id })
             .del();
         const knexDeleteTime = performance.now() - knexDeleteStart;
