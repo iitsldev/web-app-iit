@@ -8,6 +8,8 @@ import {
     Navbar,
     Button,
     NavbarBrand,
+    Modal,
+    Form,
 } from 'react-bootstrap';
 import { adminAuthMiddleware } from '../../middleware/auth';
 import styles from './AdminDashboard.module.css';
@@ -102,6 +104,13 @@ export default function AdminDashboard() {
     const [loading, setLoading] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [editItem, setEditItem] = useState(null);
+    const [showPasswordModal, setShowPasswordModal] = useState(false);
+    const [passwordData, setPasswordData] = useState({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+    });
+
 
     const activeModel = sections.find((section) => section.key === activeSection)?.apiModel;
 
@@ -128,8 +137,37 @@ export default function AdminDashboard() {
     }, [activeSection, activeModel]);
 
     const handleLogout = async () => {
-        await fetch('/api/admin/logout', { method: 'POST' });
+        await fetch('/api/admin/logout', { method: 'POST', credentials: 'include' });
         router.push('/admin/login');
+    };
+
+    const handlePasswordChange = async (e) => {
+        e.preventDefault();
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+            alert('New password and confirmation do not match');
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/admin/change-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // Ensure JWT cookie is sent
+                body: JSON.stringify({
+                    currentPassword: passwordData.currentPassword,
+                    newPassword: passwordData.newPassword
+                })
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'Failed to change password');
+
+            alert('Password changed successfully');
+            setShowPasswordModal(false);
+            setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+        } catch (error) {
+            alert('Error changing password: ' + error.message);
+        }
     };
 
     const handleEdit = (item) => {
@@ -227,6 +265,7 @@ export default function AdminDashboard() {
                             </Nav.Link>
                         ))}
                     </Nav>
+
                     <Button variant="outline-light" onClick={handleLogout}>
                         Logout
                     </Button>
@@ -255,6 +294,14 @@ export default function AdminDashboard() {
                 <Col md={9} lg={10} className={styles.mainContent}>
                     <div className={`${styles.header} d-none d-sm-flex`}>
                         <h1 className={styles.headerTitle}>Admin Dashboard</h1>
+                        {/* Add this new button */}
+                        <Button
+                            variant="outline-primary"
+                            onClick={() => setShowPasswordModal(true)}
+                            className="me-2"
+                        >
+                            Change Password
+                        </Button>
                         <Button variant="outline-danger" onClick={handleLogout}>
                             Logout
                         </Button>
@@ -293,6 +340,47 @@ export default function AdminDashboard() {
                         initialData={editItem}
                         fields={modelFields[activeSection]}
                     />
+
+                    <Modal show={showPasswordModal} onHide={() => setShowPasswordModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Change Password</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form onSubmit={handlePasswordChange}>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Current Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        value={passwordData.currentPassword}
+                                        onChange={(e) => setPasswordData({ ...passwordData, currentPassword: e.target.value })}
+                                        required
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>New Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        value={passwordData.newPassword}
+                                        onChange={(e) => setPasswordData({ ...passwordData, newPassword: e.target.value })}
+                                        required
+                                    />
+                                </Form.Group>
+                                <Form.Group className="mb-3">
+                                    <Form.Label>Confirm New Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        value={passwordData.confirmPassword}
+                                        onChange={(e) => setPasswordData({ ...passwordData, confirmPassword: e.target.value })}
+                                        required
+                                    />
+                                </Form.Group>
+                                <Button variant="primary" type="submit">
+                                    Change Password
+                                </Button>
+                            </Form>
+                        </Modal.Body>
+                    </Modal>
+
                 </Col>
             </Row>
         </Container >

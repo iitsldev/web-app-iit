@@ -1,11 +1,13 @@
 import { parseCookies } from 'nookies';
+import jwt from 'jsonwebtoken';
 
 export function adminAuthMiddleware(handler) {
     return async (context) => {
         const { req } = context;
-        const cookies = parseCookies(context); // Pass context to parseCookies
+        const cookies = parseCookies(context);
+        const token = cookies.token;
 
-        if (!cookies.adminAuth || cookies.adminAuth !== 'true') {
+        if (!token) {
             return {
                 redirect: {
                     destination: '/admin/login',
@@ -14,6 +16,20 @@ export function adminAuthMiddleware(handler) {
             };
         }
 
-        return handler(context);
+        try {
+            // Verify JWT token
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            // Optionally attach userId to req if needed downstream
+            req.userId = decoded.userId;
+            return handler(context);
+        } catch (error) {
+            console.error('Auth error:', error);
+            return {
+                redirect: {
+                    destination: '/admin/login',
+                    permanent: false,
+                },
+            };
+        }
     };
 }
