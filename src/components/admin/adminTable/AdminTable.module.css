@@ -1,10 +1,105 @@
+.tableWrapper {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
 .adminTable {
     margin-bottom: 0;
 }
 
-/* Add to existing media queries */
+.tableHeader {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.tableHeader th {
+    font-weight: 600;
+    color: #495057;
+    text-transform: uppercase;
+    padding: 12px 15px;
+}
+
+.actionsHeader {
+    text-align: center;
+}
+
+.tableRow {
+    transition: background-color 0.2s ease;
+}
+
+.tableRow:hover {
+    background-color: #f1f3f5;
+}
+
+.tableCell {
+    vertical-align: middle;
+    padding: 12px 15px;
+    color: #212529;
+}
+
+.actionCell {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.actionButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 120px;
+    margin: 0 auto;
+}
+
+.actionButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.emptyState h4 {
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+.emptyState p {
+    color: #868e96;
+}
+
+/* Responsive Adjustments */
 @media (max-width: 575px) {
     .adminTable {
         font-size: 0.875rem;
+    }
+
+    .tableCell,
+    .tableHeader th {
+        padding: 8px 10px;
+    }
+
+    .actionButtons {
+        width: 100%;
     }
 }

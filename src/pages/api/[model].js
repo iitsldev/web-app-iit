@@ -65,6 +65,7 @@ export default async function handler(req, res) {
 
     const { model } = req.query;
     const validModels = [
+        'AcademicProfile',
         'Mission',
         'Card',
         'NavigationItem',
@@ -93,6 +94,7 @@ export default async function handler(req, res) {
                 return res.status(200).json(items);
 
             case 'POST':
+                console.log(req.body);
                 const createdItem = await createItem(model, req.body);
                 return res.status(201).json(createdItem);
 
