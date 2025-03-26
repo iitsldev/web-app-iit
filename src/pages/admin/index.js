@@ -307,7 +307,7 @@ export default function AdminDashboard() {
                             <Dropdown.Toggle variant="outline-primary" id="user-dropdown" className={styles.userDropdown}>
                                 <FaUser /> Admin
                             </Dropdown.Toggle>
-                            <Dropdown.Menu>
+                            <Dropdown.Menu align="end">
                                 <Dropdown.Item onClick={() => setShowPasswordModal(true)}>
                                     <FaLock className="me-2" /> Change Password
                                 </Dropdown.Item>
