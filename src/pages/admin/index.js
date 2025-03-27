@@ -133,7 +133,7 @@ export default function AdminDashboard() {
     useEffect(() => {
         if (!activeModel) return;
         setLoading(true);
-        fetch(`/api/${activeModel}`)
+        fetch(`/api/admin/${activeModel}`)
             .then((res) => {
                 if (!res.ok) throw new Error('Failed to fetch');
                 return res.json();
@@ -194,7 +194,7 @@ export default function AdminDashboard() {
     const handleDelete = async (id) => {
         if (confirm('Are you sure you want to delete this item?')) {
             try {
-                const res = await fetch(`/api/${activeModel}?id=${id}`, {
+                const res = await fetch(`/api/admin/${activeModel}?id=${id}`, {
                     method: 'DELETE',
                 });
                 if (!res.ok) throw new Error('Failed to delete');
@@ -227,8 +227,8 @@ export default function AdminDashboard() {
     const handleFormSubmit = async (data) => {
         try {
             const url = editItem
-                ? `/api/${activeModel}?id=${editItem.id}`
-                : `/api/${activeModel}`;
+                ? `/api/admin/${activeModel}?id=${editItem.id}`
+                : `/api/admin/${activeModel}`;
             const method = editItem ? 'PUT' : 'POST';
             const res = await fetch(url, {
                 method,
@@ -316,7 +316,7 @@ export default function AdminDashboard() {
                                 </Dropdown.Item>
 
                                 <Dropdown.Divider />
-                                <Dropdown.Item className="text-danger">
+                                <Dropdown.Item className="text-danger" onClick={() => handleLogout()}>
                                     <FaSignOutAlt className="me-2" /> Logout
                                 </Dropdown.Item>
                             </Dropdown.Menu>

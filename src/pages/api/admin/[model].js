@@ -8,7 +8,7 @@ import {
     updateItem,
     deleteItem,
     knex,
-} from '../../models/db';
+} from '../../../models/db';
 
 async function cleanupUnusedImages() {
     try {
