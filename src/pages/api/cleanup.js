@@ -35,9 +35,12 @@ async function cleanupUnusedImages() {
 }
 
 export default async function handler(req, res) {
+
     const cookies = parseCookies({ req });
-    if (!cookies.adminAuth || cookies.adminAuth !== 'true') {
-        return res.status(401).json({ error: 'Unauthorized' });
+    const token = cookies.token;
+
+    if (!token) {
+        return res.status(401).json({ error: 'Not authenticated' });
     }
 
     if (req.method !== 'POST') {
