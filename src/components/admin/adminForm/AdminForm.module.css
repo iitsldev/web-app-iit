@@ -1,9 +1,55 @@
+.formModal {
+    background-color: #f8f9fa;
+}
+
+.modalHeader {
+    background-color: #f1f3f5;
+    border-bottom: 1px solid #e9ecef;
+    padding: 1rem;
+}
+
+.modalTitle {
+    font-weight: 600;
+    color: #343a40;
+}
+
+.formContainer {
+    padding: 1rem;
+}
+
 .tiptapContainer {
     margin-bottom: 1rem;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 .tiptapToolbar {
-    margin-bottom: 0.5rem;
+    background-color: #f1f3f5;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.toolbarButton {
+    background-color: transparent;
+    border: none;
+    color: #495057;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.toolbarButton:hover {
+    background-color: #e9ecef;
+}
+
+.toolbarButton.active {
+    background-color: #dee2e6;
+    color: #212529;
 }
 
 .tiptapEditor {
@@ -11,14 +57,14 @@
     border-radius: 0.25rem;
     padding: 0.75rem;
     min-height: 300px;
-    /* Larger size */
     max-height: 500px;
     overflow-y: auto;
+    background-color: white;
 }
 
 .tiptapEditor:focus-within {
     border-color: #80bdff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.10);
 }
 
 .ProseMirror {
@@ -28,35 +74,60 @@
 .ProseMirror h1 {
     font-size: 2em;
     margin: 0.67em 0;
+    color: #212529;
 }
 
 .ProseMirror h2 {
     font-size: 1.5em;
     margin: 0.75em 0;
+    color: #343a40;
 }
 
 .ProseMirror h3 {
     font-size: 1.17em;
     margin: 0.83em 0;
+    color: #495057;
 }
 
-.ProseMirror h4 {
-    font-size: 1em;
-    margin: 1em 0;
-}
-
-.ProseMirror h5 {
-    font-size: 0.83em;
-    margin: 1.2em 0;
-}
-
-.ProseMirror h6 {
-    font-size: 0.67em;
-    margin: 1.5em 0;
+.fileUploadGroup {
+    position: relative;
 }
 
 .imagePreview {
     display: block;
     max-height: 200px;
     object-fit: cover;
+    border-radius: 6px;
+    margin-top: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.uploadProgress {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 0.5rem;
+    color: #6c757d;
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+@media (max-width: 576px) {
+    .modalTitle {
+        font-size: 1.2rem;
+    }
+
+    .tiptapContainer {
+        margin-bottom: 0.5rem;
+    }
+
+    .tiptapEditor {
+        min-height: 200px;
+    }
 }

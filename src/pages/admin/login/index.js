@@ -20,14 +20,19 @@ export default function AdminLogin() {
                 body: JSON.stringify({ username, password }),
             });
 
+            const data = await response.json();
+            console.log('Login response:', data); // Debug log
+
             if (!response.ok) {
-                const data = await response.json();
                 throw new Error(data.error || 'Login failed');
             }
 
-            // On success, redirect to admin dashboard
-            router.push('/admin');
+            if (data.message === 'Login successful') {
+                console.log('Redirecting to /admin'); // Debug log
+                router.push('/admin');
+            }
         } catch (err) {
+            console.error('Login error:', err);
             setError(err.message);
         }
     };

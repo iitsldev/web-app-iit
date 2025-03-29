@@ -45,9 +45,9 @@ export default function Home({ faqs, testimonials, newsAndEvents }) {
 }
 
 export async function getServerSideProps(context) {
-  const responseGeneralFAQ = await fetch('http://localhost:3000/api/general-faqs');
-  const responseTestimonials = await fetch('http://localhost:3000/api/testimonials');
-  const responseNewsAndEvents = await fetch('http://localhost:3000/api/news-and-events');
+  const responseGeneralFAQ = await fetch(`${process.env.API_BASE_URL}/api/general-faqs`);
+  const responseTestimonials = await fetch(`${process.env.API_BASE_URL}/api/testimonials`);
+  const responseNewsAndEvents = await fetch(`${process.env.API_BASE_URL}/api/news-and-events`);
 
   let faqs = [];
   let testimonials = [];

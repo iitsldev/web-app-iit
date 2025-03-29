@@ -1,0 +1,215 @@
+/* NewsAndEventPage.module.css */
+.newsEventsPage {
+  background-color: #f4f6f9;
+  font-family: 'Inter', sans-serif;
+}
+
+.newsContainer {
+  max-width: 1200px;
+  padding: 4rem 15px;
+}
+
+.newsGridWide {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.newsCardWide {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.newsCardWide:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.newsCardImageWide {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+
+.newsCardImageContent {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.newsCardTypeBadge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+/* Post Type Badge Colors */
+.newsTypeBadge {
+  background-color: #0066cc;
+}
+
+.eventTypeBadge {
+  background-color: #28a745;
+}
+
+.announcementTypeBadge {
+  background-color: #dc3545;
+}
+
+.workshopTypeBadge {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.seminarTypeBadge {
+  background-color: #6f42c1;
+}
+
+.defaultTypeBadge {
+  background-color: #6c757d;
+}
+
+.newsCardContentWide {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.newsCardMetaWide {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.newsCardDateWide {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.newsCardTitleWide {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.newsCardTitleLinkWide {
+  color: #1a202c;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.newsCardTitleLinkWide:hover {
+  color: #0066cc;
+}
+
+.newsCardDescriptionWide {
+  color: #4a5568;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.newsCardReadMoreWide {
+  align-self: flex-start;
+  color: #0066cc;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.newsCardReadMoreWide:hover {
+  color: #004080;
+  text-decoration: underline;
+}
+
+.noPostsWide {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1.25rem;
+  width: 100%;
+  padding: 3rem 0;
+}
+
+.paginationContainerWide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 3rem;
+}
+
+.paginationButtonWide {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  color: #1a202c;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.paginationButtonWide:hover:not(.disabledWide) {
+  background-color: #0066cc;
+  color: white;
+  border-color: #0066cc;
+}
+
+.paginationButtonWide.activeWide {
+  background-color: #0066cc;
+  color: white;
+  border-color: #0066cc;
+}
+
+.paginationButtonWide.disabledWide {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .newsCardWide {
+    grid-template-columns: 1fr;
+  }
+
+  .newsCardImageWide {
+    height: 250px;
+  }
+
+  .newsCardContentWide {
+    padding: 1.5rem;
+  }
+
+  .newsCardTitleWide {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .newsContainer {
+    padding: 2rem 15px;
+  }
+
+  .newsCardImageWide {
+    height: 200px;
+  }
+
+  .newsCardContentWide {
+    padding: 1rem;
+  }
+}

@@ -110,7 +110,8 @@ export default function Education({ dhammaLectures }) {
 }
 
 export async function getServerSideProps(context) {
-  const response = await fetch('http://localhost:3000/api/dhamma-lectures');
+
+  const response = await fetch(`${process.env.API_BASE_URL}/api/dhamma-lectures`);
   if (!response.ok) {
     console.error(`Failed to fetch dhamma lectures: ${response.status}`);
     return {

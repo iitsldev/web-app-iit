@@ -105,7 +105,7 @@ export async function getServerSideProps(context) {
 
     try {
         // Fetch the specific post
-        const postResponse = await fetch(`http://localhost:3000/api/news-and-events?id=${slug}`);
+        const postResponse = await fetch(`${process.env.API_BASE_URL}/api/news-and-events?id=${slug}`);
         if (!postResponse.ok) {
             console.error(`Failed to fetch post: ${postResponse.status}`);
             return { notFound: true };
@@ -114,7 +114,7 @@ export async function getServerSideProps(context) {
 
         // Fetch recent posts with error handling
         const recentPostsResponse = await fetch(
-            `http://localhost:3000/api/news-and-events?limit=10`
+            `${process.env.API_BASE_URL}/api/news-and-events?limit=10`
         );
         let recentPosts = [];
 

@@ -39,9 +39,10 @@ export default function AboutUs({ aboutUsList, missions, ourFocus }) {
 }
 
 export async function getServerSideProps(context) {
-  const aboutUsResponse = await fetch('http://localhost:3000/api/navigation/aboutUs');
-  const missionsResponse = await fetch('http://localhost:3000/api/missions');
-  const ourFocusResponse = await fetch('http://localhost:3000/api/our-focus');
+
+  const aboutUsResponse = await fetch(`${process.env.API_BASE_URL}/api/navigation/aboutUs`);
+  const missionsResponse = await fetch(`${process.env.API_BASE_URL}/api/missions`);
+  const ourFocusResponse = await fetch(`${process.env.API_BASE_URL}/api/our-focus`);
 
   let aboutUsList = [];
   let missions = [];
