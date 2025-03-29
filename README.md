@@ -16,3 +16,8 @@ Run commands
 1. `npm install --global yarn`
 2. `yarn install`
 3. `yarn run dev`
+
+## config
+Edit the database, s3,.. configuration from .env file
+run `npm run kmigrate` to migrate the schema of database to database server.
+run `npm run kseed` to pull the sample database from seed.js file.
