@@ -2,8 +2,6 @@
 const knexConfig = require('../../knex/knexfile');
 const knex = require('knex')(knexConfig.development);
 
-console.log('Database path:', knexConfig.development.connection.filename);
-
 async function getMissions() {
     try {
         return await knex('Mission').select();
