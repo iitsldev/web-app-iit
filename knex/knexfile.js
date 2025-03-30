@@ -9,7 +9,6 @@ const connection = {
     port: process.env.DATABASE_PORT || 3306,
 };
 
-console.log("Connection:", connection);
 
 module.exports = {
     development: {
