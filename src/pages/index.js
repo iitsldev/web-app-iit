@@ -8,6 +8,7 @@ import NewsAndEventsComponent from '../components/newsandevents/NewsAndEventsCom
 import Footer from '../components/footer/Footer';
 import Testimonials from '../components/testimonials/Testimonials';
 import GeneralFAQ from '../components/generalfaq/GeneralFAQ';
+import fs from 'fs/promises'; // Use promises-based fs for async operations
 
 export default function Home({ faqs, testimonials, newsAndEvents }) {
   const { t, lang } = useTranslation();
@@ -35,7 +36,6 @@ export default function Home({ faqs, testimonials, newsAndEvents }) {
       <CardDeckComponent />
       <NewsAndEventsComponent newsAndEvents={newsAndEvents} />
       <Testimonials testimonials={testimonials} />
-
       {/* Remove below div when GeneralFAQ section added */}
       <div className="mt-4"></div>
       <GeneralFAQ faqs={faqs} />
@@ -45,37 +45,63 @@ export default function Home({ faqs, testimonials, newsAndEvents }) {
 }
 
 export async function getServerSideProps(context) {
-  const responseGeneralFAQ = await fetch(`${process.env.API_BASE_URL}/api/general-faqs`);
-  const responseTestimonials = await fetch(`${process.env.API_BASE_URL}/api/testimonials`);
-  const responseNewsAndEvents = await fetch(`${process.env.API_BASE_URL}/api/news-and-events`);
-
   let faqs = [];
   let testimonials = [];
   let newsAndEvents = [];
 
-  if (!responseGeneralFAQ.ok) {
-    console.error(`Failed to fetch FAQs: ${responseGeneralFAQ.status}`);
-  } else {
-    faqs = await responseGeneralFAQ.json();
-  }
+  // Helper function to log errors to /tmp/error.log
+  const logError = async (message) => {
+    const timestamp = new Date().toISOString();
+    const logMessage = `${timestamp} - ${message}\n`;
+    try {
+      await fs.appendFile('/tmp/error.log', logMessage);
+    } catch (fsError) {
+      console.error(`Failed to write to /tmp/error.log: ${fsError.message}`);
+    }
+  };
 
-  if (!responseTestimonials.ok) {
-    console.error(`Failed to fetch testimonials: ${responseTestimonials.status}`);
-  } else {
-    testimonials = await responseTestimonials.json();
-  }
+  try {
+    // Fetch General FAQs
+    const responseGeneralFAQ = await fetch(`${process.env.API_BASE_URL}/api/general-faqs`);
+    if (!responseGeneralFAQ.ok) {
+      const errorMsg = `Failed to fetch FAQs: ${responseGeneralFAQ.status}`;
+      await logError(errorMsg);
+      console.error(errorMsg);
+    } else {
+      faqs = await responseGeneralFAQ.json();
+    }
 
-  if (!responseNewsAndEvents.ok) {
-    console.error(`Failed to fetch news and events: ${responseNewsAndEvents.status}`);
-  } else {
-    newsAndEvents = await responseNewsAndEvents.json();
+    // Fetch Testimonials
+    const responseTestimonials = await fetch(`${process.env.API_BASE_URL}/api/testimonials`);
+    if (!responseTestimonials.ok) {
+      const errorMsg = `Failed to fetch testimonials: ${responseTestimonials.status}`;
+      await logError(errorMsg);
+      console.error(errorMsg);
+    } else {
+      testimonials = await responseTestimonials.json();
+    }
+
+    // Fetch News and Events
+    const responseNewsAndEvents = await fetch(`${process.env.API_BASE_URL}/api/news-and-events`);
+    if (!responseNewsAndEvents.ok) {
+      const errorMsg = `Failed to fetch news and events: ${responseNewsAndEvents.status}`;
+      await logError(errorMsg);
+      console.error(errorMsg);
+    } else {
+      newsAndEvents = await responseNewsAndEvents.json();
+    }
+  } catch (error) {
+    // Catch any unexpected errors (e.g., network issues, JSON parsing errors)
+    const errorMsg = `Unexpected error in getServerSideProps: ${error.message}`;
+    await logError(errorMsg);
+    console.error(errorMsg);
   }
 
   return {
     props: {
-      faqs,
-      testimonials,
-      newsAndEvents,
+      faqs, // Will be empty array if fetch fails
+      testimonials, // Will be empty array if fetch fails
+      newsAndEvents, // Will be empty array if fetch fails
     },
   };
 }

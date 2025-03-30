@@ -9,6 +9,7 @@ import Slider from '../components/slider/slider';
 import OurFocusCardComponent from '../components/ourFocusCardComponent/ourFocusCardComponent';
 import styles from '../components/aboutUsComponent/aboutUsComponent.module.css';
 import React, { useRef } from 'react';
+import fs from 'fs/promises'; // For async file operations
 
 export default function Education({ dhammaLectures }) {
   // Create an array for card components to view in card slider
@@ -110,17 +111,45 @@ export default function Education({ dhammaLectures }) {
 }
 
 export async function getServerSideProps(context) {
+  let dhammaLectures = [];
 
-  const response = await fetch(`${process.env.API_BASE_URL}/api/dhamma-lectures`);
-  if (!response.ok) {
-    console.error(`Failed to fetch dhamma lectures: ${response.status}`);
+  // Helper function to log errors to /tmp/error.log
+  const logError = async (message) => {
+    const timestamp = new Date().toISOString();
+    const logMessage = `${timestamp} - ${message}\n`;
+    try {
+      await fs.appendFile('/tmp/error.log', logMessage);
+    } catch (fsError) {
+      console.error(`Failed to write to /tmp/error.log: ${fsError.message}`);
+    }
+  };
+
+  try {
+    // Fetch Dhamma Lectures
+    const response = await fetch(`${process.env.API_BASE_URL}/api/dhamma-lectures`);
+    if (!response.ok) {
+      const errorMsg = `Failed to fetch dhamma lectures: ${response.status}`;
+      await logError(errorMsg);
+      console.error(errorMsg);
+      return {
+        props: {
+          dhammaLectures: [], // Return empty array on failure
+        },
+      };
+    }
+    dhammaLectures = await response.json();
+  } catch (error) {
+    // Catch unexpected errors (e.g., network issues, JSON parsing errors)
+    const errorMsg = `Unexpected error in getServerSideProps: ${error.message}`;
+    await logError(errorMsg);
+    console.error(errorMsg);
     return {
       props: {
         dhammaLectures: [], // Return empty array on failure
       },
     };
   }
-  const dhammaLectures = await response.json();
+
   return {
     props: {
       dhammaLectures,

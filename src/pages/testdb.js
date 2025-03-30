@@ -6,11 +6,11 @@ const prisma = new PrismaClient();
 import mysql from 'mysql2/promise';
 
 const connection = {
-    host: process.env.DB_HOST || 'rds-theravado-com-iit.cdrks5iijrux.ap-southeast-1.rds.amazonaws.com',
-    user: process.env.DB_USER || 'admin',
-    password: process.env.DB_PASSWORD || 'WSxpW29Gqz47QnQ',
-    database: process.env.DB_NAME || 'dev_dn',
-    port: process.env.DB_PORT || 3306,
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_NAME,
+    port: process.env.DATABASE_PORT,
 }
 
 const mysqlPool = mysql.createPool(connection);
