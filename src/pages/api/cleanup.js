@@ -1,33 +1,24 @@
+// pages/api/admin/cleanup-images.js (or wherever this file lives)
 import fs from 'fs';
 import path from 'path';
 import { parseCookies } from 'nookies';
-import { prisma } from '../../models/db';
+import db from '../../models/db'; // Adjust path as needed
 
 async function cleanupUnusedImages() {
     try {
-        const modelsWithImages = [
-            'Mission', 'Card', 'DhammaLecture', 'Meditation',
-            'NewsAndEvent', 'OurFocus', 'Testimonial'
-        ];
-        const imagePromises = modelsWithImages.map((model) =>
-            prisma[model].findMany({
-                select: { image: true },
-                where: { image: { not: '' } }, // Simplified syntax
-            })
-        );
-        const imageResults = await Promise.all(imagePromises);
-        const usedImages = imageResults
-            .flat()
-            .map((item) => item.image)
-            .filter(Boolean);
+        // Fetch all used image paths from the database
+        const usedImages = await db.getAllImages();
 
+        // Get all files in public/uploads
         const uploadsDir = path.join(process.cwd(), 'public/uploads');
         const uploadedFiles = fs.existsSync(uploadsDir)
             ? fs.readdirSync(uploadsDir).map((file) => `/uploads/${file}`)
             : [];
 
+        // Find unused images
         const unusedImages = uploadedFiles.filter((file) => !usedImages.includes(file));
 
+        // Delete unused images
         unusedImages.forEach((file) => {
             const filePath = path.join(process.cwd(), 'public', file);
             if (fs.existsSync(filePath)) {
@@ -44,9 +35,12 @@ async function cleanupUnusedImages() {
 }
 
 export default async function handler(req, res) {
+
     const cookies = parseCookies({ req });
-    if (!cookies.adminAuth || cookies.adminAuth !== 'true') {
-        return res.status(401).json({ error: 'Unauthorized' });
+    const token = cookies.token;
+
+    if (!token) {
+        return res.status(401).json({ error: 'Not authenticated' });
     }
 
     if (req.method !== 'POST') {

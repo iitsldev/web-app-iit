@@ -4,17 +4,17 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = env("DATABASE_URL")
 }
 
 model Mission {
-  id    Int     @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   image String
   text  String
 }
 
 model Card {
-  id          Int     @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   title       String
   image       String
   description String
@@ -25,14 +25,14 @@ model Card {
 }
 
 model NavigationItem {
-  id       Int     @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   title    String
   htmlId   String
   category String
 }
 
 model DhammaLecture {
-  id    Int     @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   title String
   body  String
   image String
@@ -40,13 +40,13 @@ model DhammaLecture {
 }
 
 model FAQ {
-  id       Int     @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   question String
   answer   String
 }
 
 model Meditation {
-  id    Int     @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   title String
   body  String
   link  String
@@ -57,13 +57,13 @@ model NewsAndEvent {
   id          Int      @id @default(autoincrement())
   title       String
   type        String
-  date        DateTime // Changed from dateStr String
+  date        DateTime
   description String
   image       String?
 }
 
 model OurFocus {
-  id    Int     @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   title String
   body  String
   image String
@@ -71,7 +71,7 @@ model OurFocus {
 }
 
 model Testimonial {
-  id          Int     @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   quote       String
   author      String
   image       String
@@ -79,10 +79,21 @@ model Testimonial {
   video       String
 }
 
+model AcademicProfile {
+  id           Int      @id @default(autoincrement())
+  name         String
+  title        String
+  body         String
+  body2        String?
+  profileImage String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   username  String   @unique
-  password  String // Store hashed password
+  password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

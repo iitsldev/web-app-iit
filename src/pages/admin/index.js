@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { adminAuthMiddleware } from '../../middleware/auth';
+
 import {
     Container,
     Row,
@@ -7,10 +9,10 @@ import {
     Nav,
     Navbar,
     Button,
-    NavbarBrand,
+    Modal,
+    Form,
+    Dropdown
 } from 'react-bootstrap';
-import { adminAuthMiddleware } from '../../middleware/auth';
-import styles from './AdminDashboard.module.css';
 import {
     FaBullseye,
     FaCreditCard,
@@ -22,11 +24,19 @@ import {
     FaEye,
     FaComments,
     FaBars,
+    FaChalkboardTeacher,
+    FaUser,
+    FaLock,
+    FaSignOutAlt,
+    FaRemoveFormat,
+    FaBroom
 } from 'react-icons/fa';
+import styles from './AdminDashboard.module.css';
 import AdminTable from '../../components/admin/adminTable/AdminTable';
 import AdminForm from '../../components/admin/adminForm/AdminForm';
 
 const sections = [
+    { key: 'AcademicProfile', label: 'Academic Profiles', icon: <FaChalkboardTeacher />, apiModel: 'academicProfiles' },
     { key: 'Mission', label: 'Missions', icon: <FaBullseye />, apiModel: 'mission' },
     { key: 'Card', label: 'Cards', icon: <FaCreditCard />, apiModel: 'card' },
     { key: 'NavigationItem', label: 'Navigation Items', icon: <FaCompass />, apiModel: 'navigationItem' },
@@ -39,6 +49,13 @@ const sections = [
 ];
 
 const modelFields = {
+    AcademicProfile: [
+        { key: 'name', label: 'Name', type: 'text', required: true },
+        { key: 'title', label: 'Title', type: 'text', required: true },
+        { key: 'body', label: 'Body', type: 'richtext', required: true },
+        { key: 'body2', label: 'Additional Body', type: 'text', required: false },
+        { key: 'profileImage', label: 'Profile Image', type: 'file', required: true },
+    ],
     Mission: [
         { key: 'image', label: 'Image', type: 'file', required: true },
         { key: 'text', label: 'Description', type: 'text', required: true },
@@ -48,9 +65,9 @@ const modelFields = {
         { key: 'image', label: 'Image', type: 'file', required: true },
         { key: 'description', label: 'Description', type: 'text', required: true },
         { key: 'link', label: 'Link', type: 'text', required: false },
-        { key: 'color', label: 'Title', type: 'text', required: false },
-        { key: 'titleColor', label: 'Title', type: 'text', required: false },
-        { key: 'arrowColor', label: 'Title', type: 'text', required: false },
+        { key: 'color', label: 'color', type: 'text', required: false },
+        { key: 'titleColor', label: 'Title Color', type: 'text', required: false },
+        { key: 'arrowColor', label: 'Arrow Color', type: 'text', required: false },
     ],
     NavigationItem: [
         { key: 'title', label: 'Title', type: 'text', required: true },
@@ -97,18 +114,26 @@ const modelFields = {
 
 export default function AdminDashboard() {
     const router = useRouter();
+    const [collapsed, setCollapsed] = useState(false);
     const [activeSection, setActiveSection] = useState('NewsAndEvent');
     const [items, setItems] = useState({});
     const [loading, setLoading] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [editItem, setEditItem] = useState(null);
+    const [showPasswordModal, setShowPasswordModal] = useState(false);
+    const [passwordData, setPasswordData] = useState({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+    });
 
-    const activeModel = sections.find((section) => section.key === activeSection)?.apiModel;
+
+    const activeModel = sections.find((section) => section.key === activeSection)?.key;
 
     useEffect(() => {
         if (!activeModel) return;
         setLoading(true);
-        fetch(`/api/${activeModel}`)
+        fetch(`/api/admin/${activeModel}`)
             .then((res) => {
                 if (!res.ok) throw new Error('Failed to fetch');
                 return res.json();
@@ -128,8 +153,37 @@ export default function AdminDashboard() {
     }, [activeSection, activeModel]);
 
     const handleLogout = async () => {
-        await fetch('/api/admin/logout', { method: 'POST' });
+        await fetch('/api/admin/logout', { method: 'POST', credentials: 'include' });
         router.push('/admin/login');
+    };
+
+    const handlePasswordChange = async (e) => {
+        e.preventDefault();
+        if (passwordData.newPassword !== passwordData.confirmPassword) {
+            alert('New password and confirmation do not match');
+            return;
+        }
+
+        try {
+            const res = await fetch('/api/admin/change-password', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // Ensure JWT cookie is sent
+                body: JSON.stringify({
+                    currentPassword: passwordData.currentPassword,
+                    newPassword: passwordData.newPassword
+                })
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error || 'Failed to change password');
+
+            alert('Password changed successfully');
+            setShowPasswordModal(false);
+            setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+        } catch (error) {
+            alert('Error changing password: ' + error.message);
+        }
     };
 
     const handleEdit = (item) => {
@@ -140,7 +194,7 @@ export default function AdminDashboard() {
     const handleDelete = async (id) => {
         if (confirm('Are you sure you want to delete this item?')) {
             try {
-                const res = await fetch(`/api/${activeModel}?id=${id}`, {
+                const res = await fetch(`/api/admin/${activeModel}?id=${id}`, {
                     method: 'DELETE',
                 });
                 if (!res.ok) throw new Error('Failed to delete');
@@ -173,8 +227,8 @@ export default function AdminDashboard() {
     const handleFormSubmit = async (data) => {
         try {
             const url = editItem
-                ? `/api/${activeModel}?id=${editItem.id}`
-                : `/api/${activeModel}`;
+                ? `/api/admin/${activeModel}?id=${editItem.id}`
+                : `/api/admin/${activeModel}`;
             const method = editItem ? 'PUT' : 'POST';
             const res = await fetch(url, {
                 method,
@@ -210,56 +264,69 @@ export default function AdminDashboard() {
 
 
     return (
-        <Container fluid className={styles.dashboard}>
-            <Navbar expand="sm" className={`${styles.topNav} d-sm-none`} bg="dark" variant="dark">
-                <NavbarBrand className={styles.brand}>Admin</NavbarBrand>
-                <Navbar.Toggle aria-controls="top-nav" />
-                <Navbar.Collapse id="top-nav">
-                    <Nav className="me-auto">
-                        {sections.map((section) => (
-                            <Nav.Link
-                                key={section.key}
-                                className={`${styles.navLink} ${activeSection === section.key ? styles.active : ''}`}
-                                onClick={() => setActiveSection(section.key)}
-                            >
-                                <span className={styles.icon}>{section.icon}</span>
-                                {section.label}
-                            </Nav.Link>
-                        ))}
-                    </Nav>
-                    <Button variant="outline-light" onClick={handleLogout}>
-                        Logout
-                    </Button>
-                </Navbar.Collapse>
-            </Navbar>
+        <Container fluid className={styles.dashboardContainer}>
+            {/* Sidebar */}
+            <div className={`${styles.sidebar} ${collapsed ? styles.collapsed : ''}`}>
+                <div className={styles.logoContainer}>
+                    <h2 className={styles.logo}>
+                        {collapsed ? 'AD' : 'Admin Panel'}
+                    </h2>
+                </div>
+                <Nav className={styles.sideNav}>
+                    {sections.map((section) => (
+                        <Nav.Link
+                            key={section.key}
+                            className={`${styles.navItem} ${activeSection === section.key ? styles.active : ''}`}
+                            onClick={() => setActiveSection(section.key)}
+                        >
+                            <span className={styles.navIcon}>{section.icon}</span>
+                            {!collapsed && <span className={styles.navLabel}>{section.label}</span>}
+                        </Nav.Link>
+                    ))}
+                </Nav>
+            </div>
 
-            <Row className={styles.mainRow}>
-                <Col md={3} lg={2} className={`${styles.sidebar} d-none d-sm-block`}>
-                    <Navbar className={styles.sidebarNav}>
-                        <Nav className="flex-column">
-                            <Navbar.Brand className={styles.brand}>Admin Panel</Navbar.Brand>
-                            {sections.map((section) => (
-                                <Nav.Link
-                                    key={section.key}
-                                    className={`${styles.navLink} ${activeSection === section.key ? styles.active : ''}`}
-                                    onClick={() => setActiveSection(section.key)}
-                                >
-                                    <span className={styles.icon}>{section.icon}</span>
-                                    <span className={styles.label}>{section.label}</span>
-                                </Nav.Link>
-                            ))}
-                        </Nav>
-                    </Navbar>
-                </Col>
-
-                <Col md={9} lg={10} className={styles.mainContent}>
-                    <div className={`${styles.header} d-none d-sm-flex`}>
-                        <h1 className={styles.headerTitle}>Admin Dashboard</h1>
-                        <Button variant="outline-danger" onClick={handleLogout}>
-                            Logout
+            {/* Main Content */}
+            <div className={`${styles.mainContent} ${collapsed ? styles.expanded : ''}`}>
+                {/* Header */}
+                <Navbar className={styles.topHeader}>
+                    <div className={styles.headerLeft}>
+                        <Button
+                            variant="outline-secondary"
+                            onClick={() => setCollapsed(!collapsed)}
+                            className={styles.collapseBtn}
+                        >
+                            <FaBars />
                         </Button>
+                        <h1 className={styles.pageTitle}>
+                            {sections.find(s => s.key === activeSection)?.label}
+                        </h1>
                     </div>
-                    <div className={styles.content}>
+                    <div className={styles.headerRight}>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="outline-primary" id="user-dropdown" className={styles.userDropdown}>
+                                <FaUser /> Admin
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu align="end">
+                                <Dropdown.Item onClick={() => setShowPasswordModal(true)}>
+                                    <FaLock className="me-2" /> Change Password
+                                </Dropdown.Item>
+                                <Dropdown.Item onClick={() => handleCleanup()}>
+                                    <FaBroom className="me-2" /> Cleanup Unused Images
+                                </Dropdown.Item>
+
+                                <Dropdown.Divider />
+                                <Dropdown.Item className="text-danger" onClick={() => handleLogout()}>
+                                    <FaSignOutAlt className="me-2" /> Logout
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
+                </Navbar>
+
+                {/* Content Area */}
+                <div className={styles.contentArea}>
+                    <div className={styles.sectionTabs}>
                         <Button
                             variant="primary"
                             className="m-3"
@@ -270,32 +337,77 @@ export default function AdminDashboard() {
                         >
                             Add New
                         </Button>
-                        <Button
-                            variant="danger"
-                            className="m-3"
-                            onClick={handleCleanup}
-                        >
-                            Clean Up Unused Images
-                        </Button>
-                    </div>
 
-                    <AdminTable
-                        items={items[activeSection] || []}
-                        fields={modelFields[activeSection]}
-                        onEdit={handleEdit}
-                        onDelete={handleDelete}
-                        loading={loading}
-                    />
-                    <AdminForm
-                        show={showForm}
-                        onHide={() => setShowForm(false)}
-                        onSubmit={handleFormSubmit}
-                        initialData={editItem}
-                        fields={modelFields[activeSection]}
-                    />
-                </Col>
-            </Row>
-        </Container >
+                    </div>
+                    <div className={styles.sectionContent}>
+                        <AdminTable
+                            items={items[activeSection] || []}
+                            fields={modelFields[activeSection]}
+                            onEdit={handleEdit}
+                            onDelete={handleDelete}
+                            loading={loading}
+                        />
+                        <AdminForm
+                            show={showForm}
+                            onHide={() => setShowForm(false)}
+                            onSubmit={handleFormSubmit}
+                            initialData={editItem}
+                            fields={modelFields[activeSection]}
+                        />
+                    </div>
+                </div>
+            </div>
+
+            {/* Password Change Modal */}
+            <Modal show={showPasswordModal} onHide={() => setShowPasswordModal(false)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Change Password</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form onSubmit={handlePasswordChange}>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Current Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                value={passwordData.currentPassword}
+                                onChange={(e) => setPasswordData({
+                                    ...passwordData,
+                                    currentPassword: e.target.value
+                                })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>New Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                value={passwordData.newPassword}
+                                onChange={(e) => setPasswordData({
+                                    ...passwordData,
+                                    newPassword: e.target.value
+                                })}
+                                required
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Confirm New Password</Form.Label>
+                            <Form.Control
+                                type="password"
+                                value={passwordData.confirmPassword}
+                                onChange={(e) => setPasswordData({
+                                    ...passwordData,
+                                    confirmPassword: e.target.value
+                                })}
+                                required
+                            />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Change Password
+                        </Button>
+                    </Form>
+                </Modal.Body>
+            </Modal>
+        </Container>
     );
 }
 

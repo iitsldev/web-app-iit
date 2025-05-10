@@ -1,12 +1,11 @@
-// src/pages/api/test-user.js (temporary)
 import { getUserByUsername } from '../../../models/db';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { setCookie } from 'nookies';
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
-        res.setHeader('Allow', ['POST']);
-        return res.status(405).end(`Method ${req.method} Not Allowed`);
+        return res.status(405).json({ error: 'Method not allowed' });
     }
 
     const { username, password } = req.body;
@@ -22,13 +21,22 @@ export default async function handler(req, res) {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
 
-        // Set a cookie to mark the user as authenticated
-        setCookie({ res }, 'adminAuth', 'true', {
+        const token = jwt.sign(
+            { userId: user.id },
+            process.env.JWT_SECRET,
+            { expiresIn: '30d' }
+        );
+
+        console.log('Generated token:', token); // Debug log
+        setCookie({ res }, 'token', token, {
             maxAge: 30 * 24 * 60 * 60, // 30 days
             path: '/',
             httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // Secure in production
+            sameSite: 'Strict', // Prevent CSRF
         });
 
+        console.log('Cookie set for token');
         res.status(200).json({ message: 'Login successful' });
     } catch (error) {
         console.error('Login error:', error);

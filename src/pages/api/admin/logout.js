@@ -1,11 +1,14 @@
 import { destroyCookie } from 'nookies';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     if (req.method !== 'POST') {
-        res.setHeader('Allow', ['POST']);
-        return res.status(405).end(`Method ${req.method} Not Allowed`);
+        return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    destroyCookie({ res }, 'adminAuth', { path: '/' });
-    res.status(200).json({ message: 'Logged out successfully' });
+    // Clear the token cookie
+    destroyCookie({ res }, 'token', {
+        path: '/',
+    });
+
+    res.status(200).json({ message: 'Logout successful' });
 }

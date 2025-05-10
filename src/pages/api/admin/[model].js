@@ -7,25 +7,27 @@ import {
     getItemById,
     updateItem,
     deleteItem,
-    prisma,
-} from '../../models/db';
+    knex,
+} from '../../../models/db';
 
 async function cleanupUnusedImages() {
     try {
         const modelsWithImages = ['newsAndEvent', 'card', 'ourFocus', 'testimonial'];
 
-        // Debug: Verify Prisma models exist
         modelsWithImages.forEach((model) => {
-            if (!prisma[model]) {
+            if (!knex(model)) {
                 console.error(`Model ${model} not found in Prisma client`);
             }
         });
 
         const imagePromises = modelsWithImages.map((model) =>
-            prisma[model].findMany({
-                select: { image: true },
-                where: { image: { not: null } }, // Simplified syntax
-            })
+            // prisma[model].findMany({
+            //     select: { image: true },
+            //     where: { image: { not: null } }, // Simplified syntax
+            // })
+            knex(model)
+                .select('image')
+                .whereNotNull('image')
         );
         const imageResults = await Promise.all(imagePromises);
         const usedImages = imageResults
@@ -57,21 +59,24 @@ async function cleanupUnusedImages() {
 
 export default async function handler(req, res) {
     const cookies = parseCookies({ req });
-    if (!cookies.adminAuth || cookies.adminAuth !== 'true') {
-        return res.status(401).json({ error: 'Unauthorized' });
+    const token = cookies.token;
+
+    if (!token) {
+        return res.status(401).json({ error: 'Not authenticated' });
     }
 
     const { model } = req.query;
     const validModels = [
-        'mission',
-        'card',
-        'navigationItem',
-        'dhammaLecture',
-        'faq',
-        'meditation',
-        'newsAndEvent',
-        'ourFocus',
-        'testimonial',
+        'AcademicProfile',
+        'Mission',
+        'Card',
+        'NavigationItem',
+        'DhammaLecture',
+        'FAQ',
+        'Meditation',
+        'NewsAndEvent',
+        'OurFocus',
+        'Testimonial',
     ];
 
     if (!validModels.includes(model)) {
@@ -91,6 +96,7 @@ export default async function handler(req, res) {
                 return res.status(200).json(items);
 
             case 'POST':
+                console.log(req.body);
                 const createdItem = await createItem(model, req.body);
                 return res.status(201).json(createdItem);
 
