@@ -43,6 +43,16 @@ const NewsAndEventsComponent = ({ newsAndEvents }) => {
         <Card.Subtitle className={styles.custSubTitle}>
           {card.date.slice(0, 10)}
         </Card.Subtitle>
+        <Card.Img
+          className={styles.custImage}
+          variant="top"
+          src={card.image}
+          alt={card.title}
+          onError={(e) => {
+            e.target.onerror = null; // Prevents infinite loop
+            e.target.src = '/IIT-1.png'; // Fallback image
+          }}
+        />
         <Card.Title className={styles.custTitle}>{card.title}</Card.Title>
         <Card.Text className={styles.custDescription}>
           {`${card.description.replace(/<[^>]*>/g, '').slice(0, 200)}...`}

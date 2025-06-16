@@ -67,6 +67,39 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.10);
 }
 
+.tiptapEditor img {
+    display: inline-block;
+    /* Ensures inline behavior */
+}
+
+/* Styling for images in the editor */
+.editorImage {
+    max-width: 100%;
+    height: auto;
+    margin: 8px 0;
+    cursor: move;
+    /* Indicates draggability */
+    resize: both;
+    /* Enables CSS-based resizing */
+    overflow: auto;
+    /* Required for resize to work */
+    display: inline-block;
+}
+
+/* Visual feedback for drag-and-drop */
+.tiptapEditor.dragOver {
+    border: 2px dashed #007bff;
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Ensure editor container supports drag-and-drop */
+.tiptapEditor {
+    min-height: 200px;
+    border: 1px solid #ced4da;
+    padding: 10px;
+    border-radius: 4px;
+}
+
 .ProseMirror {
     outline: none;
 }

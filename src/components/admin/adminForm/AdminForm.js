@@ -12,6 +12,7 @@ import {
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Heading from '@tiptap/extension-heading';
+import Image from '@tiptap/extension-image';
 import styles from './AdminForm.module.css';
 
 const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
@@ -22,6 +23,13 @@ const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
         extensions: [
             StarterKit,
             Heading.configure({ levels: [1, 2, 3, 4, 5, 6] }),
+            Image.configure({
+                inline: true,
+                allowBase64: false,
+                HTMLAttributes: {
+                    class: styles.editorImage,
+                },
+            }),
         ],
         content: initialData?.description || '',
         onUpdate: ({ editor }) => {
@@ -40,12 +48,74 @@ const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
         }
     }, [initialData, editor, fields]);
 
+    // Drag-and-Drop Event Handlers
+    useEffect(() => {
+        if (!editor) return;
+
+        const editorElement = document.querySelector(`.${styles.tiptapEditor}`);
+        if (!editorElement) return;
+
+        const handleDragOver = (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+            editorElement.classList.add(styles.dragOver);
+        };
+
+        const handleDragEnter = (e) => {
+            e.preventDefault();
+            editorElement.classList.add(styles.dragOver);
+        };
+
+        const handleDragLeave = () => {
+            editorElement.classList.remove(styles.dragOver);
+        };
+
+        const handleDrop = async (e) => {
+            e.preventDefault();
+            editorElement.classList.remove(styles.dragOver);
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                setUploading(true);
+                const formData = new FormData();
+                formData.append('image', file);
+                try {
+                    const res = await fetch('/api/upload', {
+                        method: 'POST',
+                        body: formData,
+                    });
+                    if (!res.ok) {
+                        const errorData = await res.json();
+                        throw new Error(errorData.error || 'Upload failed');
+                    }
+                    const { filePath } = await res.json();
+                    editor.chain().focus().setImage({ src: filePath }).run();
+                } catch (error) {
+                    alert('Error uploading image: ' + error.message);
+                } finally {
+                    setUploading(false);
+                }
+            }
+        };
+
+        editorElement.addEventListener('dragover', handleDragOver);
+        editorElement.addEventListener('dragenter', handleDragEnter);
+        editorElement.addEventListener('dragleave', handleDragLeave);
+        editorElement.addEventListener('drop', handleDrop);
+
+        return () => {
+            editorElement.removeEventListener('dragover', handleDragOver);
+            editorElement.removeEventListener('dragenter', handleDragEnter);
+            editorElement.removeEventListener('dragleave', handleDragLeave);
+            editorElement.removeEventListener('drop', handleDrop);
+        };
+    }, [editor]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleFileUpload = async (e) => {
+    const handleFileUpload = async (e, isEditorImage = false) => {
         const file = e.target.files[0];
         if (!file) return;
 
@@ -63,7 +133,12 @@ const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
                 throw new Error(errorData.error || 'Upload failed');
             }
             const { filePath } = await res.json();
-            setFormData((prev) => ({ ...prev, image: filePath }));
+
+            if (isEditorImage && editor) {
+                editor.chain().focus().setImage({ src: filePath }).run();
+            } else {
+                setFormData((prev) => ({ ...prev, image: filePath }));
+            }
         } catch (error) {
             alert('Error uploading image: ' + error.message);
         } finally {
@@ -130,6 +205,21 @@ const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
                 >
                     <FaListOl />
                 </Button>
+                <Button
+                    variant="light"
+                    size="sm"
+                    className={styles.toolbarButton}
+                    as="label"
+                    disabled={uploading}
+                >
+                    <input
+                        type="file"
+                        accept="image/jpeg,image/jpg,image/png"
+                        style={{ display: 'none' }}
+                        onChange={(e) => handleFileUpload(e, true)}
+                    />
+                    <FaUpload />
+                </Button>
             </ButtonGroup>
         );
     };
@@ -178,7 +268,7 @@ const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
                                     <Form.Control
                                         type="file"
                                         name={field.key}
-                                        onChange={handleFileUpload}
+                                        onChange={(e) => handleFileUpload(e, false)}
                                         accept="image/jpeg,image/jpg,image/png"
                                         disabled={uploading}
                                         className="mb-2"

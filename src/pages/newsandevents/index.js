@@ -104,7 +104,7 @@ export default function NewsAndEvents({ initialNewsAndEvents = [] }) {
                   </h3>
                   <p
                     className={styles.newsCardDescriptionWide}
-                    dangerouslySetInnerHTML={{ __html: post.description }}
+                    dangerouslySetInnerHTML={{ __html: post.description.replace(/<[^>]*>/g, '').slice(0, 200) + '...' }}
                   />
                   <Link
                     href={`/newsandevents/${post.id}`}
