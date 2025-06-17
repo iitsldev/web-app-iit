@@ -76,7 +76,7 @@ const modelFields = {
     ],
     DhammaLecture: [
         { key: 'title', label: 'Title', type: 'text', required: true },
-        { key: 'image', label: 'Image', type: 'image', required: true },
+        { key: 'image', label: 'Image', type: 'file', required: true },
         { key: 'body', label: 'Description', type: 'richtext', required: false },
         { key: 'link', label: 'Link', type: 'text', required: false },
     ],
