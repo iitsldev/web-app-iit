@@ -19,6 +19,7 @@ function OurFocusCardComponent(props) {
         </div>
         <div className={styles.ourFocusHeader}>{props.cardData.title}</div>
         <div className={styles.ourFocusDetails} dangerouslySetInnerHTML={{ __html: sanitizeHtml(props.cardData.body) }}></div>
+
       </div>
     </div>
   );

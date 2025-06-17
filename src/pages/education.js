@@ -137,7 +137,7 @@ export async function getServerSideProps(context) {
         },
       };
     }
-    dhammaLectures = await response.json();
+    dhammaLectures = (await response.json()).reverse();
   } catch (error) {
     // Catch unexpected errors (e.g., network issues, JSON parsing errors)
     const errorMsg = `Unexpected error in getServerSideProps: ${error.message}`;
