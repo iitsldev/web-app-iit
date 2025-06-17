@@ -75,7 +75,7 @@ export default function NewsAndEventPost({ post, recentPosts = [] }) {  // Defau
                                 <div className={styles.postSubtitle}>
                                     {post.type} | {post.date}
                                 </div>
-                                <div className={styles.postText} dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.description) }} />
+                                <div className={styles.postText} dangerouslySetInnerHTML={{ __html: post.description }} />
                             </div>
                         </div>
                     </Col>
