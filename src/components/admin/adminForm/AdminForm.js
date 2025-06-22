@@ -19,6 +19,9 @@ const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
     const [formData, setFormData] = useState({});
     const [uploading, setUploading] = useState(false);
 
+    const richtextField = fields.find((field) => field.type === 'richtext');
+    const richtextKey = richtextField?.key || 'description'; // fallback
+
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -31,9 +34,9 @@ const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
                 },
             }),
         ],
-        content: initialData?.description || '',
+        content: initialData?.[richtextKey] || '',
         onUpdate: ({ editor }) => {
-            setFormData((prev) => ({ ...prev, description: editor.getHTML() }));
+            setFormData((prev) => ({ ...prev, [richtextKey]: editor.getHTML() }));
         },
     });
 
@@ -43,8 +46,8 @@ const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
             defaultData[field.key] = initialData?.[field.key] || '';
         });
         setFormData(defaultData);
-        if (editor && initialData?.description) {
-            editor.commands.setContent(initialData.description);
+        if (editor && initialData?.[richtextKey]) {
+            editor.commands.setContent(initialData[richtextKey] || '');
         }
     }, [initialData, editor, fields]);
 
@@ -259,7 +262,11 @@ const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
                                 <Form.Control
                                     type="datetime-local"
                                     name={field.key}
-                                    value={formData[field.key] ? new Date(formData[field.key]).toISOString().slice(0, 16) : ''}
+                                    value={
+                                        formData[field.key] ?
+                                            new Date(formData[field.key]).toISOString().slice(0, 16) :
+                                            new Date().toISOString().slice(0, 16)
+                                    }
                                     onChange={handleChange}
                                     required={field.required}
                                 />

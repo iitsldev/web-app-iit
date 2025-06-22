@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './AcademicProfile.module.css';
+import sanitizeHtml from 'sanitize-html';
+
 
 function AcademicProfile({ profileImage, name, title, body, body2 }) {
   return (
@@ -18,8 +20,14 @@ function AcademicProfile({ profileImage, name, title, body, body2 }) {
           <div className={styles.intAcademicAuthorTitle}>{title}</div>
         </div>
       </div>
-      <div className={styles.intAcademicAuthorBody}>{body}</div>
-      <div className={styles.intAcademicAuthorBody}>{body2}</div>
+      <div
+        className={styles.intAcademicAuthorBody}
+        dangerouslySetInnerHTML={{ __html: sanitizeHtml(body) }}
+      ></div>
+      <div
+        className={styles.intAcademicAuthorBody}
+        dangerouslySetInnerHTML={{ __html: sanitizeHtml(body2) }}
+      ></div>
     </div>
   );
 }

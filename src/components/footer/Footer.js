@@ -15,7 +15,7 @@ const translations = {
     visionMission: 'Vision & Mission',
     ourFocus: 'Our Focus',
     academy: 'Academy',
-    academicStaff: 'Academic Staff',
+    academicStaff: 'Faculty Members',
     monastery: 'Monastery',
     administration: 'Administration',
     education: 'Education',

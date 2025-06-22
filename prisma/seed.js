@@ -67,7 +67,7 @@ async function main() {
 
   const instituteList = [
     { title: 'Academy', htmlId: 'academy', category: 'institute' },
-    { title: 'Academic Staff', htmlId: 'academic-staff', category: 'institute' },
+    { title: 'Faculty Members', htmlId: 'academic-staff', category: 'institute' },
     { title: 'Monastery', htmlId: 'monastery', category: 'institute' },
     { title: 'Administration', htmlId: 'administration', category: 'institute' },
   ];
@@ -405,7 +405,7 @@ async function main() {
   await prisma.academicProfile.createMany({ data: academicProfilesData });
   //for User table
   const saltRounds = 10;
-  const hashedPassword = await bcrypt.hash('iitmonk', saltRounds); // Default password: admin123
+  const hashedPassword = await bcrypt.hash('password', saltRounds); // Default password: admin123
 
   await prisma.user.create({
     data: {

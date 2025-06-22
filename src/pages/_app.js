@@ -31,7 +31,7 @@ const MyApp = ({ Component, pageProps }) => {
     if (!result) {
       setTimeout(() => {
         dispatch(setIsPreLoadedToTrue());
-      }, 4100);
+      }, 1000);
     }
   }, [result]);
 

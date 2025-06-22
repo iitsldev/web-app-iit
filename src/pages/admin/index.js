@@ -46,6 +46,8 @@ const sections = [
     { key: 'NewsAndEvent', label: 'News & Events', icon: <FaNewspaper />, apiModel: 'newsAndEvent' },
     { key: 'OurFocus', label: 'Our Focus', icon: <FaEye />, apiModel: 'ourFocus' },
     { key: 'Testimonial', label: 'Testimonials', icon: <FaComments />, apiModel: 'testimonial' },
+    { key: 'User', label: 'Users', icon: <FaUser />, apiModel: 'user' },
+
 ];
 
 const modelFields = {
@@ -110,9 +112,14 @@ const modelFields = {
         { key: 'description', label: 'Description', type: 'text', required: false },
         { key: 'video', label: 'Video Link', type: 'text', required: false },
     ],
+    User: [
+        { key: 'username', label: 'Username', type: 'text', required: true },
+        { key: 'password', label: 'Password', type: 'password', required: true },
+        { key: 'role', label: 'Role', type: 'select', required: true, options: ['admin', 'content', 'mark', 'user',] },
+    ],
 };
 
-export default function AdminDashboard() {
+export default function AdminDashboard({ userRole }) {
     const router = useRouter();
     const [collapsed, setCollapsed] = useState(false);
     const [activeSection, setActiveSection] = useState('NewsAndEvent');
@@ -187,11 +194,19 @@ export default function AdminDashboard() {
     };
 
     const handleEdit = (item) => {
+        if (activeSection === 'User' && userRole !== 'admin') {
+            alert('Only admins can edit users.');
+            return;
+        }
         setEditItem(item);
         setShowForm(true);
     };
 
     const handleDelete = async (id) => {
+        if (activeSection === 'User' && userRole !== 'admin') {
+            alert('Only admins can delete users.');
+            return;
+        }
         if (confirm('Are you sure you want to delete this item?')) {
             try {
                 const res = await fetch(`/api/admin/${activeModel}?id=${id}`, {
@@ -225,6 +240,10 @@ export default function AdminDashboard() {
     };
 
     const handleFormSubmit = async (data) => {
+        if (activeSection === 'User' && userRole !== 'admin') {
+            alert('Only admins can modify users.');
+            return;
+        }
         try {
             const url = editItem
                 ? `/api/admin/${activeModel}?id=${editItem.id}`
@@ -273,16 +292,18 @@ export default function AdminDashboard() {
                     </h2>
                 </div>
                 <Nav className={styles.sideNav}>
-                    {sections.map((section) => (
-                        <Nav.Link
-                            key={section.key}
-                            className={`${styles.navItem} ${activeSection === section.key ? styles.active : ''}`}
-                            onClick={() => setActiveSection(section.key)}
-                        >
-                            <span className={styles.navIcon}>{section.icon}</span>
-                            {!collapsed && <span className={styles.navLabel}>{section.label}</span>}
-                        </Nav.Link>
-                    ))}
+                    {sections
+                        .filter((section) => section.key !== 'User' || userRole === 'admin')
+                        .map((section) => (
+                            <Nav.Link
+                                key={section.key}
+                                className={`${styles.navItem} ${activeSection === section.key ? styles.active : ''}`}
+                                onClick={() => setActiveSection(section.key)}
+                            >
+                                <span className={styles.navIcon}>{section.icon}</span>
+                                {!collapsed && <span className={styles.navLabel}>{section.label}</span>}
+                            </Nav.Link>
+                        ))}
                 </Nav>
             </div>
 
@@ -327,16 +348,19 @@ export default function AdminDashboard() {
                 {/* Content Area */}
                 <div className={styles.contentArea}>
                     <div className={styles.sectionTabs}>
-                        <Button
-                            variant="primary"
-                            className="m-3"
-                            onClick={() => {
-                                setEditItem(null);
-                                setShowForm(true);
-                            }}
-                        >
-                            Add New
-                        </Button>
+                        {userRole === 'admin' || activeSection !== 'User' ? (
+                            <Button
+                                variant="primary"
+                                className="m-3"
+                                onClick={() => {
+                                    setEditItem(null);
+                                    setShowForm(true);
+                                }}
+                            >
+                                Add New
+                            </Button>
+                        ) : null}
+
 
                     </div>
                     <div className={styles.sectionContent}>
@@ -412,7 +436,10 @@ export default function AdminDashboard() {
 }
 
 export const getServerSideProps = adminAuthMiddleware(async (context) => {
+    const { user } = context.req;
     return {
-        props: {},
+        props: {
+            userRole: user?.role || 'user',
+        },
     };
 });

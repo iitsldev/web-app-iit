@@ -66,7 +66,7 @@ async function main() {
 
     const instituteList = [
         { title: 'Academy', htmlId: 'academy', category: 'institute' },
-        { title: 'Academic Staff', htmlId: 'academic-staff', category: 'institute' },
+        { title: 'Faculty Members', htmlId: 'academic-staff', category: 'institute' },
         { title: 'Monastery', htmlId: 'monastery', category: 'institute' },
         { title: 'Administration', htmlId: 'administration', category: 'institute' },
     ];
@@ -410,6 +410,7 @@ async function main() {
     await knex('User').insert({
         username: 'admin',
         password: hashedPassword,
+        role: 'admin', // Default role
     });
 
     console.log('Database seeded successfully');

@@ -90,6 +90,7 @@ exports.up = async function (knex) {
         table.increments('id').primary();
         table.string('username').notNullable().unique();
         table.string('password').notNullable();
+        table.string('role').notNullable().defaultTo('user'); // Default role is 'user'
         table.datetime('createdAt').defaultTo(knex.fn.now());
         table.datetime('updatedAt').defaultTo(knex.fn.now());
     });

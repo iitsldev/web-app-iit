@@ -23,7 +23,7 @@ export const instituteList = [
     id: 'academy',
   },
   {
-    title: 'Academic Staff',
+    title: 'Faculty Members',
     id: 'academic-staff',
   },
   {
