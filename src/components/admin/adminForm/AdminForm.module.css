@@ -22,6 +22,9 @@
     background-color: white;
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
 }
 
 .tiptapToolbar {
@@ -52,15 +55,6 @@
     color: #212529;
 }
 
-.tiptapEditor {
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    padding: 0.75rem;
-    min-height: 300px;
-    max-height: 500px;
-    overflow-y: auto;
-    background-color: white;
-}
 
 .tiptapEditor:focus-within {
     border-color: #80bdff;
@@ -92,16 +86,28 @@
     background-color: rgba(0, 123, 255, 0.1);
 }
 
-/* Ensure editor container supports drag-and-drop */
 .tiptapEditor {
-    min-height: 200px;
+    flex: 1;
     border: 1px solid #ced4da;
-    padding: 10px;
-    border-radius: 4px;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    min-height: 300px;
+    max-height: 500px;
+    overflow-y: auto;
+    background-color: white;
 }
 
 .ProseMirror {
     outline: none;
+    min-height: 200px;
+    box-sizing: border-box;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+    content: '';
+    float: left;
+    height: 280px;
+    pointer-events: none;
 }
 
 .ProseMirror h1 {

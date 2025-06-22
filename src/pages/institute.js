@@ -49,7 +49,7 @@ export default function Institute({ instituteList, academicProfiles }) {
           Theravada.
         </div>
         <div className="inst-academic-header" id="academic-staff">
-          Academic Staff
+          Faculty Members
         </div>
         <Row className="inst-academic-row">
           {profiles.length > 0 ? (
