@@ -7,7 +7,7 @@ import MainLayoutSection from '../components/maincommonlayout/MainCommonLayoutSe
 import EducationComponent from '../components/education/EducationComponent';
 import Slider from '../components/slider/slider';
 import OurFocusCardComponent from '../components/ourFocusCardComponent/ourFocusCardComponent';
-import styles from '../components/aboutUsComponent/aboutUsComponent.module.css';
+import styles from '../styles/education.module.css';
 import React, { useRef } from 'react';
 import fs from 'fs/promises'; // For async file operations
 
