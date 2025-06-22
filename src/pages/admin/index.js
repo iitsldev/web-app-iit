@@ -34,6 +34,7 @@ import {
 import styles from './AdminDashboard.module.css';
 import AdminTable from '../../components/admin/adminTable/AdminTable';
 import AdminForm from '../../components/admin/adminForm/AdminForm';
+import { use } from 'react';
 
 const sections = [
     { key: 'AcademicProfile', label: 'Academic Profiles', icon: <FaChalkboardTeacher />, apiModel: 'academicProfiles' },
@@ -119,7 +120,7 @@ const modelFields = {
     ],
 };
 
-export default function AdminDashboard({ userRole }) {
+export default function AdminDashboard({ userId, username, userRole }) {
     const router = useRouter();
     const [collapsed, setCollapsed] = useState(false);
     const [activeSection, setActiveSection] = useState('NewsAndEvent');
@@ -326,7 +327,8 @@ export default function AdminDashboard({ userRole }) {
                     <div className={styles.headerRight}>
                         <Dropdown>
                             <Dropdown.Toggle variant="outline-primary" id="user-dropdown" className={styles.userDropdown}>
-                                <FaUser /> Admin
+                                <FaUser /> {username || 'Admin'}
+                                <span className={styles.userRole}>({userRole})</span>
                             </Dropdown.Toggle>
                             <Dropdown.Menu align="end">
                                 <Dropdown.Item onClick={() => setShowPasswordModal(true)}>
@@ -436,10 +438,12 @@ export default function AdminDashboard({ userRole }) {
 }
 
 export const getServerSideProps = adminAuthMiddleware(async (context) => {
-    const { user } = context.req;
+    const { userId, username, role } = context.req;
     return {
         props: {
-            userRole: user?.role || 'user',
+            userId: userId || null,
+            username: username || null,
+            userRole: role || 'user',
         },
     };
 });
