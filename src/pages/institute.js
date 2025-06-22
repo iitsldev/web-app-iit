@@ -51,10 +51,11 @@ export default function Institute({ instituteList, academicProfiles }) {
         <div className="inst-academic-header" id="academic-staff">
           Faculty Members
         </div>
-        <Row className="inst-academic-row">
+
+        <div className="inst-academic-masonry">
           {profiles.length > 0 ? (
             profiles.map((profile, index) => (
-              <Col key={index} md={6} lg={4}>
+              <div className="inst-masonry-item" key={index}>
                 <AcademicProfile
                   body={profile.body}
                   name={profile.name}
@@ -62,14 +63,13 @@ export default function Institute({ instituteList, academicProfiles }) {
                   title={profile.title}
                   body2={profile.body2}
                 />
-              </Col>
+              </div>
             ))
           ) : (
-            <Col>
-              <p>No academic profiles available at this time.</p>
-            </Col>
+            <p>No academic profiles available at this time.</p>
           )}
-        </Row>
+        </div>
+
 
         <div className="inst-academic-header" id="monastery">
           Monastery
