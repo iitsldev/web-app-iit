@@ -29,7 +29,8 @@ import {
     FaLock,
     FaSignOutAlt,
     FaRemoveFormat,
-    FaBroom
+    FaBroom,
+    FaGift
 } from 'react-icons/fa';
 import styles from './AdminDashboard.module.css';
 import AdminTable from '../../components/admin/adminTable/AdminTable';
@@ -47,6 +48,7 @@ const sections = [
     { key: 'NewsAndEvent', label: 'News & Events', icon: <FaNewspaper />, apiModel: 'newsAndEvent' },
     { key: 'OurFocus', label: 'Our Focus', icon: <FaEye />, apiModel: 'ourFocus' },
     { key: 'Testimonial', label: 'Testimonials', icon: <FaComments />, apiModel: 'testimonial' },
+    { key: 'Donation', label: 'Donations', icon: <FaGift />, apiModel: 'donation' },
     { key: 'User', label: 'Users', icon: <FaUser />, apiModel: 'user' },
 
 ];
@@ -113,10 +115,20 @@ const modelFields = {
         { key: 'description', label: 'Description', type: 'text', required: false },
         { key: 'video', label: 'Video Link', type: 'text', required: false },
     ],
+    Donation: [
+        { key: 'donor', label: 'Donor', type: 'text', required: true },
+        { key: 'topic', label: 'Topic', type: 'text', required: true },
+        { key: 'amount', label: 'Amount', type: 'text', required: false },
+        { key: 'date', label: 'Date', type: 'datetime', required: false },
+        { key: 'createdAt', label: 'Created At', type: 'datetime', required: false },
+        { key: 'updatedAt', label: 'Updated At', type: 'datetime', required: false },
+    ],
     User: [
         { key: 'username', label: 'Username', type: 'text', required: true },
-        { key: 'password', label: 'Password', type: 'password', required: true },
+        { key: 'password', label: 'Password', type: 'text', required: true },
         { key: 'role', label: 'Role', type: 'select', required: true, options: ['admin', 'content', 'mark', 'user',] },
+        { key: 'createdAt', label: 'Created At', type: 'datetime', required: false },
+        { key: 'updatedAt', label: 'Updated At', type: 'datetime', required: false },
     ],
 };
 
@@ -144,6 +156,7 @@ export default function AdminDashboard({ userId, username, userRole }) {
         fetch(`/api/admin/${activeModel}`)
             .then((res) => {
                 if (!res.ok) throw new Error('Failed to fetch');
+                console.log(`Fetching data for ${activeModel}...`);
                 return res.json();
             })
             .then((data) => {

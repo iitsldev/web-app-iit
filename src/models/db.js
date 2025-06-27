@@ -176,6 +176,16 @@ async function getAcademicProfiles() {
     }
 }
 
+async function getDonations() {
+    try {
+        return await knex('Donation').select();
+    } catch (error) {
+        const { logError } = await import('./logger');
+        await logError('Error fetching donations', error);
+        throw error;
+    }
+}
+
 async function getUserByUsername(username) {
     try {
         return await knex('User')
@@ -350,6 +360,7 @@ module.exports = {
     getOurFocus,
     getTestimonials,
     getAcademicProfiles,
+    getDonations,
     getUserByUsername,
     getUserById,
     updateUser,

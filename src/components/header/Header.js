@@ -18,13 +18,13 @@ function Header() {
               <img src="/IIT-1.png" className={styles.bannerImage} />
             </div>
             <div className={styles.bannerText}>
-              <div>International</div>
-              <div>Institute of</div>
-              <div>Theravada</div>
+              <div><strong>INTERNATIONAL INSTITUTE OF THERAVADA</strong></div>
+              <div><i>Karuwalagaswewa, Sri Lanka</i></div>
             </div>
           </div>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" className={styles.navToggle} />
+
         <Navbar.Collapse
           id="responsive-navbar-nav"
           className="justify-content-end"

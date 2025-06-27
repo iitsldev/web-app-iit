@@ -36,7 +36,7 @@
   text-align: center;
   align-self: center;
   opacity: 0.7;
-  margin-top:22%;
+  margin-top: 22%;
 }
 
 .bannerTextTwo {
@@ -49,7 +49,7 @@
   font-weight: 500;
 }
 
-.sliderLogoText{
+.sliderLogoText {
   text-align: left;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .motoImage {
-  padding:0;
+  padding: 0;
 }
 
 .iconsButton2 {
@@ -169,7 +169,7 @@
   font-family: "Raleway";
   font-weight: 400;
   color: #ffffff;
-  padding:30px;
+  padding: 30px;
 }
 
 .sliderThreeTextLine {
@@ -200,28 +200,28 @@
 }
 
 @media (max-width: 1399px) {
-  .motoImage{
-    padding-left:20px;
+  .motoImage {
+    padding-left: 20px;
     padding-right: 20px;
   }
 
-  .bannerTextOne{
+  .bannerTextOne {
     font-size: 50px;
-    margin-top:10px;
+    margin-top: 10px;
     text-align: center;
     margin-top: 20%;
   }
 
-  .bannerTextTwo{
+  .bannerTextTwo {
     font-size: 30px;
     line-height: 40px;
-    padding-left:20px;
-    padding-right:20px;
+    padding-left: 20px;
+    padding-right: 20px;
     text-align: center;
   }
 
   .sliderThreeContainer {
-    margin:30px;
+    margin: 30px;
   }
 
   .sliderThreeText {
@@ -238,33 +238,33 @@
     width: 100%;
   }
 
-  .iconsButton2{
-    width:70px;
-    margin-right:5px; 
+  .iconsButton2 {
+    width: 70px;
+    margin-right: 5px;
   }
 
- .motoImage{
-    padding-left:20px;
+  .motoImage {
+    padding-left: 20px;
     padding-right: 20px;
   }
 
-  .bannerTextOne{
+  .bannerTextOne {
     font-size: 50px;
-    margin-top:10px;
+    margin-top: 10px;
     text-align: center;
     margin-top: 20%;
   }
 
-  .bannerTextTwo{
+  .bannerTextTwo {
     font-size: 30px;
     line-height: 40px;
-    padding-left:20px;
-    padding-right:20px;
+    padding-left: 20px;
+    padding-right: 20px;
     text-align: center;
   }
 
   .sliderThreeContainer {
-    margin:30px;
+    margin: 30px;
   }
 
   .sliderThreeText {
@@ -284,45 +284,45 @@
   .bannerOneLeft {
     display: none;
   }
-  
+
   .bannerOneRight {
     display: none;
   }
 
-  .motoImage{
-    padding-left:10px;
+  .motoImage {
+    padding-left: 10px;
     padding-right: 10px;
   }
 
-  .bannerTextOne{
+  .bannerTextOne {
     font-size: 50px;
-    padding-top:28%;
+    padding-top: 28%;
     text-align: center;
   }
 
-  .bannerTextOne img{
-    width:150px;
+  .bannerTextOne img {
+    width: 150px;
   }
 
-  .bannerTextOne{
+  .bannerTextOne {
     font-size: 50px;
-    margin-top:30px;
+    margin-top: 30px;
     text-align: center;
   }
 
-  .bannerTextOne img{
-    width:120px;
+  .bannerTextOne img {
+    width: 120px;
   }
 
-  .bannerTextTwo{
+  .bannerTextTwo {
     font-size: 23px;
     line-height: 40px;
-    padding-left:20px;
-    padding-right:20px;
+    padding-left: 20px;
+    padding-right: 20px;
     text-align: center;
   }
 
-  .outer{
+  .outer {
     flex-direction: column;
   }
 
@@ -330,13 +330,13 @@
     font-size: 20px;
   }
 
-  .outerTextThree{
+  .outerTextThree {
     display: none;
   }
 
-  .sliderTwoContainer{
-    margin-left:20px;
-    margin-right:20px;
+  .sliderTwoContainer {
+    margin-left: 20px;
+    margin-right: 20px;
     padding-top: 140px;
     padding-bottom: 140px;
   }
@@ -357,7 +357,7 @@
     text-align: center;
     text-align: justify;
     font-size: 15px;
-    padding:0;
+    padding: 0;
     padding-top: 20px;
     padding-bottom: 20px;
   }
@@ -373,51 +373,51 @@
   .bannerOneLeft {
     display: none;
   }
-  
+
   .bannerOneRight {
     display: none;
   }
-  
+
   .motoContainer {
     flex-direction: column;
     align-items: center;
   }
 
-  .motoImage{
+  .motoImage {
     padding-left: 120px;
     padding-right: 120px;
   }
 
-  .bannerTextOne{
+  .bannerTextOne {
     font-size: 50px;
-    padding-top:0;
-    margin-top:10px;
+    padding-top: 0;
+    margin-top: 10px;
     text-align: center;
   }
 
-  .bannerTextOne img{
-    width:150px;
+  .bannerTextOne img {
+    width: 150px;
   }
 
-  .bannerTextOne{
+  .bannerTextOne {
     font-size: 50px;
-    margin-top:30px;
+    margin-top: 30px;
     text-align: center;
   }
 
-  .bannerTextOne img{
-    width:120px;
+  .bannerTextOne img {
+    width: 120px;
   }
 
-  .bannerTextTwo{
+  .bannerTextTwo {
     font-size: 23px;
     line-height: 40px;
-    padding-left:20px;
-    padding-right:20px;
+    padding-left: 20px;
+    padding-right: 20px;
     text-align: center;
   }
 
-  .outer{
+  .outer {
     flex-direction: column;
   }
 
@@ -425,13 +425,13 @@
     font-size: 20px;
   }
 
-  .outerTextThree{
+  .outerTextThree {
     display: none;
   }
 
-  .sliderTwoContainer{
-    margin-left:20px;
-    margin-right:20px;
+  .sliderTwoContainer {
+    margin-left: 20px;
+    margin-right: 20px;
     padding-top: 160px;
     padding-bottom: 160px;
   }
@@ -452,7 +452,7 @@
     text-align: center;
     text-align: justify;
     font-size: 15px;
-    padding:0;
+    padding: 0;
     padding-top: 20px;
     padding-bottom: 20px;
   }
@@ -464,11 +464,11 @@
     left: -2%;
     width: 100%;
   }
-  
+
   .bannerOneLeft {
     display: none;
   }
-  
+
   .bannerOneRight {
     display: none;
   }
@@ -478,27 +478,27 @@
     align-items: center;
   }
 
-  .motoImage{
+  .motoImage {
     padding-left: 40px;
     padding-right: 40px;
   }
 
-  .bannerTextOne{
+  .bannerTextOne {
     font-size: 50px;
-    padding-top:0;
-    margin-top:10px;
+    padding-top: 0;
+    margin-top: 10px;
     text-align: center;
   }
 
-  .bannerTextOne img{
-    width:150px;
+  .bannerTextOne img {
+    width: 150px;
   }
 
-  .bannerTextTwo{
+  .bannerTextTwo {
     font-size: 25px;
     line-height: 40px;
-    padding-left:20px;
-    padding-right:20px;
+    padding-left: 20px;
+    padding-right: 20px;
     text-align: center;
   }
 
@@ -507,7 +507,7 @@
     margin-bottom: 30px;
   }
 
-  .outer{
+  .outer {
     flex-direction: column;
   }
 
@@ -515,11 +515,11 @@
     font-size: 20px;
   }
 
-  .outerTextThree{
+  .outerTextThree {
     display: none;
   }
 
-  .sliderTwoContainer{
+  .sliderTwoContainer {
     margin-left: 20px;
     margin-right: 20px;
     padding-top: 190px;
@@ -542,14 +542,14 @@
     text-align: center;
     text-align: justify;
     font-size: 15px;
-    padding:0;
+    padding: 0;
     padding-top: 20px;
     padding-bottom: 20px;
   }
 }
 
-@media (max-width: 480px){
-  .motoContainer{
+@media (max-width: 480px) {
+  .motoContainer {
     display: block;
     position: absolute;
     top: 50px;
@@ -557,7 +557,7 @@
     right: 0px;
   }
 
-  .motoImage{
+  .motoImage {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -566,8 +566,8 @@
     margin-top: 50px;
   }
 
-  .bannerTextOne img{
-    width:100px;
+  .bannerTextOne img {
+    width: 100px;
   }
 
   .sliderTwoContainer {
@@ -578,5 +578,96 @@
     padding: 0;
     padding-top: 45px;
     bottom: 60px;
+  }
+}
+
+
+
+/* New styles */
+
+.carouselWrapper {
+  position: relative;
+  background: #e6c49d;
+  padding: 20px;
+  overflow: hidden;
+}
+
+.carousel {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.carouselItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  background: #966304;
+  border-radius: 20px;
+  opacity: 0.85;
+  padding: 20px;
+}
+
+.carouselImage {
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.carouselCaption {
+  position: static;
+  text-align: center;
+  padding: 0;
+  color: #ffffff;
+}
+
+.carouselTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.carouselDescription {
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .carouselItem {
+    min-height: 400px;
+    padding: 15px;
+  }
+
+  .carouselImage {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .carouselTitle {
+    font-size: 28px;
+  }
+
+  .carouselDescription {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 575px) {
+  .carouselItem {
+    min-height: 350px;
+    padding: 10px;
+  }
+
+  .carouselTitle {
+    font-size: 24px;
+  }
+
+  .carouselDescription {
+    font-size: 14px;
   }
 }
