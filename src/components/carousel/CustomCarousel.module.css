@@ -49,23 +49,7 @@
   font-weight: 500;
 }
 
-.sliderLogoText {
-  text-align: left;
-}
-
-.learnMoreButton {
-  border: 2px solid #174b78;
-  border-radius: 33px;
-  font-size: 20px;
-  padding-left: 34px;
-  padding-right: 34px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  background-color: transparent;
-  color: #174b78;
-}
-
-.iconsButton {
+.iconsButton2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -103,100 +87,9 @@
 
 .motoImage {
   padding: 0;
-}
-
-.iconsButton2 {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-height: 458px;
-  max-width: 74px;
-  width: 73px;
-  height: 458px;
-  background: #00000010 0% 0% no-repeat padding-box;
-  border-radius: 60px;
-  -webkit-backdrop-filter: blur(30px);
-  backdrop-filter: blur(30px);
-}
-
-.sliderTwoContainer {
-  position: relative;
-  display: flex;
-  min-height: 356px;
-  flex: 7;
-  flex-direction: row-reverse;
-  max-width: 1500px;
-  background: #966304 0% 0% no-repeat padding-box;
-  border-radius: 48px;
-  opacity: 0.85;
-}
-
-.sliderTwoText {
-  text-align: center;
-  font-size: 25px;
-  font-family: "Raleway";
-  font-weight: 400;
-  color: #ffffff;
-}
-
-.sliderTwoTemple {
-  height: 190px;
-  width: 190px;
-  min-width: 190px;
-  min-height: 190px;
-  background-color: #65471f;
-  border-radius: 100%;
-  margin: 20px;
-  padding: 40px;
-}
-
-.sliderThreeContainer {
-  display: flex;
-  min-height: 356px;
-  flex: 7;
-  flex-direction: row-reverse;
-  max-width: 1500px;
-  background: #966304 0% 0% no-repeat padding-box;
-  border-radius: 48px;
-  opacity: 0.85;
-}
-
-.sliderThreeText {
-  text-align: left;
-  text-align: justify;
-  font-size: 19px;
-  font-family: "Raleway";
-  font-weight: 400;
-  color: #ffffff;
-  padding: 30px;
-}
-
-.sliderThreeTextLine {
-  padding: 6px 0 6px 0;
-}
-
-.sliderTwoInnerCont {
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-  justify-content: center;
-}
-
-.outer {
-  display: flex;
-}
-
-.outerTextThree {
-  width: 154px;
-}
-
-.sliderThreeLogo {
-  height: 500px;
-  width: 500px;
-  min-height: 500px;
-  border-radius: 100%;
-  padding: 40px;
 }
 
 @media (max-width: 1399px) {
@@ -219,16 +112,6 @@
     padding-right: 20px;
     text-align: center;
   }
-
-  .sliderThreeContainer {
-    margin: 30px;
-  }
-
-  .sliderThreeText {
-    text-align: center;
-    text-align: justify;
-    font-size: 18px;
-  }
 }
 
 @media (max-width: 1199px) {
@@ -236,11 +119,6 @@
     bottom: 30%;
     left: -30%;
     width: 100%;
-  }
-
-  .iconsButton2 {
-    width: 70px;
-    margin-right: 5px;
   }
 
   .motoImage {
@@ -261,105 +139,6 @@
     padding-left: 20px;
     padding-right: 20px;
     text-align: center;
-  }
-
-  .sliderThreeContainer {
-    margin: 30px;
-  }
-
-  .sliderThreeText {
-    text-align: center;
-    text-align: justify;
-    font-size: 15px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .customEllipse {
-    bottom: 50%;
-    left: -30%;
-    width: 100%;
-  }
-
-  .bannerOneLeft {
-    display: none;
-  }
-
-  .bannerOneRight {
-    display: none;
-  }
-
-  .motoImage {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .bannerTextOne {
-    font-size: 50px;
-    padding-top: 28%;
-    text-align: center;
-  }
-
-  .bannerTextOne img {
-    width: 150px;
-  }
-
-  .bannerTextOne {
-    font-size: 50px;
-    margin-top: 30px;
-    text-align: center;
-  }
-
-  .bannerTextOne img {
-    width: 120px;
-  }
-
-  .bannerTextTwo {
-    font-size: 23px;
-    line-height: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: center;
-  }
-
-  .outer {
-    flex-direction: column;
-  }
-
-  .sliderTwoText {
-    font-size: 20px;
-  }
-
-  .outerTextThree {
-    display: none;
-  }
-
-  .sliderTwoContainer {
-    margin-left: 20px;
-    margin-right: 20px;
-    padding-top: 140px;
-    padding-bottom: 140px;
-  }
-
-  .sliderTwoInnerCont {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sliderThreeContainer {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-
-  .sliderThreeText {
-    text-align: center;
-    text-align: justify;
-    font-size: 15px;
-    padding: 0;
-    padding-top: 20px;
-    padding-bottom: 20px;
   }
 }
 
@@ -383,26 +162,21 @@
     align-items: center;
   }
 
+  .motoItem {
+    flex-basis: auto;
+    width: 100%;
+    text-align: center;
+  }
+
   .motoImage {
-    padding-left: 120px;
-    padding-right: 120px;
+    padding: 20px;
   }
 
   .bannerTextOne {
-    font-size: 50px;
-    padding-top: 0;
+    font-size: 40px;
     margin-top: 10px;
-    text-align: center;
-  }
-
-  .bannerTextOne img {
-    width: 150px;
-  }
-
-  .bannerTextOne {
-    font-size: 50px;
-    margin-top: 30px;
-    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 0;
   }
 
   .bannerTextOne img {
@@ -410,51 +184,10 @@
   }
 
   .bannerTextTwo {
-    font-size: 23px;
-    line-height: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: center;
-  }
-
-  .outer {
-    flex-direction: column;
-  }
-
-  .sliderTwoText {
     font-size: 20px;
-  }
-
-  .outerTextThree {
-    display: none;
-  }
-
-  .sliderTwoContainer {
-    margin-left: 20px;
-    margin-right: 20px;
-    padding-top: 160px;
-    padding-bottom: 160px;
-  }
-
-  .sliderTwoInnerCont {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sliderThreeContainer {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-
-  .sliderThreeText {
+    line-height: 30px;
+    padding: 0 20px;
     text-align: center;
-    text-align: justify;
-    font-size: 15px;
-    padding: 0;
-    padding-top: 20px;
-    padding-bottom: 20px;
   }
 }
 
@@ -465,209 +198,57 @@
     width: 100%;
   }
 
-  .bannerOneLeft {
-    display: none;
-  }
-
-  .bannerOneRight {
-    display: none;
-  }
-
   .motoContainer {
     flex-direction: column;
     align-items: center;
   }
 
   .motoImage {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding: 20px;
   }
 
   .bannerTextOne {
-    font-size: 50px;
-    padding-top: 0;
+    font-size: 35px;
     margin-top: 10px;
-    text-align: center;
-  }
-
-  .bannerTextOne img {
-    width: 150px;
-  }
-
-  .bannerTextTwo {
-    font-size: 25px;
-    line-height: 40px;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: center;
-  }
-
-  .learnMoreButton {
-    font-size: 15px;
-    margin-bottom: 30px;
-  }
-
-  .outer {
-    flex-direction: column;
-  }
-
-  .sliderTwoText {
-    font-size: 20px;
-  }
-
-  .outerTextThree {
-    display: none;
-  }
-
-  .sliderTwoContainer {
-    margin-left: 20px;
-    margin-right: 20px;
-    padding-top: 190px;
-    padding-bottom: 190px;
-  }
-
-  .sliderInnerCont {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sliderThreeContainer {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-
-  .sliderThreeText {
-    text-align: center;
-    text-align: justify;
-    font-size: 15px;
-    padding: 0;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .motoContainer {
-    display: block;
-    position: absolute;
-    top: 50px;
-    left: 0px;
-    right: 0px;
-  }
-
-  .motoImage {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-
-  .bannerTextOne {
-    margin-top: 50px;
+    margin-bottom: 15px;
   }
 
   .bannerTextOne img {
     width: 100px;
   }
 
-  .sliderTwoContainer {
-    position: absolute;
-    top: 30px;
-    left: 0px;
-    right: 0px;
-    padding: 0;
-    padding-top: 45px;
-    bottom: 60px;
+  .bannerTextTwo {
+    font-size: 18px;
+    line-height: 28px;
+    padding: 0 15px;
   }
 }
 
+@media (max-width: 480px) {
+  .motoContainer {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 0;
+  }
 
-
-/* New styles */
-
-.carouselWrapper {
-  position: relative;
-  background: #e6c49d;
-  padding: 20px;
-  overflow: hidden;
-}
-
-.carousel {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.carouselItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 500px;
-  background: #966304;
-  border-radius: 20px;
-  opacity: 0.85;
-  padding: 20px;
-}
-
-.carouselImage {
-  max-width: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.carouselCaption {
-  position: static;
-  text-align: center;
-  padding: 0;
-  color: #ffffff;
-}
-
-.carouselTitle {
-  font-family: 'Playfair Display', serif;
-  font-size: 36px;
-  margin-bottom: 15px;
-}
-
-.carouselDescription {
-  font-family: 'Raleway', sans-serif;
-  font-size: 18px;
-  line-height: 1.6;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .carouselItem {
-    min-height: 400px;
+  .motoImage {
     padding: 15px;
   }
 
-  .carouselImage {
-    width: 100% !important;
-    height: auto !important;
+  .bannerTextOne {
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 
-  .carouselTitle {
-    font-size: 28px;
+  .bannerTextOne img {
+    width: 80px;
   }
 
-  .carouselDescription {
+  .bannerTextTwo {
     font-size: 16px;
-  }
-}
-
-@media (max-width: 575px) {
-  .carouselItem {
-    min-height: 350px;
-    padding: 10px;
-  }
-
-  .carouselTitle {
-    font-size: 24px;
-  }
-
-  .carouselDescription {
-    font-size: 14px;
+    line-height: 24px;
+    padding: 0 10px;
   }
 }

@@ -1,32 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import styles from './CustomCarousel.module.css';
+import $ from 'jquery';
 
-// Sample JSON data (to be replaced with DB data later)
 const carouselData = [
   {
     id: 1,
-    title: 'Poya Day Programs',
-    description: 'Join our online Dhamma programs during full moon days, featuring discourses and meditation instructions in Sinhala and English.',
-    image: '/temple.svg',
-    imageWidth: '100px',
-    imageHeight: '100px'
+    imageSrc: "/buddha_20250628.png",
+    imageAlt: "Buddha Image",
+    title: "IIT",
+    description: "International Institute of Theravada is an inclusive bhikkhu training center aiming at capacitating attahita, parahita and vinayadhara Buddhist monks.",
+    imageWidth: "100%",
+    imageHeight: "auto",
   },
   {
     id: 2,
-    title: 'IIT Mission',
-    description: 'International Institute of Theravada trains Buddhist monks in attahita, parahita, and vinayadhara, fostering spiritual and scholarly growth.',
-    image: '/buddha_20250628.png',
-    imageWidth: '400px',
-    imageHeight: '500px'
+    imageSrc: "/temple.svg",
+    imageAlt: "Temple Image",
+    title: "Dhamma Programs",
+    description: "IIT holds online Dhamma programs during full moon days. You can listen to various dhamma discourses, meditation instructions in both Sinhala and English medium.",
+    imageWidth: "100px",
+    imageHeight: "auto"
   },
   {
     id: 3,
-    title: 'Dhamma Wheel Symbolism',
-    description: 'The brown Dhamma Wheel with 24 spokes represents the Noble Truths, supported by palm-leaf books, symbolizing Dhamma and Vinaya studies.',
-    image: '/IIT-2.svg',
-    imageWidth: '100px',
-    imageHeight: '100px'
+    imageSrc: "/IIT-2.svg",
+    imageAlt: "IIT Logo",
+    title: "Wheel of Dhamma",
+    description: "<p><strong>Brown Coloured Large Wheel of Dhamma</strong> indicates how the dispensation of the Buddha is spread all over the world.</p><p><strong>Twenty-four Spokes</strong> of the wheel represent the twenty-four factors of the Noble Truths.</p><p><strong>Palm-Leaf-Books</strong> which holds the wheel of Dhamma indicates how the dispensation depends upon studies on Dhamma and Vinaya after the passing away of the Buddha.</p><p><strong>The Pen and the Palm Leaf</strong> inside the wheel depicts how a monk is involved in studies of Dhamma and Vinaya – pariyatti sāsana.</p><p><strong>The Meditative Figure</strong> shows how a monk is involved in developing spiritual qualities – paṭipatti sāsana.</p><p><strong>The Pagoda</strong> depicts how a monk who involves in both scriptural studies and spiritual practice becomes a noble being who deserves to be venerated having a pagoda built for him.</p>",
+    imageWidth: "100px",
+    imageHeight: "auto",
   }
 ];
 
@@ -37,22 +40,66 @@ function CustomCarousel() {
     setIndex(selectedIndex);
   };
 
+  function normalizeSlideHeights() {
+    $('.main-carousel.carousel').each(function () {
+      var items = $('.carousel-item', this);
+      items.css('height', 'auto');
+      var maxHeight = Math.max.apply(
+        null,
+        items
+          .map(function () {
+            return $(this).outerHeight();
+          })
+          .get()
+      );
+      items.css('height', maxHeight + 'px');
+    });
+  }
+
+  useEffect(() => {
+    $(window).on('load resize orientationchange', normalizeSlideHeights);
+    setTimeout(() => {
+      normalizeSlideHeights();
+    }, 400);
+    return () => {
+      $(window).off('load resize orientationchange');
+    };
+  }, []);
+
   return (
-    <div className={styles.carouselWrapper}>
-      <Carousel activeIndex={index} onSelect={handleSelect} className={styles.carousel}>
+    <div className={styles.customCarouselWrapper}>
+      <div className={styles.customEllipse}></div>
+      <Carousel
+        className="main-carousel"
+        activeIndex={index}
+        onSelect={handleSelect}
+      >
         {carouselData.map((item) => (
           <Carousel.Item key={item.id}>
-            <div className={styles.carouselItem}>
-              <img
-                className={styles.carouselImage}
-                src={item.image}
-                alt={item.title}
-                style={{ width: item.imageWidth, height: item.imageHeight }}
-              />
-              <Carousel.Caption className={styles.carouselCaption}>
-                <h3 className={styles.carouselTitle}>{item.title}</h3>
-                <p className={styles.carouselDescription}>{item.description}</p>
-              </Carousel.Caption>
+            <div className={styles.carouwrap}>
+              <div className={styles.motoContainer}>
+                <div className={styles.motoItem}>
+                  <div className={styles.motoImage}>
+                    <img
+                      className="d-block w-100 banner-img-max-width"
+                      src={item.imageSrc}
+                      alt={item.imageAlt}
+                      style={{ width: item.imageWidth, height: item.imageHeight }}
+                    />
+                  </div>
+                </div>
+                <div className={styles.motoItem}>
+                  <div className={styles.bannerTextOne}>
+                    <img src="/swirlLeftt.png" width="200px" />
+                    {item.title}
+                    <img src="/swirlRight.png" width="200px" />
+                  </div>
+                  <div
+                    className={styles.bannerTextTwo}
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  />
+                </div>
+              </div>
             </div>
           </Carousel.Item>
         ))}
