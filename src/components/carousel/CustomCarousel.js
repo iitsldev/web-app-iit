@@ -28,7 +28,7 @@ const carouselData = [
     imageAlt: "IIT Logo",
     title: "Wheel of Dhamma",
     description: "<p><strong>Brown Coloured Large Wheel of Dhamma</strong> indicates how the dispensation of the Buddha is spread all over the world.</p><p><strong>Twenty-four Spokes</strong> of the wheel represent the twenty-four factors of the Noble Truths.</p><p><strong>Palm-Leaf-Books</strong> which holds the wheel of Dhamma indicates how the dispensation depends upon studies on Dhamma and Vinaya after the passing away of the Buddha.</p><p><strong>The Pen and the Palm Leaf</strong> inside the wheel depicts how a monk is involved in studies of Dhamma and Vinaya – pariyatti sāsana.</p><p><strong>The Meditative Figure</strong> shows how a monk is involved in developing spiritual qualities – paṭipatti sāsana.</p><p><strong>The Pagoda</strong> depicts how a monk who involves in both scriptural studies and spiritual practice becomes a noble being who deserves to be venerated having a pagoda built for him.</p>",
-    imageWidth: "100px",
+    imageWidth: "300px",
     imageHeight: "auto",
   }
 ];
@@ -40,31 +40,31 @@ function CustomCarousel() {
     setIndex(selectedIndex);
   };
 
-  function normalizeSlideHeights() {
-    $('.main-carousel.carousel').each(function () {
-      var items = $('.carousel-item', this);
-      items.css('height', 'auto');
-      var maxHeight = Math.max.apply(
-        null,
-        items
-          .map(function () {
-            return $(this).outerHeight();
-          })
-          .get()
-      );
-      items.css('height', maxHeight + 'px');
-    });
-  }
+  // function normalizeSlideHeights() {
+  //   $('.main-carousel.carousel').each(function () {
+  //     var items = $('.carousel-item', this);
+  //     items.css('height', 'auto');
+  //     var maxHeight = Math.max.apply(
+  //       null,
+  //       items
+  //         .map(function () {
+  //           return $(this).outerHeight();
+  //         })
+  //         .get()
+  //     );
+  //     items.css('height', maxHeight + 'px');
+  //   });
+  // }
 
-  useEffect(() => {
-    $(window).on('load resize orientationchange', normalizeSlideHeights);
-    setTimeout(() => {
-      normalizeSlideHeights();
-    }, 400);
-    return () => {
-      $(window).off('load resize orientationchange');
-    };
-  }, []);
+  // useEffect(() => {
+  //   $(window).on('load resize orientationchange', normalizeSlideHeights);
+  //   setTimeout(() => {
+  //     normalizeSlideHeights();
+  //   }, 400);
+  //   return () => {
+  //     $(window).off('load resize orientationchange');
+  //   };
+  // }, []);
 
   return (
     <div className={styles.customCarouselWrapper}>
@@ -76,28 +76,30 @@ function CustomCarousel() {
       >
         {carouselData.map((item) => (
           <Carousel.Item key={item.id}>
-            <div className={styles.carouwrap}>
-              <div className={styles.motoContainer}>
-                <div className={styles.motoItem}>
-                  <div className={styles.motoImage}>
-                    <img
-                      className="d-block w-100 banner-img-max-width"
-                      src={item.imageSrc}
-                      alt={item.imageAlt}
-                      style={{ width: item.imageWidth, height: item.imageHeight }}
+            <div className={`d-flex flex-column flex-md-row align-items-center align-items-md-stretch ${styles.carouwrap}`}>
+              <div className={`container ${styles.motoContainer}`}>
+                <div className="row align-items-center">
+                  <div className={`col-md-12 col-xl-6 order-xl-2 ${styles.motoItem} d-flex align-items-center justify-content-center`}>
+                    <div className={styles.motoImage}>
+                      <img
+                        className="img-fluid banner-img-max-width"
+                        src={item.imageSrc}
+                        alt={item.imageAlt}
+                        style={{ width: item.imageWidth, height: item.imageHeight }}
+                      />
+                    </div>
+                  </div>
+                  <div className={`col-md-12 col-xl-6 order-xl-1 ${styles.motoItem}`}>
+                    <div className={styles.bannerTextOne}>
+                      <img src="/swirlLeftt.png" width="200px" />
+                      {item.title}
+                      <img src="/swirlRight.png" width="200px" />
+                    </div>
+                    <div
+                      className={styles.bannerTextTwo}
+                      dangerouslySetInnerHTML={{ __html: item.description }}
                     />
                   </div>
-                </div>
-                <div className={styles.motoItem}>
-                  <div className={styles.bannerTextOne}>
-                    <img src="/swirlLeftt.png" width="200px" />
-                    {item.title}
-                    <img src="/swirlRight.png" width="200px" />
-                  </div>
-                  <div
-                    className={styles.bannerTextTwo}
-                    dangerouslySetInnerHTML={{ __html: item.description }}
-                  />
                 </div>
               </div>
             </div>
