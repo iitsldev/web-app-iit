@@ -16,7 +16,7 @@
 }
 
 .bannerTextOne {
-  font-size: 75px;
+  font-size: 2.25rem;
   color: black;
   letter-spacing: 0;
   font-family: "Playfair Display";
@@ -26,7 +26,7 @@
 }
 
 .bannerTextTwo {
-  font-size: 20px;
+  font-size: 1.25rem;
   color: #616057;
   letter-spacing: 0;
   line-height: 25px;
@@ -41,6 +41,9 @@
 
 .motoContainer {
   max-width: 1500px;
+  /* border-radius: 10px;
+  background-color: #202020;
+  margin: 30px;*/
 }
 
 .motoImage {

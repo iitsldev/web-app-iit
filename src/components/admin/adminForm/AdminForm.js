@@ -82,7 +82,7 @@ const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
                 const formData = new FormData();
                 formData.append('image', file);
                 try {
-                    const res = await fetch('/api/upload', {
+                    const res = await fetch('/api/upload_cdn', {
                         method: 'POST',
                         body: formData,
                     });
@@ -127,7 +127,7 @@ const AdminForm = ({ show, onHide, onSubmit, initialData, fields }) => {
         formData.append('image', file);
 
         try {
-            const res = await fetch('/api/upload', {
+            const res = await fetch('/api/upload_cdn', {
                 method: 'POST',
                 body: formData,
             });

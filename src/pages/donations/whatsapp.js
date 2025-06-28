@@ -9,14 +9,14 @@ import React, { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 // import DatePicker from 'react-datepicker';
-import Calendar from 'react-calendar'
+// import Calendar from 'react-calendar'
 
 export default function Donation({ donations }) {
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null);
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-    const [selectedDonation, setSelectedDonation] = useState<any | null>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [imageUrl, setImageUrl] = useState < string | null > (null);
+    const [error, setError] = useState < string | null > (null);
+    const [selectedDate, setSelectedDate] = useState < Date | null > (null);
+    const [selectedDonation, setSelectedDonation] = useState < any | null > (null);
+    const canvasRef = useRef < HTMLCanvasElement > (null);
 
     // Create an array for card components to view in card slider
     const cards = donations.map((data, index) => (
@@ -94,7 +94,7 @@ export default function Donation({ donations }) {
     };
 
     // Handle date selection
-    const handleDateChange = (date: Date | null) => {
+    const handleDateChange = (date) => {
         setSelectedDate(date);
         if (date) {
             const donationOnDate = donations.find(
@@ -161,20 +161,18 @@ export default function Donation({ donations }) {
 
                 <canvas ref={canvasRef} style={{ display: 'none' }} />
 
-                <section className="mb-12">
+                {/* <section className="mb-12">
                     <h2 className="text-3xl font-bold text-gray-800 mb-6">Donation Calendar</h2>
                     <Card className="shadow-lg rounded-lg p-6">
                         <Form.Group>
                             <Calendar
-                                selected={selectedDate}
+                                value={selectedDate}
                                 onChange={handleDateChange}
-                                highlightDates={donations.map((d) => new Date(d.date))}
-                                inline
                                 className="w-full"
                             />
                         </Form.Group>
                     </Card>
-                </section>
+                </section> */}
 
                 {selectedDate && selectedDonation && (
                     <section className="mb-12">
