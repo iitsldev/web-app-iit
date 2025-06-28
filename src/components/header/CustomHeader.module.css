@@ -19,7 +19,7 @@
   grid-template-columns: 20% 80%;
   text-transform: capitalize;
   font-weight: 700;
-  font-size: 1.188rem;
+  font-size: 1rem;
   line-height: 1.5rem;
   letter-spacing: 0px;
   color: #4c2911;
@@ -38,7 +38,6 @@
   justify-self: start;
   align-self: center;
   grid-area: b;
-  text-align: center;
 }
 
 .customNavItem {
@@ -179,29 +178,7 @@
 /* Style the navbar toggler button (outline) */
 .navToggle {
   border-color: rgb(83, 47, 0) !important;
-  border-width: 3px !important;
+  border-width: 2px !important;
+  padding: 3px;
   /* Change outline color to red */
-}
-
-/* Style the hamburger icon lines */
-.navToggle .navbar-toggler-icon {
-  background-image: none;
-  /* Remove default icon */
-  position: relative;
-}
-
-/* Create custom hamburger lines using pseudo-elements */
-.navToggle .navbar-toggler-icon::before,
-.navToggle .navbar-toggler-icon::after,
-.navToggle .navbar-toggler-icon span {
-  background-color: rgb(83, 47, 0) !important;
-  /* Change hamburger lines to green */
-  height: 10px;
-  /* Thickness of lines */
-  width: 20px;
-  /* Width of lines */
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  content: '';
 }
