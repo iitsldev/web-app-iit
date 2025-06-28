@@ -16,7 +16,7 @@
 }
 
 .bannerTextOne {
-  font-size: 2.5rem;
+  font-size: 3rem;
   letter-spacing: 0;
   font-family: "Playfair Display";
   margin-bottom: 30px;
@@ -32,6 +32,10 @@
   text-align: left;
   font-weight: 500;
   opacity: 0.8
+}
+
+.bannerTextTwo>* {
+  color: white;
 }
 
 .carouwrap {
