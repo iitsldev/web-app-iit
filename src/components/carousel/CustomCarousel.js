@@ -40,31 +40,6 @@ function CustomCarousel() {
     setIndex(selectedIndex);
   };
 
-  // function normalizeSlideHeights() {
-  //   $('.main-carousel.carousel').each(function () {
-  //     var items = $('.carousel-item', this);
-  //     items.css('height', 'auto');
-  //     var maxHeight = Math.max.apply(
-  //       null,
-  //       items
-  //         .map(function () {
-  //           return $(this).outerHeight();
-  //         })
-  //         .get()
-  //     );
-  //     items.css('height', maxHeight + 'px');
-  //   });
-  // }
-
-  // useEffect(() => {
-  //   $(window).on('load resize orientationchange', normalizeSlideHeights);
-  //   setTimeout(() => {
-  //     normalizeSlideHeights();
-  //   }, 400);
-  //   return () => {
-  //     $(window).off('load resize orientationchange');
-  //   };
-  // }, []);
 
   return (
     <div className={styles.customCarouselWrapper}>
@@ -82,14 +57,14 @@ function CustomCarousel() {
                   <div className={`col-md-12 col-xl-6 order-xl-2 ${styles.motoItem} d-flex align-items-center justify-content-center`}>
                     <div className={styles.motoImage}>
                       <img
-                        className="img-fluid banner-img-max-width"
+                        className="img-fluid banner-img-max-width border-radius-50"
                         src={item.imageSrc}
                         alt={item.imageAlt}
                         style={{ width: item.imageWidth, height: item.imageHeight }}
                       />
                     </div>
                   </div>
-                  <div className={`col-md-12 col-xl-6 order-xl-1 ${styles.motoItem}`}>
+                  <div className={`col-md-12 col-xl-6 order-xl-1 text-white ${styles.motoItem}`}>
                     <div className={styles.bannerTextOne}>
                       <img src="/swirlLeftt.png" width="80px" />
                       {item.title}

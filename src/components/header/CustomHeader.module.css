@@ -39,7 +39,7 @@
   justify-self: start;
   align-self: center;
   grid-area: b;
-  font-size: 1.125rem;
+  font-size: 1.2rem;
 }
 
 .customNavItem {
@@ -72,6 +72,7 @@
   z-index: 50;
   padding: 0;
   margin: 0;
+
 }
 
 
@@ -106,8 +107,8 @@
 
 @media (max-width: 1471px) {
   .navBarContainer {
-    padding-left: 9.25%;
-    padding-right: 8.8%;
+    padding-left: 1.25%;
+    padding-right: 1.8%;
   }
 
   .navItems>a {
@@ -156,7 +157,7 @@
   }
 
   .bannerText {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
   }
 }
 
@@ -175,6 +176,17 @@
     font: normal normal bold 12px/14px Raleway;
     letter-spacing: 0px;
   }
+
+  .bannerImage {
+    max-width: 44px;
+  }
+
+  .bannerText {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 400px) {
 
   .bannerImage {
     max-width: 44px;
