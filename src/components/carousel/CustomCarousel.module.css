@@ -1,6 +1,10 @@
 .customCarouselWrapper {
   position: relative;
   background: #e6c49d 0% 0% no-repeat padding-box;
+  min-height: 1024px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .customEllipse {
