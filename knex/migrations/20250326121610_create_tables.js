@@ -86,17 +86,6 @@ exports.up = async function (knex) {
         table.datetime('updatedAt').defaultTo(knex.fn.now());
     });
 
-    await knex.schema.createTable('Donation', table => {
-        table.increments('id').primary();
-        table.string('donor').notNullable();
-        table.string('phoneNumber').Nullable();
-        table.string('topic').notNullable();
-        table.string('amount');
-        table.date('date').defaultTo(knex.fn.now());
-        table.datetime('createdAt').defaultTo(knex.fn.now());
-        table.datetime('updatedAt').defaultTo(knex.fn.now());
-    });
-
     await knex.schema.createTable('User', table => {
         table.increments('id').primary();
         table.string('username').notNullable().unique();

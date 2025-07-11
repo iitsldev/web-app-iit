@@ -176,15 +176,6 @@ async function getAcademicProfiles() {
     }
 }
 
-async function getDonations() {
-    try {
-        return await knex('Donation').select();
-    } catch (error) {
-        const { logError } = await import('./logger');
-        await logError('Error fetching donations', error);
-        throw error;
-    }
-}
 
 async function getUserByUsername(username) {
     try {
@@ -343,6 +334,16 @@ async function getAllImages() {
     }
 }
 
+async function getCarouselData() {
+    try {
+        return await knex('Carousel').select();
+    } catch (error) {
+        const { logError } = await import('./logger');
+        await logError('Error fetching carousel data', error);
+        throw error;
+    }
+}
+
 module.exports = {
     knex, // Export knex instance if needed elsewhere
     getMissions,
@@ -360,7 +361,6 @@ module.exports = {
     getOurFocus,
     getTestimonials,
     getAcademicProfiles,
-    getDonations,
     getUserByUsername,
     getUserById,
     updateUser,
@@ -371,4 +371,5 @@ module.exports = {
     deleteItem,
     getNewsAndEvents,
     getAllImages,
+    getCarouselData,
 };

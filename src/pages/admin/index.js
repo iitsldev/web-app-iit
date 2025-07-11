@@ -48,7 +48,6 @@ const sections = [
     { key: 'NewsAndEvent', label: 'News & Events', icon: <FaNewspaper />, apiModel: 'newsAndEvent' },
     { key: 'OurFocus', label: 'Our Focus', icon: <FaEye />, apiModel: 'ourFocus' },
     { key: 'Testimonial', label: 'Testimonials', icon: <FaComments />, apiModel: 'testimonial' },
-    { key: 'Donation', label: 'Donations', icon: <FaGift />, apiModel: 'donation' },
     { key: 'User', label: 'Users', icon: <FaUser />, apiModel: 'user' },
 
 ];
@@ -115,14 +114,7 @@ const modelFields = {
         { key: 'description', label: 'Description', type: 'text', required: false },
         { key: 'video', label: 'Video Link', type: 'text', required: false },
     ],
-    Donation: [
-        { key: 'donor', label: 'Donor', type: 'text', required: true },
-        { key: 'topic', label: 'Topic', type: 'text', required: true },
-        { key: 'amount', label: 'Amount', type: 'text', required: false },
-        { key: 'date', label: 'Date', type: 'datetime', required: false },
-        { key: 'createdAt', label: 'Created At', type: 'datetime', required: false },
-        { key: 'updatedAt', label: 'Updated At', type: 'datetime', required: false },
-    ],
+
     User: [
         { key: 'username', label: 'Username', type: 'text', required: true },
         { key: 'password', label: 'Password', type: 'text', required: true },
