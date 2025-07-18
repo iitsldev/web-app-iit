@@ -77,6 +77,7 @@ export default async function handler(req, res) {
         'NewsAndEvent',
         'OurFocus',
         'Testimonial',
+        'User',
     ];
 
     if (!validModels.includes(model)) {

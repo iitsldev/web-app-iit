@@ -1,25 +1,29 @@
 .navBarContainer {
   grid-template-columns: repeat(1, 100%);
   grid-template-areas: 'a';
-  padding-left: 10.25%;
-  padding-right: 9.8%;
+  padding-left: 1.25%;
+  padding-right: 1.8%;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  background-color: white;
+  /* Added white background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Added elevation effect */
 }
 
 .custBrand {
   cursor: pointer;
 }
 
+
 .headerContainer {
-  display: grid;
-  grid-template-areas: 'a b';
-  grid-template-columns: 42% 58%;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: capitalize;
   font-weight: 700;
-  font-size: 1.188rem;
-  line-height: 1.5rem;
-  letter-spacing: 0px;
   color: #4c2911;
-  opacity: 1;
 }
 
 .headerIconContainer {
@@ -27,13 +31,15 @@
 }
 
 .bannerImage {
-  max-width: 83px;
+  max-width: 53px;
 }
 
 .bannerText {
+  margin-left: 10px;
   justify-self: start;
   align-self: center;
   grid-area: b;
+  font-size: 1.2rem;
 }
 
 .customNavItem {
@@ -44,10 +50,18 @@
 }
 
 .supportButton {
-  padding-left: 0.75rem /* 12px */;
-  padding-right: 0.75rem /* 12px */;
-  padding-top: 0.5rem /* 8px */;
-  padding-bottom: 0.5rem /* 8px */;
+  padding-left: 0.75rem
+    /* 12px */
+  ;
+  padding-right: 0.75rem
+    /* 12px */
+  ;
+  padding-top: 0.5rem
+    /* 8px */
+  ;
+  padding-bottom: 0.5rem
+    /* 8px */
+  ;
   border-radius: 9999px;
   background-color: #044884;
   cursor: pointer;
@@ -56,22 +70,36 @@
 
 .navBarTop {
   z-index: 50;
+  padding: 0;
+  margin: 0;
+
 }
 
-.navItems > a {
+
+.customTogglerIcon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  background-color: rgb(83, 47, 0);
+  /* Blue color */
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") no-repeat center;
+}
+
+.navItems>a {
   padding-left: 1.5rem !important;
   padding-right: 1.5rem !important;
 }
 
 @media (max-width: 1700px) {
-  .navItems > a {
+  .navItems>a {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
   }
 }
 
 @media (max-width: 1540px) {
-  .navItems > a {
+  .navItems>a {
     padding-left: 0.8rem !important;
     padding-right: 0.8rem !important;
   }
@@ -79,11 +107,11 @@
 
 @media (max-width: 1471px) {
   .navBarContainer {
-    padding-left: 9.25%;
-    padding-right: 8.8%;
+    padding-left: 1.25%;
+    padding-right: 1.8%;
   }
 
-  .navItems > a {
+  .navItems>a {
     padding-left: 0.6rem !important;
     padding-right: 0.6rem !important;
   }
@@ -91,11 +119,11 @@
 
 @media (max-width: 1372px) {
   .navBarContainer {
-    padding-left: 6.25%;
-    padding-right: 5.8%;
+    padding-left: 1.25%;
+    padding-right: 1.8%;
   }
 
-  .navItems > a {
+  .navItems>a {
     padding-left: 0.5rem !important;
     padding-right: 0.5rem !important;
   }
@@ -103,11 +131,11 @@
 
 @media (max-width: 1249px) {
   .navBarContainer {
-    padding-left: 5.25%;
-    padding-right: 4.8%;
+    padding-left: 1.25%;
+    padding-right: 1.8%;
   }
 
-  .navItems > a {
+  .navItems>a {
     padding-left: 0.4rem !important;
     padding-right: 0.4rem !important;
   }
@@ -115,27 +143,31 @@
 
 @media (max-width: 1199px) {
   .navBarContainer {
-    padding-left: 6.25%;
-    padding-right: 5.8%;
+    padding-left: 2.25%;
+    padding-right: 1.8%;
   }
 
   .headerContainer {
     font-size: 1.125rem;
-    line-height: 1.4rem;
+    /* line-height: 1.4rem; */
   }
 
   .bannerImage {
-    max-width: 73px;
+    max-width: 53px;
+  }
+
+  .bannerText {
+    font-size: 1.2rem;
   }
 }
 
 @media (max-width: 575px) {
   .navBarContainer {
-    padding-left: 5.25%;
-    padding-right: 4.8%;
+    padding-left: 2.25%;
+    padding-right: 1.8%;
   }
 
-  .navItems > a {
+  .navItems>a {
     padding-left: 0.4rem !important;
     padding-right: 0.4rem !important;
   }
@@ -148,4 +180,32 @@
   .bannerImage {
     max-width: 44px;
   }
+
+  .bannerText {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .bannerImage {
+    max-width: 44px;
+  }
+
+  .bannerText {
+    font-size: 0.45rem;
+  }
+}
+
+/* styles.module.css */
+
+/* Style the navbar toggler button (outline) */
+.navToggle {
+  border-color: rgb(83, 47, 0) !important;
+  border-width: 1px !important;
+  padding: 1px;
+  width: 35px;
+  height: 35px;
+  font-size: 0.2rem;
+  /* Change outline color to red */
 }

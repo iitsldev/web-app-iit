@@ -29,11 +29,13 @@ import {
     FaLock,
     FaSignOutAlt,
     FaRemoveFormat,
-    FaBroom
+    FaBroom,
+    FaGift
 } from 'react-icons/fa';
 import styles from './AdminDashboard.module.css';
 import AdminTable from '../../components/admin/adminTable/AdminTable';
 import AdminForm from '../../components/admin/adminForm/AdminForm';
+import { use } from 'react';
 
 const sections = [
     { key: 'AcademicProfile', label: 'Academic Profiles', icon: <FaChalkboardTeacher />, apiModel: 'academicProfiles' },
@@ -112,14 +114,17 @@ const modelFields = {
         { key: 'description', label: 'Description', type: 'text', required: false },
         { key: 'video', label: 'Video Link', type: 'text', required: false },
     ],
+
     User: [
         { key: 'username', label: 'Username', type: 'text', required: true },
-        { key: 'password', label: 'Password', type: 'password', required: true },
+        { key: 'password', label: 'Password', type: 'text', required: true },
         { key: 'role', label: 'Role', type: 'select', required: true, options: ['admin', 'content', 'mark', 'user',] },
+        { key: 'createdAt', label: 'Created At', type: 'datetime', required: false },
+        { key: 'updatedAt', label: 'Updated At', type: 'datetime', required: false },
     ],
 };
 
-export default function AdminDashboard({ userRole }) {
+export default function AdminDashboard({ userId, username, userRole }) {
     const router = useRouter();
     const [collapsed, setCollapsed] = useState(false);
     const [activeSection, setActiveSection] = useState('NewsAndEvent');
@@ -143,6 +148,7 @@ export default function AdminDashboard({ userRole }) {
         fetch(`/api/admin/${activeModel}`)
             .then((res) => {
                 if (!res.ok) throw new Error('Failed to fetch');
+                console.log(`Fetching data for ${activeModel}...`);
                 return res.json();
             })
             .then((data) => {
@@ -326,7 +332,8 @@ export default function AdminDashboard({ userRole }) {
                     <div className={styles.headerRight}>
                         <Dropdown>
                             <Dropdown.Toggle variant="outline-primary" id="user-dropdown" className={styles.userDropdown}>
-                                <FaUser /> Admin
+                                <FaUser /> {username || 'Admin'}
+                                <span className={styles.userRole}>({userRole})</span>
                             </Dropdown.Toggle>
                             <Dropdown.Menu align="end">
                                 <Dropdown.Item onClick={() => setShowPasswordModal(true)}>
@@ -436,10 +443,12 @@ export default function AdminDashboard({ userRole }) {
 }
 
 export const getServerSideProps = adminAuthMiddleware(async (context) => {
-    const { user } = context.req;
+    const { userId, username, role } = context.req;
     return {
         props: {
-            userRole: user?.role || 'user',
+            userId: userId || null,
+            username: username || null,
+            userRole: role || 'user',
         },
     };
 });
