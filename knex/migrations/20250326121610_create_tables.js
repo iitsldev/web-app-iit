@@ -94,6 +94,16 @@ exports.up = async function (knex) {
         table.datetime('createdAt').defaultTo(knex.fn.now());
         table.datetime('updatedAt').defaultTo(knex.fn.now());
     });
+
+    await knex.schema.createTable('Carousel', table => {
+        table.increments('id').primary();
+        table.string('imageSrc').notNullable();
+        table.string('imageAlt').notNullable();
+        table.string('title').notNullable();
+        table.text('description').notNullable();
+        table.string('imageWidth').notNullable();
+        table.string('imageHeight').notNullable();
+    });
 };
 
 /**
@@ -101,6 +111,7 @@ exports.up = async function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = async function (knex) {
+    await knex.schema.dropTable('Carousel');
     await knex.schema.dropTable('User');
     await knex.schema.dropTable('AcademicProfile');
     await knex.schema.dropTable('Testimonial');

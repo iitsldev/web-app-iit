@@ -48,6 +48,7 @@ const sections = [
     { key: 'NewsAndEvent', label: 'News & Events', icon: <FaNewspaper />, apiModel: 'newsAndEvent' },
     { key: 'OurFocus', label: 'Our Focus', icon: <FaEye />, apiModel: 'ourFocus' },
     { key: 'Testimonial', label: 'Testimonials', icon: <FaComments />, apiModel: 'testimonial' },
+    { key: 'Carousel', label: 'Carousel', icon: <FaGift />, apiModel: 'carousel' },
     { key: 'User', label: 'Users', icon: <FaUser />, apiModel: 'user' },
 
 ];
@@ -113,6 +114,15 @@ const modelFields = {
         { key: 'image', label: 'Image', type: 'file', required: false },
         { key: 'description', label: 'Description', type: 'text', required: false },
         { key: 'video', label: 'Video Link', type: 'text', required: false },
+    ],
+
+    Carousel: [
+        { key: 'title', label: 'Title', type: 'text', required: true },
+        { key: 'description', label: 'Description', type: 'richtext', required: true },
+        { key: 'imageSrc', label: 'Image Source', type: 'file', required: true },
+        { key: 'imageAlt', label: 'Image Alt Text', type: 'text', required: true },
+        { key: 'imageWidth', label: 'Image Width', type: 'text', required: false },
+        { key: 'imageHeight', label: 'Image Height', type: 'text', required: false },
     ],
 
     User: [

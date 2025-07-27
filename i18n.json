@@ -1,12 +1,22 @@
 {
     "locales": [
         "en-US",
-        "si-LK"
+        "si-LK",
+        "vi-VN"
     ],
     "defaultLocale": "en-US",
     "pages": {
         "*": [
-            "common"
+            "common",
+            "alert-box",
+            "audio",
+            "card-deck"
+        ],
+        "/meditation": [
+            "meditation"
+        ],
+        "/aboutus": [
+            "about-us"
         ]
     }
 }

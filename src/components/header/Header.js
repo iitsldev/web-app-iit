@@ -1,10 +1,21 @@
 import Image from 'next/image';
 import { useRouter } from 'next/dist/client/router';
-import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import styles from './CustomHeader.module.css';
+import useTranslation from 'next-translate/useTranslation';
+import Link from 'next/link';
 
 function Header() {
   const router = useRouter();
+  const { t, lang } = useTranslation('common');
+
+  const languages = [
+    { code: 'en-US', name: 'English', flag: '🇺🇸' },
+    { code: 'si-LK', name: 'Sinhala', flag: '🇱🇰' },
+    { code: 'vi-VN', name: 'Vietnamese', flag: '🇻🇳' },
+  ];
+
+  const currentLanguage = languages.find((l) => l.code === lang);
 
   return (
     <div className={styles.navBarContainer}>
@@ -58,6 +69,13 @@ function Header() {
             <Nav.Link onClick={() => router.push('/howtosupport')}>
               <span className={styles.supportButton}>How To Support</span>
             </Nav.Link>
+            <NavDropdown title={<span>{currentLanguage.flag} {currentLanguage.name}</span>} id="collasible-nav-dropdown">
+              {languages.map((language) => (
+                <Link href={router.asPath} locale={language.code} key={language.code} passHref>
+                  <NavDropdown.Item>{language.flag} {language.name}</NavDropdown.Item>
+                </Link>
+              ))}
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

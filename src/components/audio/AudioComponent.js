@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import ReactPlayer from 'react-player'
+import useTranslation from 'next-translate/useTranslation';
 
 function AudioComponent() {
+    const { t } = useTranslation('audio');
     const [isPlaying, setIsPlaying] = useState(false);
     const [playLabel, setPlayLable] = useState("Play")
 
@@ -26,7 +28,7 @@ function AudioComponent() {
                 height={0}
                 />
             </div>
-            <button onClick={handlePlaying}>{playLabel}</button>
+            <button onClick={handlePlaying}>{t(playLabel.toLowerCase())}</button>
         </div>
     );
 }

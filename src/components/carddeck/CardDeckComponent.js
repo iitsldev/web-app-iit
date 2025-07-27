@@ -4,9 +4,11 @@ import styles from './CardDeck.module.css';
 import { BsArrowRight } from 'react-icons/bs';
 import $ from 'jquery';
 import sanitizeHtml from 'sanitize-html';
+import useTranslation from 'next-translate/useTranslation';
 
 const CardDeckComponent = () => {
   const [cardInfo, setCardInfo] = useState([]);
+  const { t } = useTranslation('card-deck');
 
   useEffect(() => {
     async function fetchCardData() {
@@ -52,8 +54,7 @@ const CardDeckComponent = () => {
         <Card className={styles.cardComponent}>
           <Card.Body
             style={{ background: card.color }}
-            className={`card-dynamic-height ${styles.cardBody}`}
-          >
+            className={`card-dynamic-height ${styles.cardBody}`}>
             <div className={styles.arrowContainer}>
               <a href={card.link}>
                 <BsArrowRight
@@ -91,8 +92,7 @@ const CardDeckComponent = () => {
     <Container className={`card-container ${styles.deckContainer}`}>
       <div className={styles.deckHeader}>
         <p className={styles.deckHeaderIntro}>
-          International Institute of Theravada is a monk training institute dedicated to capacitate monks who are capable in attaining their own liberation (atthahita bhikkhu),
-          guiding others towards liberation (parahita bhikkhu) and sustaining the sāsana by accurately following the code of discipline (vinayadhara bhikkhu).
+          {t('intro')}
         </p>
       </div>
       <Row xs={1} sm={2} md={2} lg={4}>
