@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import styles from './CustomCarousel.module.css';
-
+import useTranslation from 'next-translate/useTranslation';
 
 function CustomCarousel() {
+  const { t } = useTranslation('custom-carousel');
   const [carouselData, setCarouselData] = useState([]);
   const [index, setIndex] = useState(0);
 
@@ -16,8 +17,6 @@ function CustomCarousel() {
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
-
-
 
   return (
     <div className={styles.customCarouselWrapper}>
@@ -39,6 +38,7 @@ function CustomCarousel() {
                         src={item.imageSrc}
                         alt={item.imageAlt}
                         style={{ width: item.imageWidth, height: item.imageHeight }}
+                        priority
                       />
                     </div>
                   </div>

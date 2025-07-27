@@ -8,15 +8,52 @@
     "pages": {
         "*": [
             "common",
-            "alert-box",
-            "audio",
-            "card-deck"
+            "card-deck",
+            "footer",
+            "our-focus-card",
+            "testimonials",
+            "timeline",
+            "general-faq",
+            "main-common-layout",
+            "navigation-common-layout",
+            "academic-profile",
+            "custom-carousel",
+            "messenger",
+            "news-and-events",
+            "about-us"
+        ],
+        "/": [
+            "home-page"
         ],
         "/meditation": [
             "meditation"
         ],
         "/aboutus": [
-            "about-us"
+            "about-us",
+            "about-us-page"
+        ],
+        "/contactus": [
+            "contact-us",
+            "contact-us-page"
+        ],
+        "/education": [
+            "education",
+            "education-page"
+        ],
+        "/newsandevents": [
+            "news-and-events-page"
+        ],
+        "/newsandevents/[slug]": [
+            "news-and-events-post"
+        ],
+        "/howtosupport": [
+            "how-to-support-page"
+        ],
+        "/institute": [
+            "institute-page"
+        ],
+        "/nmcmain": [
+            "nmc-main"
         ]
     }
 }

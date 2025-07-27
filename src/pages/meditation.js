@@ -7,18 +7,18 @@ import MainLayoutSection from '../components/maincommonlayout/MainCommonLayoutSe
 import MeditationComponent from '../components/meditation/MeditationComponent';
 
 export default function Meditation({ meditations }) {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation('meditation-page');
   const router = useRouter();
 
   return (
     <div className="skeleton">
       <Head>
-        <title>{t('meditation_title')}</title>
+        <title>{t('page_title')}</title>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content={t('meditation_description')}
+          content={t('page_description')}
         />
       </Head>
 
@@ -27,8 +27,8 @@ export default function Meditation({ meditations }) {
       </div>
 
       <MainLayoutSection
-        title={t('meditation_title')}
-        description={t('meditation_description')}
+        title={t('main_layout_title')}
+        description={t('main_layout_description')}
         photo="/Meditate.png"
         backgroundImg="url(/Ellipse-7.svg)"
       // info="Are you looking for guidance for your mediation? IIT is willing to render a helping hand in your noble quest."

@@ -1,9 +1,11 @@
 import React from 'react';
 import styles from './AcademicProfile.module.css';
 import sanitizeHtml from 'sanitize-html';
-
+import useTranslation from 'next-translate/useTranslation';
 
 function AcademicProfile({ profileImage, name, title, body, body2 }) {
+  const { t } = useTranslation('academic-profile');
+
   return (
     <div className={styles.instAcademicProfileSubSontainer}>
       <div className={styles.instAcademicContainer}>
@@ -12,7 +14,7 @@ function AcademicProfile({ profileImage, name, title, body, body2 }) {
             //   className="d-block w-100 inst-img-max-width"
             className="d-block inst-img-max-width"
             src={profileImage}
-            alt="profile"
+            alt={t('profile')}
           />
         </div>
         <div className={styles.intAcademicAuthor}>

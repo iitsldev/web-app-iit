@@ -3,8 +3,11 @@ import { Container } from 'react-bootstrap';
 import styles from './MeditationComponent.module.css';
 import VideoCardComponent from '../videoCardComponent/videoCardComponent';
 import Slider from '../slider/slider';
+import useTranslation from 'next-translate/useTranslation';
 
 function MeditationComponent({ meditations }) {
+  const { t } = useTranslation('meditation');
+
   // Create an array for card components to view in card slider
   const cards = meditations.map((data, index) => {
     return <VideoCardComponent key={index} cardData={data} />;
@@ -29,26 +32,19 @@ function MeditationComponent({ meditations }) {
     <div>
       <Container>
         <div className={styles.meditationHelp}>
-          Are you looking for guidance for your meditation? IIT is willing to render a helping hand in your noble quest.
+          {t('meditation_help')}
         </div>
         <div className={styles.meditationContainer} id="samatha-meditation">
           <div className={styles.meditationInnerContainer}>
-            <p className={styles.title}>Samatha Meditation</p>
+            <p className={styles.title}>{t('samatha_meditation')}</p>
             <p className={styles.description}>
-              There are forty (40) meditation subjects called samatha bhāvanā
-              (meditation) to tranquilize our mind. Monks in IIT are given
-              proper instructions to practice samatha and calm down their
-              thoughts.
+              {t('samatha_meditation_description')}
             </p>
           </div>
           <div className={styles.meditationInnerContainer} id="vipassana-meditation">
-            <p className={styles.title}>Vipassanā Meditation</p>
+            <p className={styles.title}>{t('vipassana_meditation')}</p>
             <p className={styles.description}>
-              One apprehends the reality of life and world with wisdom through
-              insight meditation (vipassanā bhāvanā). Theravada tradition has
-              preserved a doctrine which contains gem-like information of this
-              special training that has proven to yield fruition for two
-              millennia.
+              {t('vipassana_meditation_description')}
             </p>
           </div>
         </div>
@@ -60,7 +56,7 @@ function MeditationComponent({ meditations }) {
             <div className={styles.ourFocusHeader}></div>
             <div className={styles.ourFocusSubHeader}>
               <div className={styles.subHeaderText}>
-                Meditation Instructions
+                {t('meditation_instructions')}
               </div>
               <div className={styles.sliderButtonContainer}>
                 <div className={styles.sliderButton} onClick={slideRight}>

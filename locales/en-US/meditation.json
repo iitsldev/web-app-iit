@@ -1,4 +1,8 @@
 {
-    "title": "Meditation",
-    "description": "Meditation is a part of daily life of anyone who is seeking spiritual fulfilment."
+  "meditation_help": "Are you looking for guidance for your meditation? IIT is willing to render a helping hand in your noble quest.",
+  "samatha_meditation": "Samatha Meditation",
+  "samatha_meditation_description": "There are forty (40) meditation subjects called samatha bhāvanā (meditation) to tranquilize our mind. Monks in IIT are given proper instructions to practice samatha and calm down their thoughts.",
+  "vipassana_meditation": "Vipassanā Meditation",
+  "vipassana_meditation_description": "One apprehends the reality of life and world with wisdom through insight meditation (vipassanā bhāvanā). Theravada tradition has preserved a doctrine which contains gem-like information of this special training that has proven to yield fruition for two millennia.",
+  "meditation_instructions": "Meditation Instructions"
 }

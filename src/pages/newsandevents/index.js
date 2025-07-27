@@ -6,8 +6,10 @@ import Header from '../../components/header/Header';
 import Footer from '../../components/footer/Footer';
 import MainLayoutSection from '../../components/maincommonlayout/MainCommonLayoutSection';
 import styles from './NewsAndEventPage.module.css';
+import useTranslation from 'next-translate/useTranslation';
 
 export default function NewsAndEvents({ initialNewsAndEvents = [] }) {
+  const { t } = useTranslation('news-and-events-page');
   const [newsAndEvents, setNewsAndEvents] = useState(initialNewsAndEvents || []);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10;
@@ -58,15 +60,15 @@ export default function NewsAndEvents({ initialNewsAndEvents = [] }) {
   return (
     <div className={styles.newsEventsPage}>
       <Head>
-        <title>News and Events | International Institute of Theravada</title>
-        <meta name="description" content="Stay updated with the latest news and events from the International Institute of Theravada" />
+        <title>{t('page_title')}</title>
+        <meta name="description" content={t('page_description')} />
       </Head>
 
       <Header />
 
       <MainLayoutSection
-        title="News and Events"
-        description="Be informed of our wholesome activities. Join, Rejoice, and Accumulate Great Merits."
+        title={t('main_layout_title')}
+        description={t('main_layout_description')}
         photo="/Group 1071.png"
         backgroundImg="url(/MaskGroup3.svg)"
       />
@@ -110,13 +112,13 @@ export default function NewsAndEvents({ initialNewsAndEvents = [] }) {
                     href={`/newsandevents/${post.id}`}
                     className={styles.newsCardReadMoreWide}
                   >
-                    Read More
+                    {t('read_more')}
                   </Link>
                 </div>
               </div>
             ))
           ) : (
-            <div className={styles.noPostsWide}>No posts available.</div>
+            <div className={styles.noPostsWide}>{t('no_posts_available')}</div>
           )}
         </div>
 
@@ -128,7 +130,7 @@ export default function NewsAndEvents({ initialNewsAndEvents = [] }) {
               disabled={currentPage === 1}
               className={`${styles.paginationButtonWide} ${currentPage === 1 ? styles.disabledWide : ''}`}
             >
-              Previous
+              {t('previous')}
             </button>
 
             {Array.from({ length: totalPages }, (_, i) => (
@@ -148,7 +150,7 @@ export default function NewsAndEvents({ initialNewsAndEvents = [] }) {
               className={`${styles.paginationButtonWide} ${currentPage === totalPages ? styles.disabledWide : ''
                 }`}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         )}

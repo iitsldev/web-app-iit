@@ -1,4 +1,8 @@
 {
-    "title": "Thiền",
-    "description": "Thiền là một phần cuộc sống hàng ngày của bất kỳ ai đang tìm kiếm sự thỏa mãn về tinh thần."
+  "meditation_help": "Bạn đang tìm kiếm sự hướng dẫn cho việc thiền định của mình? IIT sẵn sàng giúp đỡ bạn trong hành trình cao cả của mình.",
+  "samatha_meditation": "Thiền Samatha",
+  "samatha_meditation_description": "Có bốn mươi (40) đề mục thiền định được gọi là samatha bhāvanā (thiền định) để làm cho tâm trí chúng ta được yên tĩnh. Các nhà sư trong IIT được hướng dẫn đúng cách để thực hành samatha và làm dịu suy nghĩ của họ.",
+  "vipassana_meditation": "Thiền Vipassanā",
+  "vipassana_meditation_description": "Người ta nhận thức được thực tại của cuộc sống và thế giới bằng trí tuệ thông qua thiền tuệ (vipassanā bhāvanā). Truyền thống Theravada đã bảo tồn một giáo lý chứa đựng những thông tin quý giá như ngọc về khóa đào tạo đặc biệt này đã được chứng minh là mang lại kết quả trong hai thiên niên kỷ.",
+  "meditation_instructions": "Hướng dẫn thiền định"
 }

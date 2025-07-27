@@ -9,26 +9,26 @@ import NavigationCommonLayout from '../components/navigationcommonlayout/Navigat
 import fs from 'fs/promises'; // For async file operations
 
 export default function AboutUs({ aboutUsList, missions, ourFocus }) {
-  const { t, lang } = useTranslation();
+  const { t, lang } = useTranslation('about-us-page');
   const router = useRouter();
 
   return (
     <div className="skeleton">
       <Head>
-        <title>About Us</title>
+        <title>{t('page_title')}</title>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="International Institute of Theravada"
+          content={t('page_description')}
         />
       </Head>
       <div className="navbarCarouselWrapper about">
         <Header />
       </div>
       <MainLayoutSection
-        title="About Us"
-        description="Comprehensive training institute aimed at facilitating spiritual and academic development of Buddhist monks, based on Theravada teachings."
+        title={t('main_layout_title')}
+        description={t('main_layout_description')}
         photo="/aboutus.png"
         backgroundImg="url(/Ellipse-4.svg)"
       />

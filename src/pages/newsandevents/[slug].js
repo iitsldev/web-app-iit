@@ -9,7 +9,7 @@ import styles from './NewsAndEventPost.module.css';
 import sanitizeHtml from 'sanitize-html';
 
 export default function NewsAndEventPost({ post, recentPosts = [] }) {  // Default to empty array
-    const { t, lang } = useTranslation();
+    const { t, lang } = useTranslation('news-and-events-post');
     const router = useRouter();
 
     const renderRecentItem = (item, index) => (
@@ -30,7 +30,7 @@ export default function NewsAndEventPost({ post, recentPosts = [] }) {  // Defau
                         {`${item.description.slice(0, 100)}...`}
                     </p>
                     <a href={`/newsandevents/${item.id}`} className={styles.recentLink}>
-                        Read more →
+                        {t('read_more')}
                     </a>
                 </div>
             </div>
@@ -40,7 +40,7 @@ export default function NewsAndEventPost({ post, recentPosts = [] }) {  // Defau
     return (
         <div className="skeleton">
             <Head>
-                <title>{post.title} | News and Events</title>
+                <title>{post.title} {t('page_title_suffix')}</title>
                 <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta
@@ -86,7 +86,7 @@ export default function NewsAndEventPost({ post, recentPosts = [] }) {  // Defau
                 {Array.isArray(recentPosts) && recentPosts.length > 0 && (
                     <Row className={styles.recentSection}>
                         <Col>
-                            <h2 className={styles.sectionTitle}>Recent Posts</h2>
+                            <h2 className={styles.sectionTitle}>{t('recent_posts')}</h2>
                             <div className={styles.recentGrid}>
                                 {recentPosts.map(renderRecentItem)}
                             </div>

@@ -32,18 +32,18 @@ export default function Education({ dhammaLectures }) {
     }
   };
 
-  const { t, lang } = useTranslation();
+  const { t, lang } = useTranslation('education-page');
   const router = useRouter();
 
   return (
     <div className="skeleton">
       <Head>
-        <title>Education</title>
+        <title>{t('page_title')}</title>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="international institute of theravada"
+          content={t('page_description')}
         />
       </Head>
 
@@ -52,8 +52,8 @@ export default function Education({ dhammaLectures }) {
       </div>
 
       <MainLayoutSection
-        title="Education"
-        description="Comprehensive studies of Buddhist scriptures pave the foundation for the prolongation of the Buddha Sāsana (dispensation)."
+        title={t('main_layout_title')}
+        description={t('main_layout_description')}
         photo="/EducationSangha.png"
         backgroundImg="url(/Ellipse-6.svg)"
       />
@@ -65,7 +65,7 @@ export default function Education({ dhammaLectures }) {
           <div className={styles.ourFocusInnerContainer}>
             <div className={styles.ourFocusHeader}></div>
             <div className={styles.ourFocusSubHeader}>
-              <div className={styles.subHeaderText}>Dhamma Lectures and Sermons</div>
+              <div className={styles.subHeaderText}>{t('dhamma_lectures_and_sermons')}</div>
               <div className={styles.sliderButtonContainer}>
                 <div className={styles.sliderButton} onClick={slideRight}>
                   <svg

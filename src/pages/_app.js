@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Router from 'next/router';
 import ProgressBar from '@badrap/bar-of-progress';
 import Image from 'next/image';
-import iitImageLoader from '../../public/IIT-2.svg';
+import iitImageLoader from '../../public/IIT-2.webp';
 
 import { store } from '../app/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
