@@ -69,10 +69,10 @@ function Header() {
             <Nav.Link onClick={() => router.push('/howtosupport')}>
               <span className={styles.supportButton}>How To Support</span>
             </Nav.Link>
-            <NavDropdown title={<span>{currentLanguage.flag} {currentLanguage.name}</span>} id="collasible-nav-dropdown">
+            <NavDropdown title={<span>{currentLanguage.flag}</span>} id="collasible-nav-dropdown">
               {languages.map((language) => (
                 <Link href={router.asPath} locale={language.code} key={language.code} passHref>
-                  <NavDropdown.Item>{language.flag} {language.name}</NavDropdown.Item>
+                  <NavDropdown.Item>{language.flag}</NavDropdown.Item>
                 </Link>
               ))}
             </NavDropdown>

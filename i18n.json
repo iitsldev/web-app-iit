@@ -26,7 +26,8 @@
             "home-page"
         ],
         "/meditation": [
-            "meditation"
+            "meditation",
+            "meditation-page"
         ],
         "/aboutus": [
             "about-us",

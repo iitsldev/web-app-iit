@@ -14,21 +14,21 @@ import useTranslation from 'next-translate/useTranslation';
 
 const schema = yup.object().shape(
   {
-    contactName: yup.string().required('name_is_mandatory'),
-    contactSubject: yup.string().required('subject_is_mandatory'),
-    contactMessage: yup.string().required('message_is_mandatory'),
+    contactName: yup.string().required('name is mandatory'),
+    contactSubject: yup.string().required('subject is mandatory'),
+    contactMessage: yup.string().required('message is mandatory'),
     contactEmail: yup.string().when('contactPhone', {
       is: (fieldPhone) => !fieldPhone || fieldPhone.length === 0,
       then: yup
         .string()
-        .required('at_least_one_field_is_required')
-        .email('email_must_be_valid'),
+        .required('at least one field is required')
+        .email('email must be valid'),
     }),
     contactPhone: yup.string().when('contactEmail', {
       is: (fieldEmail) => !fieldEmail || fieldEmail.length === 0,
       then: yup
         .string()
-        .required('at_least_one_field_is_required'),
+        .required('at least one field is required'),
     }),
   },
   ['contactEmail', 'contactPhone']
@@ -219,7 +219,7 @@ function ContactUs() {
                 {...register('contactName')}
               />
               <div className={`${styles.InvalidFeedback}`}>
-                {t(errors.contactName?.message)}
+                {errors.contactName?.message}
               </div>
             </div>
             <div>
@@ -237,7 +237,7 @@ function ContactUs() {
                 onBlur={validateCommMethods}
               />
               <div className={`${styles.InvalidFeedback}`}>
-                {t(errors.contactEmail?.message)}
+                {errors.contactEmail?.message}
               </div>
             </div>
           </div>
@@ -257,7 +257,7 @@ function ContactUs() {
                 onBlur={validateCommMethods}
               />
               <div className={`${styles.InvalidFeedback}`}>
-                {t(errors.contactPhone?.message)}
+                {errors.contactPhone?.message}
               </div>
             </div>
             <div>
@@ -274,7 +274,7 @@ function ContactUs() {
                 {...register('contactSubject')}
               />
               <div className={`${styles.InvalidFeedback}`}>
-                {t(errors.contactSubject?.message)}
+                {errors.contactSubject?.message}
               </div>
             </div>
           </div>
@@ -292,7 +292,7 @@ function ContactUs() {
               {...register('contactMessage')}
             ></textarea>
             <div className={`${styles.InvalidFeedback}`}>
-              {t(errors.contactMessage?.message)}
+              {errors.contactMessage?.message}
             </div>
           </div>
           <div className={styles.mb26}>
