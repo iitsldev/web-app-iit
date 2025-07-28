@@ -10,30 +10,32 @@ import styles from './ContactUs.module.css';
 import AlertBox from '../alertbox/AlertBox';
 import CustomToast from '../toast/Toast';
 import CustomSpinner from '../spinner/Spinner';
+import useTranslation from 'next-translate/useTranslation';
 
 const schema = yup.object().shape(
   {
-    contactName: yup.string().required('Name is mandatory'),
-    contactSubject: yup.string().required('Subject is mandatory'),
-    contactMessage: yup.string().required('Message is mandatory'),
+    contactName: yup.string().required('name is mandatory'),
+    contactSubject: yup.string().required('subject is mandatory'),
+    contactMessage: yup.string().required('message is mandatory'),
     contactEmail: yup.string().when('contactPhone', {
       is: (fieldPhone) => !fieldPhone || fieldPhone.length === 0,
       then: yup
         .string()
-        .required('At least one of the fields [ email or phone ] is required')
-        .email('Email must be valid'),
+        .required('at least one field is required')
+        .email('email must be valid'),
     }),
     contactPhone: yup.string().when('contactEmail', {
       is: (fieldEmail) => !fieldEmail || fieldEmail.length === 0,
       then: yup
         .string()
-        .required('At least one of the fields [ email or phone ] is required'),
+        .required('at least one field is required'),
     }),
   },
   ['contactEmail', 'contactPhone']
 );
 
 function ContactUs() {
+  const { t } = useTranslation('contact-us');
   const recaptchaRef = React.useRef({});
   let submitButton = React.useRef();
   const {
@@ -78,7 +80,7 @@ function ContactUs() {
         setAlertBox(
           'success',
           'Success',
-          'Message sent to International Institute of Theravada successfully.'
+          t('success_message')
         );
         setShow(true);
       })
@@ -191,7 +193,7 @@ function ContactUs() {
             />
           </div>
           <div className={styles.directionDetailsContainer}>
-            <a>Get Directions</a>
+            <a>{t('get_directions')}</a>
           </div>
         </div>
       </div>
@@ -208,7 +210,7 @@ function ContactUs() {
                 htmlFor="contactName"
                 className={`form-label ${styles.contactLabelsText}`}
               >
-                Name
+                {t('name')}
               </label>
               <input
                 type="text"
@@ -225,7 +227,7 @@ function ContactUs() {
                 htmlFor="contactEmail"
                 className={`form-label ${styles.contactLabelsText}`}
               >
-                Email
+                {t('email')}
               </label>
               <input
                 type="email"
@@ -245,7 +247,7 @@ function ContactUs() {
                 htmlFor="contactPhone"
                 className={`form-label ${styles.contactLabelsText}`}
               >
-                Phone
+                {t('phone')}
               </label>
               <input
                 type="text"
@@ -263,7 +265,7 @@ function ContactUs() {
                 htmlFor="contactSubject"
                 className={`form-label ${styles.contactLabelsText}`}
               >
-                Subject
+                {t('subject')}
               </label>
               <input
                 type="text"
@@ -281,7 +283,7 @@ function ContactUs() {
               htmlFor="contactMessage"
               className={`form-label ${styles.contactLabelsText}`}
             >
-              Message
+              {t('message')}
             </label>
             <textarea
               className={`form-control ${styles.minHeight213} ${styles.pd19} ${styles.bgColorBrown} ${styles.contactInputText}`}
@@ -306,7 +308,7 @@ function ContactUs() {
               className={styles.submitButton}
               ref={submitButton}
             >
-              SUBMIT
+              {t('submit')}
             </button>
           </div>
         </form>

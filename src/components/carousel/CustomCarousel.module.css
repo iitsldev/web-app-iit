@@ -35,11 +35,11 @@
 }
 
 .bannerTextTwo {
-  font-size: 2rem;
+  font-size: 1.7rem;
   letter-spacing: 0;
   line-height: 2.7rem;
   margin-bottom: 39px;
-  text-align: left;
+  text-align: center;
   font-weight: 500;
   opacity: 0.8
 }
@@ -57,12 +57,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 1024px;
+  min-height: 900px;
   max-width: 1500px;
   border-radius: 50px;
   background-color: #966304;
   margin: 30px;
   opacity: 0.8;
+  padding: 20px;
+}
+
+.motoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
   padding: 20px;
 }
 
@@ -85,6 +94,7 @@
 
   .bannerTextOne img {
     width: 120px;
+    text-align: center;
   }
 
   .bannerTextTwo {

@@ -3,8 +3,11 @@ import { Container, Row, Card } from 'react-bootstrap';
 import styles from './NewsAndEvents.module.css';
 import Carousel from 'react-multi-carousel';
 import { CustomButtonGroup } from '../customarrow/CustomArrows';
+import useTranslation from 'next-translate/useTranslation';
 
 const NewsAndEventsComponent = ({ newsAndEvents }) => {
+  const { t } = useTranslation('news-and-events');
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -57,7 +60,7 @@ const NewsAndEventsComponent = ({ newsAndEvents }) => {
         <Card.Text className={styles.custDescription}>
           {`${card.description.replace(/<[^>]*>/g, '').slice(0, 200)}...`}
         </Card.Text>
-        <Card.Link href={`/newsandevents/${card.id}`} target="_blank">Read more...</Card.Link>
+        <Card.Link href={`/newsandevents/${card.id}`} target="_blank">{t('read_more')}</Card.Link>
       </Card>
     );
   };
@@ -66,7 +69,7 @@ const NewsAndEventsComponent = ({ newsAndEvents }) => {
     <div className={styles.mainDiv}>
       <Container className={styles.relativeClass}>
         <Row className={styles.newEventsHeaderContainer}>
-          <span className={styles.mainText}>News and Events</span>
+          <span className={styles.mainText}>{t('news_and_events')}</span>
         </Row>
         <Carousel
           className={styles.shsslkCardListCarousel}

@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import $ from 'jquery';
+import useTranslation from 'next-translate/useTranslation';
 
 function TimeLineComponent() {
+  const { t } = useTranslation('timeline');
+
   function operateTimeline() {
     var timelineSwiper = new Swiper('.timeline .swiper-container', {
       direction: 'vertical',
@@ -46,13 +49,10 @@ function TimeLineComponent() {
               data-year="2011"
             >
               <div className="swiper-slide-content">
-                <span className="timeline-year">2011</span>
-                <h4 className="timeline-title">Our nice super title</h4>
+                <span className="timeline-year">{t('timeline_year')}</span>
+                <h4 className="timeline-title">{t('timeline_title')}</h4>
                 <p className="timeline-text">
-                  Lorem ipsum dolor site amet, consectetur adipscing elit, sed
-                  do eisumod tempor incididut ut labore et dolore magna aliqua.
-                  Ut enim ad mimim venjam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  {t('timeline_text')}
                 </p>
               </div>
             </div>
@@ -64,13 +64,10 @@ function TimeLineComponent() {
               data-year="2012"
             >
               <div className="swiper-slide-content">
-                <span className="timeline-year">2012</span>
-                <h4 className="timeline-title">Our nice super title</h4>
+                <span className="timeline-year">{t('timeline_year')}</span>
+                <h4 className="timeline-title">{t('timeline_title')}</h4>
                 <p className="timeline-text">
-                  Lorem ipsum dolor site amet, consectetur adipscing elit, sed
-                  do eisumod tempor incididut ut labore et dolore magna aliqua.
-                  Ut enim ad mimim venjam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  {t('timeline_text')}
                 </p>
               </div>
             </div>

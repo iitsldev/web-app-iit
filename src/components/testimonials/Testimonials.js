@@ -4,8 +4,11 @@ import styles from './Testimonials.module.css';
 import ReactPlayer from 'react-player';
 import $ from 'jquery';
 import sanitizeHtml from 'sanitize-html';
+import useTranslation from 'next-translate/useTranslation';
 
 const Testimonials = ({ testimonials }) => {
+  const { t } = useTranslation('testimonials');
+
   function normalizeSlideHeights() {
     $('.testimonial-carousel.carousel').each(function () {
       var items = $('.carousel-item', this);
@@ -59,7 +62,7 @@ const Testimonials = ({ testimonials }) => {
             <img
               className="d-block w-100 banner-social-icon-max-width-45"
               src="/Path 691.svg"
-              alt="Quote"
+              alt={t('quote')}
             />
             <div>{item.quote}</div>
             <div

@@ -9,7 +9,7 @@ import MainLayoutSection from '../components/maincommonlayout/MainCommonLayoutSe
 import AcademicProfile from '../components/academicprofile/AcademicProfile';
 
 export default function Institute({ instituteList, academicProfiles }) {
-  const { t, lang } = useTranslation();
+  const { t, lang } = useTranslation('institute-page');
   const router = useRouter();
 
   // Ensure academicProfiles is an array, provide fallback if not
@@ -18,38 +18,33 @@ export default function Institute({ instituteList, academicProfiles }) {
   return (
     <div className="skeleton">
       <Head>
-        <title>Institute</title>
+        <title>{t('page_title')}</title>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="international institute of theravada"
+          content={t('page_description')}
         />
       </Head>
       <div className="navbarCarouselWrapper institute">
         <Header />
       </div>
       <MainLayoutSection
-        title="Institute"
-        description="IIT as an institution has both monastic features and, at the same time, features of a well-organized academic institute autonomously governed by its own peculiar constitution."
+        title={t('main_layout_title')}
+        description={t('main_layout_description')}
         photo="/Institute.png"
         backgroundImg="url(/Ellipse-4.svg)"
       />
       <NavigationCommonLayout navigationList={instituteList} />
       <Container>
         <div className="inst-academic-header" id="academy">
-          Academy
+          {t('academy')}
         </div>
         <div className="inst-academic-academy-text">
-          In our Academy, we impart Theravada teachings in their purest form in
-          Buddhist monks and train them in authentic Theravada meditation
-          techniques. Foremost objective of our Academy is to capacitate our
-          students who have profound apprehension on fundamentals of the
-          doctrine and meditation practice as preserved by the tradition of
-          Theravada.
+          {t('academy_description')}
         </div>
         <div className="inst-academic-header" id="academic-staff">
-          Faculty Members
+          {t('faculty_members')}
         </div>
 
         <div className="inst-academic-masonry">
@@ -66,30 +61,91 @@ export default function Institute({ instituteList, academicProfiles }) {
               </div>
             ))
           ) : (
-            <p>No academic profiles available at this time.</p>
+            <p>{t('no_academic_profiles')}</p>
           )}
         </div>
 
 
         <div className="inst-academic-header" id="monastery">
-          Monastery
+          {t('monastery')}
         </div>
         <div className="inst-academic-academy-text">
-          IIT, being a monk-training center, has a monastery. In it, students
-          can lead their lives well according to the disciplinary code advocated
-          under the Theravada Vinaya. Monks in IIT fully abstain from using or
-          handling money as admonished by the Buddha and strive to achieve their
-          aspired sublime goals as per doctrine they have studied in the
-          Academy.
+          {t('monastery_description')}
         </div>
       </Container>
 
       <Container className="inst-admin-struct-container" id="administration">
         {/* Rest of the administration section remains the same */}
         <div className="inst-admin-struct-header">
-          Administrational Structure
+          {t('administrational_structure')}
         </div>
-        {/* ... rest of the administration content ... */}
+        <div className="inst-admin-struct-main-text">
+          {t('administrational_structure_main_text')}
+        </div>
+
+        <div className="inst-admin-struct-sub-text">
+          {t('administrational_structure_sub_text')}
+        </div>
+
+        <div className="inst-admin-struct-general">{t('general_assembly')}</div>
+
+        <div className="inst-admin-struct-general-subtext">
+          <div className="inst-assembly-container">
+            <p className="inst-admin-executive-content">
+              {t('executive_board_description')}
+            </p>
+            <hr className="inst-assembly-vert-line"></hr>
+            <hr className="inst-assembly-horiz-line"></hr>
+            <div className="inst-council-container">
+              <div className="inst-council-container-col">
+                <div className="inst-council-container-col-item">
+                  <span className="inst-council-container-col-title">
+                    {t('executive_board')}
+                  </span>
+                  <p className="inst-council-container-col-desc">
+                    {t('executive_board_description')}
+                  </p>
+                </div>
+                <div className="inst-assembly-vert-line-short-container">
+                  <hr className="inst-assembly-vert-line-short"></hr>
+                </div>
+                <div className="inst-council-container-col-item">
+                  <p className="inst-council-container-col-title-two">
+                    {t('study_council')}
+                  </p>
+                  <p className="inst-council-container-col-desc">
+                    {t('study_council_description')}
+                  </p>
+                </div>
+                <div className="inst-assembly-vert-line-short-container">
+                  <hr className="inst-assembly-vert-line-short"></hr>
+                </div>
+                <div className="inst-council-container-col-item">
+                  <p className="inst-council-container-col-title-two">
+                    {t('monastic_council')}
+                  </p>
+                  <p className="inst-council-container-col-desc">
+                    {t('monastic_council_description')}
+                  </p>
+                </div>
+              </div>
+              <div className="inst-council-container-col">
+                <span className="inst-council-container-col-title">{t('senat')}</span>
+                <p className="inst-council-container-col-desc">
+                  {t('senat_description')}
+                </p>
+              </div>
+              <div className="inst-council-container-col">
+                <span className="inst-council-container-col-title">
+                  {t('vinaya_council')}
+                </span>
+                <p className="inst-council-container-col-desc">
+                  {t('vinaya_council_description')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </Container>
       <Footer />
     </div>

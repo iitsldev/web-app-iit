@@ -120,7 +120,7 @@
 @media (max-width: 1372px) {
   .navBarContainer {
     padding-left: 1.25%;
-    padding-right: 1.8%;
+    padding-right: 0;
   }
 
   .navItems>a {
@@ -132,7 +132,7 @@
 @media (max-width: 1249px) {
   .navBarContainer {
     padding-left: 1.25%;
-    padding-right: 1.8%;
+    padding-right: 0;
   }
 
   .navItems>a {
@@ -144,7 +144,7 @@
 @media (max-width: 1199px) {
   .navBarContainer {
     padding-left: 2.25%;
-    padding-right: 1.8%;
+    padding-right: 0;
   }
 
   .headerContainer {
@@ -193,7 +193,7 @@
   }
 
   .bannerText {
-    font-size: 0.45rem;
+    font-size: 0.60rem;
   }
 }
 

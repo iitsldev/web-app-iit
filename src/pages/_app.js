@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Router from 'next/router';
 import ProgressBar from '@badrap/bar-of-progress';
 import Image from 'next/image';
-import iitImageLoader from '../../public/IIT-2.svg';
+import iitImageLoader from '../../public/IIT-2.png';
 
 import { store } from '../app/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -46,7 +46,7 @@ const MyApp = ({ Component, pageProps }) => {
         src={iitImageLoader}
         alt="International Institue of Theravada"
         className="d-block w-100 preLoader-max-width"
-        width={320}
+        width={520}
       />
       <div className="loader">
         <div className="loading"></div>

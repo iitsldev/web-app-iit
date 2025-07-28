@@ -28,18 +28,18 @@ import {
 } from 'react-icons/bs';
 
 export default function HowToSupport() {
-  const { t, lang } = useTranslation();
+  const { t, lang } = useTranslation('how-to-support-page');
   const router = useRouter();
 
   return (
     <div className="skeleton">
       <Head>
-        <title>How to Support</title>
+        <title>{t('page_title')}</title>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="international institute of theravada"
+          content={t('page_description')}
         />
       </Head>
 
@@ -48,8 +48,8 @@ export default function HowToSupport() {
       </div>
 
       <MainLayoutSection
-        title="How To Support"
-        description="You can support us on Construction of IIT, Healthcare of monks of IIT and Propagating the Dhamma."
+        title={t('main_layout_title')}
+        description={t('main_layout_description')}
         photo="/How-to-support-new.png"
         backgroundImg="url(/Ellipse-2.svg)"
       />
@@ -70,17 +70,10 @@ export default function HowToSupport() {
                     src="/wheelbarrow.svg"
                     alt="construction"
                   />
-                  <p className="construct-header">Construction</p>
+                  <p className="construct-header">{t('construction')}</p>
                 </div>
                 <div className="how-to-support-main-aspects-text">
-                  Currently constructions are underway in a 100-acre land for
-                  forty (40) residential chambers (kuṭis), two Lecture Halls,
-                  one Permanent AV Studio, a Study Council, one Sewing Room and
-                  one Robe Washing Shed in order to commence the five-year
-                  teacher training program. Constructions for the main complex
-                  that will provide lodging facilities for about 300 monks,
-                  Lecture Theatres and a Library is expected to begin in the
-                  near future.
+                  {t('construction_description')}
                 </div>
               </div>
 
@@ -91,13 +84,11 @@ export default function HowToSupport() {
                     src="/health.svg"
                     alt="healthcare"
                   />
-                  <p className="construct-header">Healthcare</p>
+                  <p className="construct-header">{t('healthcare')}</p>
                 </div>
 
                 <div className="how-to-support-main-aspects-text">
-                  Contributions can be made for the medical purposes and other
-                  healthcare related needs of the monks residing in the
-                  Institute.
+                  {t('healthcare_description')}
                 </div>
                 <br></br>
                 <br></br>
@@ -107,11 +98,10 @@ export default function HowToSupport() {
                     src="/dhamma.svg"
                     alt="Dhamma"
                   />
-                  <p className="construct-header">Propagating Dhamma</p>
+                  <p className="construct-header">{t('propagating_dhamma')}</p>
                 </div>
                 <div className="how-to-support-main-aspects-text">
-                  One can contribute to spread the noble Theravada Dhamma all
-                  around the globe for the benefit of humankind.
+                  {t('propagating_dhamma_description')}
                 </div>
               </div>
             </div>
@@ -148,36 +138,35 @@ export default function HowToSupport() {
           <div className="how-to-support-main-body-bank-info">
             <div className="how-to-support-main-body-bank-info-section1">
               <div className="how-to-support-main-body-bank-info-section1-title">
-                How to Contribute
+                {t('how_to_contribute')}
               </div>
               <div className="how-to-support-main-body-bank-info-section1-body">
-                Devotees who are willing to join the meritorious act of
-                supporting the IIT can do so with the below information.
+                {t('how_to_contribute_description')}
               </div>
             </div>
 
             <div className="how-to-support-main-body-bank-info-section2">
               <div className="how-to-support-main-body-bank-info-section2-subtitle">
-                Account Name
+                {t('account_name')}
                 <div className="how-to-support-main-body-bank-info-section2-subtitle-val">
-                  Kshemabhoomi Sansadaya
+                  {t('account_name_val')}
                 </div>
                 <hr></hr>
               </div>
 
               <div className="how-to-support-main-body-bank-info-section2-col2">
                 <div className="how-to-support-main-body-bank-info-section2-subtitle-cust">
-                  Account Number
+                  {t('account_number')}
                   <div className="how-to-support-main-body-bank-info-section2-subtitle-val">
-                    119165000021
+                    {t('account_number_val')}
                   </div>
                   <hr></hr>
                 </div>
 
                 <div className="how-to-support-main-body-bank-info-section2-subtitle-cust">
-                  Bank Name
+                  {t('bank_name')}
                   <div className="how-to-support-main-body-bank-info-section2-subtitle-val">
-                    Sampath Bank PLC
+                    {t('bank_name_val')}
                   </div>
                   <hr></hr>
                 </div>
@@ -185,17 +174,17 @@ export default function HowToSupport() {
 
               <div className="how-to-support-main-body-bank-info-section2-col2">
                 <div className="how-to-support-main-body-bank-info-section2-subtitle-cust">
-                  Branch Name
+                  {t('branch_name')}
                   <div className="how-to-support-main-body-bank-info-section2-subtitle-val">
-                    Panchikawatte
+                    {t('branch_name_val')}
                   </div>
                   <hr></hr>
                 </div>
 
                 <div className="how-to-support-main-body-bank-info-section2-subtitle-cust">
-                  Bank Code
+                  {t('bank_code')}
                   <div className="how-to-support-main-body-bank-info-section2-subtitle-val">
-                    7278
+                    {t('bank_code_val')}
                   </div>
                   <hr></hr>
                 </div>
@@ -206,17 +195,17 @@ export default function HowToSupport() {
                 style={{ paddingBottom: '23px' }}
               >
                 <div className="how-to-support-main-body-bank-info-section2-subtitle-cust">
-                  Branch Code
+                  {t('branch_code')}
                   <div className="how-to-support-main-body-bank-info-section2-subtitle-val">
-                    191
+                    {t('branch_code_val')}
                   </div>
                   <hr className="how-to-support-main-body-bank-info-separator"></hr>
                 </div>
 
                 <div className="how-to-support-main-body-bank-info-section2-subtitle-cust">
-                  SWIFT Code
+                  {t('swift_code')}
                   <div className="how-to-support-main-body-bank-info-section2-subtitle-val">
-                    BSAMLKLX
+                    {t('swift_code_val')}
                   </div>
                 </div>
               </div>
@@ -235,18 +224,14 @@ export default function HowToSupport() {
             <div className="how-to-support-quote-container">
               <blockquote className="blockquote mb-0 ">
                 <p className="how-to-support-quote-p">
-                  Sāgārā anagārā ca - ubho aññoññanissitā, <br />
-                  Ārādhayanti saddhammaṃ - yogakkhemaṃ anuttaraṃ.
+                  {t('quote_p1')}
                 </p>
                 <footer className="how-to-support-source-name">
-                  Sutta Pitaka, Kuddaka Nikāya, Itivuttaka, Catukkanipāta,
-                  bahukārasuttaṃ
+                  {t('quote_footer')}
                 </footer>
                 <br />
                 <p className="how-to-support-quote-20">
-                  While lay devotees support monks with relevant requisites,
-                  monks enrich them with the noble Dhamma. Thus, the disciples
-                  of the Tathāgata get freed from suffering.
+                  {t('quote_p2')}
                 </p>
               </blockquote>
             </div>

@@ -1,0 +1,15 @@
+{
+  "name": "නම",
+  "email": "විද්යුත් තැපෑල",
+  "phone": "දුරකථන අංකය",
+  "subject": "විෂය",
+  "message": "පණිවුඩය",
+  "submit": "ඉදිරිපත් කරන්න",
+  "name_is_mandatory": "නම අනිවාර්යයි",
+  "subject_is_mandatory": "විෂය අනිවාර්යයි",
+  "message_is_mandatory": "පණිවිඩය අනිවාර්යයි",
+  "at_least_one_field_is_required": "[විද්‍යුත් තැපෑල හෝ දුරකථන] ක්ෂේත්‍රවලින් එකක්වත් අවශ්‍ය වේ",
+  "email_must_be_valid": "විද්‍යුත් තැපෑල වලංගු විය යුතුය",
+  "success_message": "ජාත්‍යන්තර ථේරවාද ආයතනයට පණිවිඩය සාර්ථකව යවන ලදී.",
+  "get_directions": "දිශාවන් ලබා ගන්න"
+}

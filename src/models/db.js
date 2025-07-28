@@ -334,7 +334,7 @@ async function getAllImages() {
     }
 }
 
-async function getCarouselData() {
+async function getCarousel() {
     try {
         return await knex('Carousel').select();
     } catch (error) {
@@ -371,5 +371,5 @@ module.exports = {
     deleteItem,
     getNewsAndEvents,
     getAllImages,
-    getCarouselData,
+    getCarousel,
 };
