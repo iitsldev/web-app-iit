@@ -44,9 +44,9 @@ function CustomCarousel() {
                   </div>
                   <div className={`col-md-12 col-xl-6 order-xl-1 text-white ${styles.motoItem}`}>
                     <div className={styles.bannerTextOne}>
-                      <img src="/swirlLeftt.png" width="80px" />
+                      {/* <img src="/swirlLeftt.png" width="80px" /> */}
                       {item.title}
-                      <img src="/swirlRight.png" width="80px" />
+                      {/* <img src="/swirlRight.png" width="80px" /> */}
                     </div>
                     <div
                       className={styles.bannerTextTwo}

@@ -12,7 +12,7 @@ function Header() {
   const languages = [
     { code: 'en-US', name: 'English', flag: '🇺🇸' },
     { code: 'si-LK', name: 'Sinhala', flag: '🇱🇰' },
-    { code: 'vi-VN', name: 'Vietnamese', flag: '🇻🇳' },
+    // { code: 'vi-VN', name: 'Vietnamese', flag: '🇻🇳' },
   ];
 
   const currentLanguage = languages.find((l) => l.code === lang);

@@ -89,13 +89,13 @@ const CardDeckComponent = () => {
   };
 
   return (
-    <Container className={`card-container ${styles.deckContainer}`}>
-      <div className={styles.deckHeader}>
+    <Container className={`card-container ${styles.deckContainer}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div className={styles.deckHeader} style={{ textAlign: 'center' }}>
         <p className={styles.deckHeaderIntro}>
           {t('intro')}
         </p>
       </div>
-      <Row xs={1} sm={2} md={2} lg={4}>
+      <Row xs={1} sm={2} md={2} lg={4} className="justify-content-center">
         {cardInfo.map(renderCard)}
       </Row>
     </Container>
