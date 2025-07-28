@@ -134,6 +134,26 @@ function AboutUsComponent({ missions, ourFocus }) {
             ))}
           </div>
         </div>
+        <div className={styles.missionHeading} id="our-vision-and-mission">
+          <h2 className={styles.subHeading2}>{t('vision_mission')}</h2>
+        </div>
+        <div className={styles.missionDetails}>
+          <div className={styles.missionBriefing}>
+            <p className={styles.brefingText}>
+              {t('vision_mission_description')}
+            </p>
+          </div>
+          <div className={styles.missionInfo}>
+            {missions.map((data, index) => (
+              <div key={index} className={styles.missionDataContainer}>
+                <div className={styles.missionImageContainer}>
+                  <img src={data.image} className={styles.missionImage} />
+                </div>
+                <div className={styles.missionText}>{data.text}</div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
       {/* ... rest of your existing JSX ... */}
       <div className={styles.ourFocusContainer} id="our-focus">
