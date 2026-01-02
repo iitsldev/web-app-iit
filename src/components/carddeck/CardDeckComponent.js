@@ -55,34 +55,31 @@ const CardDeckComponent = () => {
           <Card.Body
             style={{ background: card.color }}
             className={`card-dynamic-height ${styles.cardBody}`}>
-            <div className={styles.arrowContainer}>
-              <a href={card.link}>
-                <BsArrowRight
-                  size={20}
-                  color="white"
-                  className={styles.cardArrow}
-                />
-              </a>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Card.Img
+                variant="top"
+                src={card.image}
+                className={styles.cardImage}
+                style={{ display: 'block', margin: '0 auto' }}
+              />
             </div>
-            <Card.Img
-              variant="top"
-              src={card.image}
-              className={styles.cardImage}
-            />
+
             <Card.Title
-              style={{ color: card.titleColor }}
+              style={{ color: card.titleColor, textAlign: 'center' }}
               className={styles.cardTitle}
             >
-              {card.title}
+              <Card.Link href={card.link}>
+                {card.title}
+              </Card.Link>
             </Card.Title>
             <Card.Text
               style={{ color: card.titleColor }}
               className={styles.cardText}
             >
               <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(card.description) }} />
-
             </Card.Text>
           </Card.Body>
+
         </Card>
       </Col>
     );
