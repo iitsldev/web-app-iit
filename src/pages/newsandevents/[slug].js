@@ -12,30 +12,34 @@ export default function NewsAndEventPost({ post, recentPosts = [] }) {  // Defau
     const { t, lang } = useTranslation('news-and-events-post');
     const router = useRouter();
 
-    const renderRecentItem = (item, index) => (
-        <div className={styles.recentItem} key={index}>
-            <div className={styles.recentItemInner}>
-                {item.image && (
-                    <div className={styles.recentImageWrapper}>
-                        <img src={item.image} alt={item.title} className={styles.recentImage} />
-                        <span className={item.type === 'News' ? styles.typeNews : styles.typeEvent}>
-                            {item.type}
-                        </span>
+    const renderRecentItem = (item, index) => {
+        const typeClassName = `type${item.type.charAt(0).toUpperCase()}${item.type.slice(1)}`;
+        return (
+            <div className={styles.recentItem} key={index}>
+                <div className={styles.recentItemInner}>
+                    {item.image && (
+                        <div className={styles.recentImageWrapper}>
+                            <img src={item.image} alt={item.title} className={styles.recentImage} />
+                            {/* <span className={item.type === 'News' ? styles.typeNews : styles.typeEvent}>
+                                {item.type}
+                            </span> */}
+                            <span className={styles[typeClassName]}>{item.type}</span>
+                        </div>
+                    )}
+                    <div className={styles.recentContent}>
+                        <div className={styles.recentDate}>{item.date}</div>
+                        <h3 className={styles.recentTitle}>{item.title}</h3>
+                        <p className={styles.recentDescription}>
+                            {`${item.description.slice(0, 100)}...`}
+                        </p>
+                        <a href={`/newsandevents/${item.id}`} className={styles.recentLink}>
+                            {t('read_more')}
+                        </a>
                     </div>
-                )}
-                <div className={styles.recentContent}>
-                    <div className={styles.recentDate}>{item.date}</div>
-                    <h3 className={styles.recentTitle}>{item.title}</h3>
-                    <p className={styles.recentDescription}>
-                        {`${item.description.slice(0, 100)}...`}
-                    </p>
-                    <a href={`/newsandevents/${item.id}`} className={styles.recentLink}>
-                        {t('read_more')}
-                    </a>
                 </div>
             </div>
-        </div>
-    );
+        )
+    };
 
     return (
         <div className="skeleton">

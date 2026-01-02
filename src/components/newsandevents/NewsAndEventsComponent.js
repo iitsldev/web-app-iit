@@ -29,6 +29,8 @@ const NewsAndEventsComponent = ({ newsAndEvents }) => {
 
   const renderCard = (card, index) => {
     const indexval = index;
+    const typeClassName = `type${card.type.charAt(0).toUpperCase()}${card.type.slice(1)}`;
+
     return (
       <Card
         className={styles.cardBody}
@@ -38,14 +40,8 @@ const NewsAndEventsComponent = ({ newsAndEvents }) => {
           height: '100%',
         }}
       >
-        {card.type === 'News' ? (
-          <span className={styles.typeNews}> {card.type}</span>
-        ) : (
-          <span className={styles.typeEvent}> {card.type}</span>
-        )}
-        <Card.Subtitle className={styles.custSubTitle}>
-          {card.date.slice(0, 10)}
-        </Card.Subtitle>
+        <span className={styles[typeClassName]}>{card.type}</span>
+
         <Card.Img
           className={styles.custImage}
           variant="top"
@@ -56,7 +52,15 @@ const NewsAndEventsComponent = ({ newsAndEvents }) => {
             e.target.src = '/IIT-1.png'; // Fallback image
           }}
         />
-        <Card.Title className={styles.custTitle}>{card.title}</Card.Title>
+
+        <Card.Title className={styles.custTitle}>
+          <Card.Link href={`/newsandevents/${card.id}`} target="_blank">
+            {card.title}
+          </Card.Link>
+        </Card.Title>
+        <Card.Subtitle className={styles.custSubTitle}>
+          {card.date.slice(0, 10)}
+        </Card.Subtitle>
         <Card.Text className={styles.custDescription}>
           {`${card.description.replace(/<[^>]*>/g, '').slice(0, 200)}...`}
         </Card.Text>
