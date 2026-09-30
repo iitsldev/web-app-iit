@@ -21,7 +21,7 @@
   "address": "Heenetikalma, Karuwalagaswewa, Sri Lanka.",
   "get_directions": "Get Directions",
   "how_to_support": "How To Support",
-  "copyright": "©{year} International Institute of Theravada",
+  "copyright": "©{{year}} International Institute of Theravada",
   "social": {
     "facebook": "Facebook",
     "youtube": "YouTube",
