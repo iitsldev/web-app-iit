@@ -91,7 +91,8 @@ function Footer() {
               <ul className={styles.ulPaddingStyle}>
                 <div className={styles.liContactUs}><Link href="/contactus">{t('contact_us')}</Link></div>
                 <div className={styles.contactDetails}>
-                  <Link href="mailto:inst.theravada@gmail.com">inst.theravada@gmail.com</Link><br />
+                  <Link href="mailto:info@theravado.com">info@theravado.com</Link><br />
+                  <Link href="tel:0094760908841">+(94)760908841</Link><br />
                   <Link href="tel:0094767253178">+(94)767253178</Link>
                 </div>
                 <br />

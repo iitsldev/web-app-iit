@@ -177,7 +177,7 @@ function ContactUs() {
             />
           </div>
           <div className={styles.contactDetailsContainer}>
-            <div>inst.theravada@gmail.com</div>
+            <div>info@theravado.com</div>
             <div>+94 77 453 1614</div>
           </div>
         </div>
