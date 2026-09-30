@@ -1,8 +1,11 @@
 import React from 'react';
 import styles from './ourFocusCardComponent.module.css';
 import sanitizeHtml from 'sanitize-html'
+import useTranslation from 'next-translate/useTranslation';
 
 function OurFocusCardComponent(props) {
+  const { t } = useTranslation('our-focus-card');
+
   function goToYoutubePlaylist(linkToYourtube) {
     window.open(linkToYourtube, '_blank');
   }
@@ -19,6 +22,7 @@ function OurFocusCardComponent(props) {
         </div>
         <div className={styles.ourFocusHeader}>{props.cardData.title}</div>
         <div className={styles.ourFocusDetails} dangerouslySetInnerHTML={{ __html: sanitizeHtml(props.cardData.body) }}></div>
+
       </div>
     </div>
   );

@@ -39,7 +39,7 @@
   padding: 40px;
 }
 
-.paginationButton > a {
+.paginationButton>a {
   border-radius: 100% !important;
   height: 40px;
   width: 40px;
@@ -57,13 +57,15 @@
   font-size: 18px;
   font-family: 'Raleway';
   margin-bottom: 15px;
+  text-align: right;
 }
 
 .custTitle {
   color: #616057;
   font-size: 20px;
   font-family: 'Raleway';
-  margin-bottom: 13px;
+  margin-top: 12px;
+  margin-bottom: 3px;
   font-weight: 600;
 }
 
@@ -119,7 +121,21 @@
   padding-top: 2px;
   padding-bottom: 2px;
   margin-bottom: 10px;
-  width: 75px;
+  width: 90px;
+}
+
+.typeDhamma {
+  background-color: #960606;
+  color: white;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  font-weight: 700;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-bottom: 10px;
+  width: 130px;
 }
 
 .typeNews {
@@ -134,7 +150,7 @@
   padding-top: 2px;
   padding-bottom: 2px;
   margin-bottom: 10px;
-  width: 75px;
+  width: 100px;
 }
 
 .shsslkCardListCarousel ul li {

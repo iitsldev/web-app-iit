@@ -6,18 +6,18 @@ import Footer from '../components/footer/Footer';
 import {Tab, Container, Tabs, Button} from 'react-bootstrap';
 
 export default function NMCMain() {
-  const { t, lang } = useTranslation();
+  const { t, lang } = useTranslation('nmc-main');
   const router = useRouter();
 
   return (
     <div className="skeleton">
       <Head>
-        <title>NMC: Get Registered - ලියාපදිංචි වන්න</title>
+        <title>{t('page_title')}</title>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="international institute of theravada"
+          content={t('page_description')}
         />
       </Head>
 
@@ -42,24 +42,18 @@ export default function NMCMain() {
           className="mb-3"
         >
           <Tab eventKey="English" title="English">
-            <h5>Calling Applications for the Nissayamuttaka Program (Nm Program)</h5>
+            <h5>{t('calling_applications_nm_program')}</h5>
             <p>
-            The first semester of the Nissayamuttaka monastic training program conducted by 
-            the International Institute of Theravada was successfully completed in last April. 
-            Currently, the second semester studies are going on.
+            {t('nm_program_p1')}
             </p>
             <p>
-            Although we had previously decided not to enroll students in the interim, 
-            considering the interest of many, we decided to provide the opportunity for 
-            a limited number of students to join the program at the beginning of the second year.
+            {t('nm_program_p2')}
             </p>
             <p>
-            Admission is done after an entrance examination in the subjects of Vinaya, Abhidharma, 
-            and Pali studied in the first year.
+            {t('nm_program_p3')}
             </p>
             <p>
-            Monks who have a strong desire to engage in this program can fill the form below 
-            and <a href="#submit"><strong>submit</strong></a> the application before <strong>August 20, 2023.</strong>
+            {t('nm_program_p4')}
             </p>
 
           {/*<p>
@@ -67,206 +61,166 @@ export default function NMCMain() {
               for the Nissayamuttaka monastic education program which will be
               commencing from December 2022.
             </p> */}
-            <h5>Course Details</h5>
+            <h5>{t('course_details')}</h5>
             <p>
-              This program is designed to impart knowledge on Theravada
-              teachings in bhikkhus and sāmaṇeras and to train them in monastic
-              training with the objective of enriching them with the qualities
-              expected to be gained by a nissayamuttaka monk, a monk who can
-              abide independently without depending on a teacher.
+              {t('course_details_p1')}
             </p>
-            <h5>Venue</h5>
+            <h5>{t('venue')}</h5>
             <p>
-              One has to undertake this course residing at the International
-              Institute of Theravada located at Karuwalagaswewa, Sri Lanka.
+              {t('venue_p1')}
             </p>
-            <h5>Duration</h5>
+            <h5>{t('duration')}</h5>
             <p>
-              This course is designed into three stages that will run for six
-              years.
+              {t('duration_p1')}
             </p>
             <p>
               <ol>
-                <li> Basic Stage - one year </li>
-                <li> Intermediate Stage - three years</li>
-                <li> Advanced Stage - two years</li>
+                <li> {t('basic_stage')} </li>
+                <li> {t('intermediate_stage')}</li>
+                <li> {t('advanced_stage')}</li>
               </ol>
             </p>
             <p>
-              A certificate issued by the International Institute of Theravada
-              shall be given to students who successfully accomplish each stage.
+              {t('certificate_p1')}
             </p>
             <p>
-              Each year has two academic semesters. Each semester will run for
-              five months and at the end of each semester comes a
-              one-month-holiday.
+              {t('academic_semesters_p1')}
             </p>
             <ol>
               <li>
-                First semester from 01st December to 30th April (holiday - from
-                1st May to 31st May)
+                {t('academic_semesters_li1')}
               </li>
               <li>
-                Second semester from 01st June to 31st October (holiday - from
-                1st November to 30th November)
+                {t('academic_semesters_li2')}
               </li>
             </ol>
-            <h5>Subjects Taught</h5>
+            <h5>{t('subjects_taught')}</h5>
             <ol>
-              <li>Theravada Fundamentals</li>
-              <li>Vinaya</li>
-              <li>Sutta</li>
-              <li>Abhidhamma</li>
-              <li>Pāli</li>
-              <li>Samatha</li>
-              <li>Vipassanā</li>
-              <li>History of Buddhism</li>
-              <li>Navakamma (Skills in monastic crafts)</li>
-              <li>Additional subjects</li>
+              <li>{t('theravada_fundamentals')}</li>
+              <li>{t('vinaya')}</li>
+              <li>{t('sutta')}</li>
+              <li>{t('abhidhamma')}</li>
+              <li>{t('pali')}</li>
+              <li>{t('samatha')}</li>
+              <li>{t('vipassana')}</li>
+              <li>{t('history_of_buddhism')}</li>
+              <li>{t('navakamma')}</li>
+              <li>{t('additional_subjects')}</li>
             </ol>
-            <h5>Basic Stage</h5>
+            <h5>{t('basic_stage')}</h5>
             <ol>
-              <li>Theravada Fundamentals - Basic</li>
-              <li>Vinaya - Bhikkhu Pātimokkha</li>
-              <li>Sutta - General knowledge</li>
+              <li>{t('basic_stage_p1')}</li>
+              <li>{t('basic_stage_p2')}</li>
+              <li>{t('basic_stage_p3')}</li>
               <li>
-                Pāli- Theoretical knowledge necessary to read the Tipiṭaka,
-                commentaries and sub-commentaries{' '}
+                {t('basic_stage_p4')}
               </li>
             </ol>
 
-            <h5>Intermediate Stage</h5>
+            <h5>{t('intermediate_stage')}</h5>
             <ol>
-              <li>Theravada Fundamentals - Part 1 </li>
-              <li>Vinaya - Ubhato Vibhaṅga and Khandhaka part 1 </li>
-              <li>Sutta - Selected discourses </li>
+              <li>{t('intermediate_stage_p1')} </li>
+              <li>{t('intermediate_stage_p2')} </li>
+              <li>{t('intermediate_stage_p3')} </li>
               <li>
-                Pāli - Comprehensive Pāli grammar based on various grammar
-                traditions
+                {t('intermediate_stage_p4')}
               </li>
-              <li>Samatha - 40 meditation subjects </li>
-              <li>Vipassanā - Part 1 </li>
-              <li>Navakamma - Part 1 </li>
-              <li>Additional Subjects - Basic Sinhala (Not compulsory) </li>
+              <li>{t('intermediate_stage_p5')} </li>
+              <li>{t('intermediate_stage_p6')} </li>
+              <li>{t('intermediate_stage_p7')} </li>
+              <li>{t('intermediate_stage_p8')} </li>
             </ol>
-            <h5>Advanced Stage</h5>
+            <h5>{t('advanced_stage')}</h5>
             <ol>
-              <li>Theravada Fundamentals - Part 2 </li>
+              <li>{t('advanced_stage_p1')} </li>
               <li>
-                Pāli, basic Sanskrit and Philology - Including composition of
-                verses, ancient techniques of reading commentaries and their
-                application, Pāli language writing and speaking skills{' '}
+                {t('advanced_stage_p2')}
               </li>
               <li>
-                Vinaya - Khandhaka part 2, Parivāra, training in Vinayakammas{' '}
+                {t('advanced_stage_p3')}
               </li>
-              <li>Sutta - Selected discourses </li>
+              <li>{t('advanced_stage_p4')} </li>
               <li>
-                Abhidhamma - Dhammasaṅgaṇī Mātikā, Dhātukathā, Yamaka, and
-                Paṭṭhāna based on ancient Burmese techniques{' '}
+                {t('advanced_stage_p5')}
               </li>
-              <li>Vipassanā - Part 2</li>
+              <li>{t('advanced_stage_p6')}</li>
               <li>
-                History of Buddhism (Including Kathāvatthu of Abhidhamma){' '}
+                {t('advanced_stage_p7')}
               </li>
-              <li>Navakamma - Part 2 </li>
+              <li>{t('advanced_stage_p8')} </li>
             </ol>
-            <h5>Qualifications to be Eligible to the Course</h5>
+            <h5>{t('qualifications')}</h5>
             <ul>
               <li>
-                The candidate should be a monk or novice ordained under the
-                tradition of Theravada.
+                {t('qualifications_li1')}
               </li>
-              <li>A novice should be at least 16 years old. </li>
-              <li>There is no upper age limit. </li>
-              <li>No prior educational qualification is required. </li>
+              <li>{t('qualifications_li2')} </li>
+              <li>{t('qualifications_li3')} </li>
+              <li>{t('qualifications_li4')} </li>
             </ul>
-            <h5>Medium of the Course </h5>
+            <h5>{t('medium_of_the_course')} </h5>
             <ul>
               <li>
-                Course will be conducted by both English and Sinhala mediums.
-                Ones who select to continue studies in English medium has to
-                have at least basic skills in English. Students can choose their
-                preferred medium within the first month of the course.
+                {t('medium_of_the_course_li1')}
               </li>
             </ul>
-            <h5>Practical Monastic Training</h5>
+            <h5>{t('practical_monastic_training')}</h5>
             <ul>
               <li>
-                Students will also gain the opportunity to improve skills in
-                crafts such as robe colouring, robe making, colouring bowls,
-                making bowl stands and so on.
+                {t('practical_monastic_training_li1')}
               </li>
               <li>
-                Students will also gain the opportunity to participate in daily
-                chanting, monastic duties, going for alms rounds and to develop
-                skills in preaching Dhamma (Dhammadesanā) and how to lead Dhamma
-                discussions (Dhammasākacchā).
+                {t('practical_monastic_training_li2')}
               </li>
               <li>
-                In addition, students will be imparted with theoretical and
-                practical knowledge in Theravada meditation methods till
-                Arahanthood and performance of vinayakammas (formal acts of
-                discipline).
+                {t('practical_monastic_training_li3')}
               </li>
             </ul>
-            <h5>How to Submit the Applications</h5>
+            <h5>{t('how_to_submit_applications')}</h5>
             <p>
-              - Following documents are required to be submitted.
+              {t('how_to_submit_applications_p1')}
               <ul>
                 <li>
-                  <b>For all applicants:</b> A copy of your original ordination
-                  certificate.
+                  {t('how_to_submit_applications_li1')}
                 </li>
                 <li>
-                  <b>
-                    For all applicants ordained less than five years and
-                    Sāmaneras:
-                  </b>{' '}
-                  A written letter from your Preceptor or teacher supporting
-                  your application for IIT.
+                  {t('how_to_submit_applications_li2')}
                 </li>
                 <li>
-                  <b>For Sri Lankan citizens:</b>A scanned copy of your identity
-                  card.
+                  {t('how_to_submit_applications_li3')}
                 </li>
                 <li>
-                  <b>For non-Sri Lankans:</b> A scanned copy of your passport
-                  including copy of your photo.
+                  {t('how_to_submit_applications_li4')}
                 </li>
               </ul>
               <p id="submit">
-                - Application Form:
+                {t('application_form')}
                 <Button
                   variant="link"
                   href="https://drive.google.com/file/d/1TKHss3ixRy9eDyNOkVbdUWVS4b6BGExj"
                   target="_blank"
                 >
-                  Download Form
+                  {t('download_form')}
                 </Button>
               </p>
             </p>
             <ul>
               <li>
-                Option 01
+                {t('option_01')}
                 <p>
-                  - Download the above application form, fill it thoroughly and
-                  email us a scanned copy of your application together with the
-                  mandatory documents mentioned above.
+                  {t('option_01_p1')}
                 </p>
                 <p>
-                  Email Address: <i>academic.iitkaruwalagaswewa@gmail.com</i>
+                  {t('email_address')} <i>academic.iitkaruwalagaswewa@gmail.com</i>
                 </p>
               </li>
               <li>
-                Option 02
+                {t('option_02')}
                 <p>
-                  - Download the above application form, fill it thoroughly and
-                  send it together with the mandatory documents mentioned above
-                  via post.
+                  {t('option_02_p1')}
                 </p>
                 <p>
-                  - Postal Address:
+                  {t('postal_address')}
                   <br />
                   <addres>
                     International Institute of Theravada.
@@ -276,247 +230,201 @@ export default function NMCMain() {
                 </p>
               </li>
               <li>
-                Option 03
+                {t('option_03')}
                 <p>
-                  Fill in the Google form found in the below link.{' '}
-                  <b>(Must have a Gmail account)</b>
+                  {t('option_03_p1')}
                 </p>
                 <Button
                   variant="primary"
                   href="https://forms.gle/XBmpoPwBV2gt3ngb7"
                   target="_blank"
                 >
-                  Go to Form
+                  {t('go_to_form')}
                 </Button>
               </li>
             </ul>
 
             <p>
               <Button variant="link" href="mailto:academic.iitkaruwalagaswewa@gmail.com">
-                Inquiries - Email
+                {t('inquiries_email')}
               </Button>
             </p>
             <p>
               <b>
-                - Deadline for application submission is extended until the 20th of August 2023.
-                {/*<br />- During the first six years of the course new
-                recruitments will not be done. */}
+                {t('deadline_extended')}
               </b>
             </p>
           </Tab>
-          <Tab eventKey="Sinhala" title="සිංහල">
-            <h5>නිශ්‍රය මුක්තක පාඨමාලාව (NmC) සඳහා අයදුම්පත් කැඳවීම</h5>
+          <Tab eventKey="Sinhala" title={t('tab_sinhala')}>
+            <h5>{t('calling_applications_nm_program')}</h5>
             <p>
-            අන්තර්ජාතික ථෙරවාද ධර්මායතනය මගින් පවත්වනු ලබන නිශ්‍රය මුක්තක භික්ෂු පුහුණු වැඩසටහනේ 
-            පළමු සය මස පසුගිය අප්‍රේල් මස දී සාර්ථකව අවසන් විය. මේ වන විට දෙවන සය මස අධ්‍යයන කටයුතු සිදුවෙමින් පවතී. 
+            {t('sinhala_nm_program_p1')}
             </p>
             <p>
-            අතරමැද දී සිසුන් බඳවා නො ගැනීමට කලින් තීරණය කර තිබුණ ද බොහෝ දෙනාගේ ඇති උනන්දුව සලකා බලා 
-            දෙවන වසර මුල දී ද සිසුන් සීමිත ප්‍රමාණයකට ධර්මායතනයට සම්බන්ධ වීම සඳහා අවස්ථාව සලසා දීමට තීරණය කළෙමු. 
+            {t('sinhala_nm_program_p2')}
             </p>
             <p>
-            බඳවා ගැනීම සිදු කෙරෙන්නේ පළමු වසර තුළ අධ්‍යයනය කෙරුණු විනය, අභිධර්මය, සහ පාලි යන 
-            විෂයයන්ට අදාළ ඇතුල්වීමේ විභාගයකින් අනතුරුව ය.
+            {t('sinhala_nm_program_p3')}
             </p>
             <p>
-            පර්යාප්ති ප්‍රතිපත්ති ශාසනික කටයුතුවල යෙදීමට දැඩි ඕනෑකමක් ඇති භික්ෂු 
-            සාමණේරයන් වහන්සේලා වෙබ් අඩවියේ ඇති <a href="#submit_sinhala"><strong>පෝරමය</strong></a> පුරවා  
-            <strong>2023 අගෝස්තු මස 20</strong> වන දිනට පෙර යොමු කරන්න. 
+            {t('sinhala_nm_program_p4')}
             </p>
             {/* <p>
               අන්තර්ජාතික ථේරවාද ධර්මායතනය විසින් 2022 දෙසැම්බර් මාසයේ ආරම්භ
               කරනු ලැබෙන නිශ්‍රය මුක්තක භික්ෂු අධ්‍යාපන වැඩසටහන සඳහා අයදුම්පත්
               කැඳවනු ලැබේ.
             </p> */}
-            <h5>පාඨමාලාව</h5>
+            <h5>{t('course_details')}</h5>
             <p>
-              මෙය භික්ෂු සාමණේරයන් වහන්සේලා ධර්ම විනය දැනුමෙන් සහ ආරාමීය
-              පුහුණුවෙන් පෝෂණය කොට “නිශ්‍රය මුක්තක” භික්ෂුවක් සතුව තිබිය යුතු
-              සුදුසුකම් ඇති කර දීම ඉලක්ක කොට ගත් වැඩසටහනකි.
+              {t('sinhala_course_details_p1')}
             </p>
-            <h5>පාඨමාලාව පැවැත්වෙන ස්ථානය</h5>
+            <h5>{t('venue')}</h5>
             <p>
-              කරුවලගස්වැව ප්‍රදේශයෙහි පිහිටා ඇති අන්තර්ජාතික ථේරවාද ධර්මායතනය
-              තුළ නේවාසිකව වැඩ වසමින් පාඨාමාලාවට සහභාගි විය යුතු වේ.
+              {t('sinhala_venue_p1')}
             </p>
-            <h5>ගත වන කාලය</h5>
+            <h5>{t('duration')}</h5>
             <p>
-              සම්පූර්ණ වැඩසටහන සඳහා ගත වන කාලය සය අවුුරුද්දකි. මෙය අදියර තුනකින්
-              සිදු කෙරේ.
+              {t('sinhala_duration_p1')}
             </p>
             <ol>
-              <li>ප්‍රාථමික අදියර - එක් වර්ෂයකි.</li>
-              <li>මධ්‍යම අදියර - වර්ෂ තුනකි.</li>
-              <li>අවසාන අදියර - වර්ෂ දෙකකි.</li>
+              <li>{t('sinhala_basic_stage')}</li>
+              <li>{t('sinhala_intermediate_stage')}</li>
+              <li>{t('sinhala_advanced_stage')}</li>
             </ol>
             <p>
-              සෑම අදියරක් අවසානයේ ම පාඨමාලාවෙන් තාවකාලිකව හෝ සම්පූර්ණයෙන් හෝ
-              ඉවත් වීමට අවකාශ ඇත. සම්පූර්ණ කරන ලද සෑම අදියරක් සඳහා ම අන්තර්ජාතික
-              ථේරවාද ධර්මායතනය විසින් නිකුත් කරනු ලබන සහතිකපතක් ප්‍රදානය කරනු
-              ලැබේ.
+              {t('sinhala_certificate_p1')}
             </p>
             <ul>
               <li>
-                සෑම වසරකම අධ්‍යයන වාර දෙකක් පවතින අතර එක් අධ්‍යයන වාරයක් මාස
-                පහකට සීමා වේ.
+                {t('sinhala_academic_semesters_li1')}
               </li>
               <li>
-                පළමු වාරය දෙසැම්බර් 1 වැනිදා සිට අප්‍රේල් 30 වැනිදා දක්වා
-                පැවැත්වෙන අතර දෙවන වාරය ජුනි 1 වැනිදා සිට ඔක්තෝබර් 31 වැනිදා
-                දක්වා පැවැත්වේ.
+                {t('sinhala_academic_semesters_li2')}
               </li>
               <li>
-                සෑම වසරකම මැයි මස සහ නොවැම්බර් මස නිවාඩු මාස වේ. ඉතිරි මාස දහය
-                අධ්‍යයන කාලය යි.
+                {t('sinhala_academic_semesters_li3')}
               </li>
             </ul>
-            <h5>අධ්‍යයන කරනු ලැබෙන විෂයයන්</h5>
+            <h5>{t('subjects_taught')}</h5>
             <ol>
-              <li>ථේරවාද සිද්ධාන්ත</li>
-              <li>විනය</li>
-              <li>සූත්‍ර</li>
-              <li>අභිධර්ම</li>
-              <li>පාලි</li>
-              <li>ශමථ</li>
-              <li>විදර්ශනා</li>
-              <li>ශාසන ඉතිහාසය</li>
-              <li>නවකර්ම</li>
-              <li>අතිරේක විෂයයන්</li>
+              <li>{t('sinhala_theravada_fundamentals')}</li>
+              <li>{t('sinhala_vinaya')}</li>
+              <li>{t('sinhala_sutta')}</li>
+              <li>{t('sinhala_abhidhamma')}</li>
+              <li>{t('sinhala_pali')}</li>
+              <li>{t('sinhala_samatha')}</li>
+              <li>{t('sinhala_vipassana')}</li>
+              <li>{t('sinhala_history_of_buddhism')}</li>
+              <li>{t('sinhala_navakamma')}</li>
+              <li>{t('sinhala_additional_subjects')}</li>
             </ol>
-            <h5>විෂය නිර්දේශය</h5>
-            <p>ප්‍රාථමික අදියර</p>
+            <h5>{t('course_details')}</h5>
+            <p>{t('basic_stage')}</p>
             <ol>
               <li>
-                ථේරවාද සිද්ධාන්ත - මූලික කොටස (අභිධර්මාර්ථ සංග්‍රහය ඇසුරින්)
+                {t('sinhala_basic_stage_p1')}
               </li>
-              <li>විනය - භික්ෂු ප්‍රාතිමෝක්ෂය</li>
-              <li>සූත්‍ර - ප්‍රකීර්ණක ධර්ම කරුණු</li>
+              <li>{t('sinhala_basic_stage_p2')}</li>
+              <li>{t('sinhala_basic_stage_p3')}</li>
               <li>
-                පාලි - ත්‍රිපිටකය, අර්ථ කථා සහ ටීකා කියැවීමට අවශ්‍ය වන
-                න්‍යායාත්මක පාලි දැනුම
+                {t('sinhala_basic_stage_p4')}
               </li>
             </ol>
 
-            <p>මධ්‍යම අදියර</p>
+            <p>{t('intermediate_stage')}</p>
             <ol>
               <li>
-                ථේරවාද සිද්ධාන්ත - මධ්‍යම කොටස (සප්‍රත්‍යය නාම රූප පරිග්‍රහය
-                දක්වා අදාළ වන දැනුම)
+                {t('sinhala_intermediate_stage_p1')}
               </li>
               <li>
-                විනය - පෙළ අටුවා ටීකා ඇසුරෙන් උභය භික්ෂු විභංගය සහ ඛන්ධක පළමු
-                කොටස
+                {t('sinhala_intermediate_stage_p2')}
               </li>
-              <li>සූත්‍ර - තෝරාගත් සූත්‍ර</li>
+              <li>{t('sinhala_intermediate_stage_p3')}</li>
               <li>
-                පාලි - කච්චායන මොග්ගල්ලාන සද්දනීති ආදි ග්‍රන්ථ ඇසුරින්
-                සවිස්තරාත්මක පාලි ව්‍යාකරණය
+                {t('sinhala_intermediate_stage_p4')}
               </li>
-              <li>ශමථ - සම සතළිස් කර්මස්ථාන</li>
-              <li>විදර්ශනා - පළමු කොටස (සප්‍රත්‍යය නාම රූප පරිග්‍රහය)</li>
-              <li>නවකර්ම - පළමු කොටස</li>
-              <li>අතිරේක විෂයයන් - මූලික ඉංග්‍රීසි දැනුම (අනිවාර්ය නො වේ.)</li>
+              <li>{t('sinhala_intermediate_stage_p5')}</li>
+              <li>{t('sinhala_intermediate_stage_p6')}</li>
+              <li>{t('sinhala_intermediate_stage_p7')}</li>
+              <li>{t('sinhala_intermediate_stage_p8')}</li>
             </ol>
-            <p>අවසාන අදියර</p>
+            <p>{t('advanced_stage')}</p>
             <ol>
-              <li>ථේරවාද සිද්ධාන්ත - අවසාන කොටස</li>
+              <li>{t('sinhala_advanced_stage_p1')}</li>
               <li>
-                විනය - ඛන්ධක දෙවන කොටස, පරිවාර පාළිය සහ විනය කර්ම කිරීමේ පුහුණුව
-              </li>
-              <li>සූත්‍ර - තෝරාගත් සූත්‍ර</li>
-              <li>
-                අභිධර්මය - පෞරාණික බුරුම නය ක්‍රම ඇසුරින් ධම්මසඞ්ගණී මාතෘකා,
-                ධාතුකථා, යමක, පට්ඨාන ප්‍රකරණ
+                {t('sinhala_advanced_stage_p2')}
               </li>
               <li>
-                පාලි, මූලික සංස්කෘත සහ වාග් විද්‍යාව - ගාථා බන්ධනය සහිත අර්ථ කථා
-                අධ්‍යයනය නය ක්‍රම 30, ඒවායේ ප්‍රායෝගික යෙදීම සහ පාලි භාෂා ලේඛන
-                සහ කථන පුහුණුව
+                {t('sinhala_advanced_stage_p3')}
               </li>
-              <li>විදර්ශනා - දෙවන කොටස</li>
-              <li>ශාසන ඉතිහාසය - කථාවස්තු ප්‍රකරණය ද ඇතුළත්ව</li>
-              <li>නවකර්ම - දෙවන කොටස</li>
+              <li>{t('sinhala_advanced_stage_p4')}</li>
+              <li>
+                {t('sinhala_advanced_stage_p5')}
+              </li>
+              <li>{t('sinhala_advanced_stage_p6')}</li>
+              <li>{t('sinhala_advanced_stage_p7')}</li>
+              <li>{t('sinhala_advanced_stage_p8')}</li>
             </ol>
-            <h5>මූලික සුදුසුකම්</h5>
+            <h5>{t('qualifications')}</h5>
             <p>
-              පාඨමාලාවට ඇතුළත් වීමට මූලික සුදුසුකම වශයෙන් සලකනු ලබන්නේ ථේරවාද
-              සම්ප්‍රදායට අයත් භික්ෂුවක් හෝ සාමණේරයෙක් වීම යි.
+              {t('sinhala_qualifications_p1')}
             </p>
             <p>
-              සාමණේරයන් වහන්සේ නමක් නම් අවම වයස අවුරුදු 16 ට වැඩි විය යුතු යි.
-              ඉහළ වයස් සීමාවක් නොමැත. වෙනත් පූර්ව අධ්‍යාපන සුදුසුකම් අපේක්ෂා නො
-              කරනු ලැබේ.
+              {t('sinhala_qualifications_p2')}
             </p>
-            <h5>පාඨමාලාව පැවැත්වෙන මාධ්‍ය</h5>
+            <h5>{t('medium_of_the_course')}</h5>
             <p>
-              සිංහල ඉංග්‍රීසි යන භාෂා ද්වයයෙන් ම පාඨමාලාව පැවැත්වේ. පාඨමාලාව
-              ආරම්භ කිරීමෙන් මාසයක කාලයක් තුළ කැමැති මාධ්‍යය තෝරා ගත යුතු ය.
-              ඉංග්‍රීසි මාධ්‍යය තෝරා ගන්නේ නම් මූලික ඉංග්‍රීසි දැනුම තිබීම
-              අත්‍යවශ්‍ය වේ.
+              {t('sinhala_medium_of_the_course_p1')}
             </p>
-            <h5>ප්‍රායෝගික භික්ෂු පුහුණුව</h5>
+            <h5>{t('practical_monastic_training')}</h5>
             <p>
-              සිවුරු කැපීම, මැසීම, සහ පඬු පෙවීම, පාත්‍ර කළු කිරීම, පාත්‍ර දරණු
-              සැකසීම ආදි වූ භික්ෂුවක් විසින් දැන සිටිය යුතු ක්‍රියාකාරකම් පිළිබඳ
-              ප්‍රායෝගික පුහුණුව,
+              {t('sinhala_practical_monastic_training_p1')}
             </p>
             <p>
-              බුද්ධ වන්දනාව, වත් පිළිවෙත්, පිණ්ඩපාත පුහුණුව, භාවනා පුහුණුව, ධර්ම
-              දේශනා පුහුණුව, ධර්ම සාකච්ඡා පුහුණුව ආදි වූ ආරාමික පුහුණුව සහ
+              {t('sinhala_practical_monastic_training_p2')}
             </p>
             <p>
-              නිශ්‍රය මුක්තක භික්ෂුවක් විසින් දත යුතු වූ අර්හත්වය දක්වා වන භාවනා
-              මාර්ගය සහ නිවැරදිව විනය කර්ම කිරීමේ හැකියාව ද ශිෂ්‍ය භික්ෂු
-              සාමණේරයන් වහන්සේලාට සපයා දෙනු ලැබේ.
+              {t('sinhala_practical_monastic_training_p3')}
             </p>
-            <h5>අයදුම්පත් යොමු කළ යුතු ආකාරය</h5>
+            <h5>{t('how_to_submit_applications')}</h5>
 
-            <p>- පහත සඳහන් ලියකියවිලි ඔබගේ අයදුම්පත සමඟ ම අප වෙත යොමු කරන්න.</p>
+            <p>{t('sinhala_how_to_submit_applications_p1')}</p>
             <ul>
               <li>
-                <b>සියලු ම අයදුම්කරුවන්:</b> උපසම්පදා සහතිකය (සාමණේරයන් සඳහා
-                පැවිදි සහතිකය), ජාතික හැඳුනුම්පතේ පිටපතක්.
+                {t('sinhala_how_to_submit_applications_li1')}
               </li>
               <li>
-                <b>වස් පහක් නො පිරුණු භික්ෂූන් සහ සාමණේරයන්:</b> අන්තර්ජාතික
-                ථේරවාද ධර්මායතනයට ඔබගේ අනුයුක්ත වීමට කැමැත්ත දක්වමින් ඔබගේ
-                ආචාර්යයන් වහන්සේ හෝ උපාධ්‍යායයන් වහන්සේ විසින් ලියා අත්සන් තබා
-                දෙන ලද ලිපියක්.
+                {t('sinhala_how_to_submit_applications_li2')}
               </li>
             </ul>
 
             <p id="submit_sinhala">
-              - අයදුම්පත:
+              {t('sinhala_application_form')}
               <Button
                 variant="link"
                 href="https://drive.google.com/file/d/1Ut6Wu8EYrYo57EC_brgIX_8aFfumbVoQ/view?usp=sharing"
                 target="_blank"
               >
-                අයදුම්පත බා ගත කර ගන්න
+                {t('sinhala_download_form')}
               </Button>
             </p>
             <ul>
               <li>
-                01 ක්‍රමය
+                {t('sinhala_option_01')}
                 <p>
-                  - ඉහත දැක්වෙන අපගේ වෙබ් අඩවියෙහි පළ කර ඇති අයදුම්පත බා ගත කර
-                  ගන්න. ඔබ විසින් සම්පූර්ණ කරන ලද අයදුම්පතේ ස්කෑන් පිටපතක් පහත
-                  දැක්වෙන අපගේ ඊ මේල් ලිපිනයට, ඉහත සදහන් ලියකියවිලි සමග ඊ මේල්
-                  කරන්න.
+                  {t('sinhala_option_01_p1')}
                 </p>
                 <p>
-                  ඊ මේල්: <i>academic.iitkaruwalagaswewa@gmail.com</i>
+                  {t('sinhala_email_address')} <i>academic.iitkaruwalagaswewa@gmail.com</i>
                 </p>
               </li>
               <li>
-                02 ක්‍රමය
+                {t('sinhala_option_02')}
                 <p>
-                  - ඉහත දැක්වෙන අපගේ වෙබ් අඩවියෙහි පළ කර ඇති අයදුම්පත බා ගත කර
-                  ගන්න. ඔබ විසින් සම්පූර්ණ කරන ලද අයදුම්පතේ පිටපතක්, ඉහත සදහන්
-                  ලියකියවිලි සමග, පහත දැක්වෙන අපගේ ලිපිනයට යොමු කරන්න.
+                  {t('sinhala_option_02_p1')}
                 </p>
                 <p>
-                  - ලිපිනය:
+                  {t('sinhala_postal_address')}
                   <br />
                   <addres>
                     අන්තර්ජාතික ථේරවාද ධර්මායතනය.
@@ -526,32 +434,27 @@ export default function NMCMain() {
                 </p>
               </li>
               <li>
-                03 ක්‍රමය
+                {t('sinhala_option_03')}
                 <p>
-                  - පහත සබැදිය(link) අනුගමනය කොට අදාළ ගූගල් පෝරමය සම්පුර්ණ
-                  කරන්න. <b>(Gmail ගිණුමක් තිබීම අනිවාර්‍යය වේ)</b>
+                  {t('sinhala_option_03_p1')}
                 </p>
                 <Button
                   variant="primary"
                   href="https://forms.gle/fqoevRSEUyLLR3pN7"
                   target="_blank"
                 >
-                  අයදුම්පත වෙත
+                  {t('sinhala_go_to_form')}
                 </Button>
               </li>
             </ul>
 
             <p>
               <Button variant="link" href="mailto:academic.iitkaruwalagaswewa@gmail.com">
-                විමසීම් - ඊ මේල්
+                {t('sinhala_inquiries_email')}
               </Button>
             </p>
             <p>
-              <b>- අයදුම්පත් භාර ගන්නා අවසාන දිනය 2023 අගෝස්තු මස 20 තෙක් දීර්ඝ කර ඇත.</b>
-              <br />
-              {/*<b>
-                - පලමු වසර 6 සදහා පාඨමාලාව අතරතුර අලුතින් බදවාගැනීම් සිදු නොකෙරේ.
-                </b>*/}
+              <b>{t('sinhala_deadline_extended')}</b>
             </p>
           </Tab>
 

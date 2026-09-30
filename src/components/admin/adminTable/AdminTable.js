@@ -39,7 +39,9 @@ const AdminTable = ({ items = [], fields, onEdit, onDelete, loading }) => {
                                 <td key={field.key} className={styles.tableCell}>
                                     {field.render
                                         ? field.render(item[field.key], item)
-                                        : item[field.key]}
+                                        : item[field.key]
+                                            ? item[field.key].slice(0, 500) + (item[field.key].length > 500 ? '...' : '')
+                                            : ''}
                                 </td>
                             ))}
                             <td className={styles.actionCell}>

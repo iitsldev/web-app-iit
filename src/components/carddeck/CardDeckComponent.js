@@ -4,9 +4,11 @@ import styles from './CardDeck.module.css';
 import { BsArrowRight } from 'react-icons/bs';
 import $ from 'jquery';
 import sanitizeHtml from 'sanitize-html';
+import useTranslation from 'next-translate/useTranslation';
 
 const CardDeckComponent = () => {
   const [cardInfo, setCardInfo] = useState([]);
+  const { t } = useTranslation('card-deck');
 
   useEffect(() => {
     async function fetchCardData() {
@@ -52,50 +54,45 @@ const CardDeckComponent = () => {
         <Card className={styles.cardComponent}>
           <Card.Body
             style={{ background: card.color }}
-            className={`card-dynamic-height ${styles.cardBody}`}
-          >
-            <div className={styles.arrowContainer}>
-              <a href={card.link}>
-                <BsArrowRight
-                  size={20}
-                  color="white"
-                  className={styles.cardArrow}
-                />
-              </a>
+            className={`card-dynamic-height ${styles.cardBody}`}>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <Card.Img
+                variant="top"
+                src={card.image}
+                className={styles.cardImage}
+                style={{ display: 'block', margin: '0 auto' }}
+              />
             </div>
-            <Card.Img
-              variant="top"
-              src={card.image}
-              className={styles.cardImage}
-            />
+
             <Card.Title
-              style={{ color: card.titleColor }}
+              style={{ color: card.titleColor, textAlign: 'center' }}
               className={styles.cardTitle}
             >
-              {card.title}
+              <Card.Link href={card.link}>
+                {card.title}
+              </Card.Link>
             </Card.Title>
             <Card.Text
               style={{ color: card.titleColor }}
               className={styles.cardText}
             >
               <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(card.description) }} />
-
             </Card.Text>
           </Card.Body>
+
         </Card>
       </Col>
     );
   };
 
   return (
-    <Container className={`card-container ${styles.deckContainer}`}>
-      <div className={styles.deckHeader}>
+    <Container className={`card-container ${styles.deckContainer}`} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div className={styles.deckHeader} style={{ textAlign: 'center' }}>
         <p className={styles.deckHeaderIntro}>
-          International Institute of Theravada is a monk training institute dedicated to capacitate monks who are capable in attaining their own liberation (atthahita bhikkhu),
-          guiding others towards liberation (parahita bhikkhu) and sustaining the sāsana by accurately following the code of discipline (vinayadhara bhikkhu).
+          {t('intro')}
         </p>
       </div>
-      <Row xs={1} sm={2} md={2} lg={4}>
+      <Row xs={1} sm={2} md={2} lg={4} className="justify-content-center">
         {cardInfo.map(renderCard)}
       </Row>
     </Container>

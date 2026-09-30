@@ -29,11 +29,13 @@ import {
     FaLock,
     FaSignOutAlt,
     FaRemoveFormat,
-    FaBroom
+    FaBroom,
+    FaGift
 } from 'react-icons/fa';
 import styles from './AdminDashboard.module.css';
 import AdminTable from '../../components/admin/adminTable/AdminTable';
 import AdminForm from '../../components/admin/adminForm/AdminForm';
+import { use } from 'react';
 
 const sections = [
     { key: 'AcademicProfile', label: 'Academic Profiles', icon: <FaChalkboardTeacher />, apiModel: 'academicProfiles' },
@@ -46,6 +48,9 @@ const sections = [
     { key: 'NewsAndEvent', label: 'News & Events', icon: <FaNewspaper />, apiModel: 'newsAndEvent' },
     { key: 'OurFocus', label: 'Our Focus', icon: <FaEye />, apiModel: 'ourFocus' },
     { key: 'Testimonial', label: 'Testimonials', icon: <FaComments />, apiModel: 'testimonial' },
+    { key: 'Carousel', label: 'Carousel', icon: <FaGift />, apiModel: 'carousel' },
+    { key: 'User', label: 'Users', icon: <FaUser />, apiModel: 'user' },
+
 ];
 
 const modelFields = {
@@ -76,7 +81,7 @@ const modelFields = {
     ],
     DhammaLecture: [
         { key: 'title', label: 'Title', type: 'text', required: true },
-        { key: 'image', label: 'Image', type: 'image', required: true },
+        { key: 'image', label: 'Image', type: 'file', required: true },
         { key: 'body', label: 'Description', type: 'richtext', required: false },
         { key: 'link', label: 'Link', type: 'text', required: false },
     ],
@@ -110,9 +115,26 @@ const modelFields = {
         { key: 'description', label: 'Description', type: 'text', required: false },
         { key: 'video', label: 'Video Link', type: 'text', required: false },
     ],
+
+    Carousel: [
+        { key: 'title', label: 'Title', type: 'text', required: true },
+        { key: 'description', label: 'Description', type: 'richtext', required: true },
+        { key: 'imageSrc', label: 'Image Source', type: 'file', required: true },
+        { key: 'imageAlt', label: 'Image Alt Text', type: 'text', required: true },
+        { key: 'imageWidth', label: 'Image Width', type: 'text', required: false },
+        { key: 'imageHeight', label: 'Image Height', type: 'text', required: false },
+    ],
+
+    User: [
+        { key: 'username', label: 'Username', type: 'text', required: true },
+        { key: 'password', label: 'Password', type: 'text', required: true },
+        { key: 'role', label: 'Role', type: 'select', required: true, options: ['admin', 'content', 'mark', 'user',] },
+        { key: 'createdAt', label: 'Created At', type: 'datetime', required: false },
+        { key: 'updatedAt', label: 'Updated At', type: 'datetime', required: false },
+    ],
 };
 
-export default function AdminDashboard() {
+export default function AdminDashboard({ userId, username, userRole }) {
     const router = useRouter();
     const [collapsed, setCollapsed] = useState(false);
     const [activeSection, setActiveSection] = useState('NewsAndEvent');
@@ -136,6 +158,7 @@ export default function AdminDashboard() {
         fetch(`/api/admin/${activeModel}`)
             .then((res) => {
                 if (!res.ok) throw new Error('Failed to fetch');
+                console.log(`Fetching data for ${activeModel}...`);
                 return res.json();
             })
             .then((data) => {
@@ -187,11 +210,19 @@ export default function AdminDashboard() {
     };
 
     const handleEdit = (item) => {
+        if (activeSection === 'User' && userRole !== 'admin') {
+            alert('Only admins can edit users.');
+            return;
+        }
         setEditItem(item);
         setShowForm(true);
     };
 
     const handleDelete = async (id) => {
+        if (activeSection === 'User' && userRole !== 'admin') {
+            alert('Only admins can delete users.');
+            return;
+        }
         if (confirm('Are you sure you want to delete this item?')) {
             try {
                 const res = await fetch(`/api/admin/${activeModel}?id=${id}`, {
@@ -225,6 +256,10 @@ export default function AdminDashboard() {
     };
 
     const handleFormSubmit = async (data) => {
+        if (activeSection === 'User' && userRole !== 'admin') {
+            alert('Only admins can modify users.');
+            return;
+        }
         try {
             const url = editItem
                 ? `/api/admin/${activeModel}?id=${editItem.id}`
@@ -273,16 +308,18 @@ export default function AdminDashboard() {
                     </h2>
                 </div>
                 <Nav className={styles.sideNav}>
-                    {sections.map((section) => (
-                        <Nav.Link
-                            key={section.key}
-                            className={`${styles.navItem} ${activeSection === section.key ? styles.active : ''}`}
-                            onClick={() => setActiveSection(section.key)}
-                        >
-                            <span className={styles.navIcon}>{section.icon}</span>
-                            {!collapsed && <span className={styles.navLabel}>{section.label}</span>}
-                        </Nav.Link>
-                    ))}
+                    {sections
+                        .filter((section) => section.key !== 'User' || userRole === 'admin')
+                        .map((section) => (
+                            <Nav.Link
+                                key={section.key}
+                                className={`${styles.navItem} ${activeSection === section.key ? styles.active : ''}`}
+                                onClick={() => setActiveSection(section.key)}
+                            >
+                                <span className={styles.navIcon}>{section.icon}</span>
+                                {!collapsed && <span className={styles.navLabel}>{section.label}</span>}
+                            </Nav.Link>
+                        ))}
                 </Nav>
             </div>
 
@@ -305,7 +342,8 @@ export default function AdminDashboard() {
                     <div className={styles.headerRight}>
                         <Dropdown>
                             <Dropdown.Toggle variant="outline-primary" id="user-dropdown" className={styles.userDropdown}>
-                                <FaUser /> Admin
+                                <FaUser /> {username || 'Admin'}
+                                <span className={styles.userRole}>({userRole})</span>
                             </Dropdown.Toggle>
                             <Dropdown.Menu align="end">
                                 <Dropdown.Item onClick={() => setShowPasswordModal(true)}>
@@ -327,16 +365,19 @@ export default function AdminDashboard() {
                 {/* Content Area */}
                 <div className={styles.contentArea}>
                     <div className={styles.sectionTabs}>
-                        <Button
-                            variant="primary"
-                            className="m-3"
-                            onClick={() => {
-                                setEditItem(null);
-                                setShowForm(true);
-                            }}
-                        >
-                            Add New
-                        </Button>
+                        {userRole === 'admin' || activeSection !== 'User' ? (
+                            <Button
+                                variant="primary"
+                                className="m-3"
+                                onClick={() => {
+                                    setEditItem(null);
+                                    setShowForm(true);
+                                }}
+                            >
+                                Add New
+                            </Button>
+                        ) : null}
+
 
                     </div>
                     <div className={styles.sectionContent}>
@@ -412,7 +453,12 @@ export default function AdminDashboard() {
 }
 
 export const getServerSideProps = adminAuthMiddleware(async (context) => {
+    const { userId, username, role } = context.req;
     return {
-        props: {},
+        props: {
+            userId: userId || null,
+            username: username || null,
+            userRole: role || 'user',
+        },
     };
 });

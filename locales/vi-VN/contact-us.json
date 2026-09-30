@@ -1,0 +1,15 @@
+{
+  "name": "Tên",
+  "email": "E-mail",
+  "phone": "Điện thoại",
+  "subject": "Chủ đề",
+  "message": "Tin nhắn",
+  "submit": "GỬI ĐI",
+  "name_is_mandatory": "Tên là bắt buộc",
+  "subject_is_mandatory": "Chủ đề là bắt buộc",
+  "message_is_mandatory": "Tin nhắn là bắt buộc",
+  "at_least_one_field_is_required": "Ít nhất một trong các trường [email hoặc điện thoại] là bắt buộc",
+  "email_must_be_valid": "Email phải hợp lệ",
+  "success_message": "Tin nhắn đã được gửi thành công đến Viện Phật giáo Nguyên thủy Quốc tế.",
+  "get_directions": "Chỉ đường"
+}

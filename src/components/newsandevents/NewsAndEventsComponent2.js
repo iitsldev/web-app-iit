@@ -4,8 +4,11 @@ import newsAndEvents from '../../data/newsAndEventsData.json';
 import styles from './NewsAndEvents2.module.css';
 import Carousel from 'react-multi-carousel';
 import { CustomButtonGroup } from '../customarrow/CustomArrows';
+import useTranslation from 'next-translate/useTranslation';
 
 const NewsAndEventsComponent2 = () => {
+  const { t } = useTranslation('news-and-events');
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -47,7 +50,7 @@ const NewsAndEventsComponent2 = () => {
         <Card.Text className={styles.custDescription}>
           {`${card.description.slice(0, 200)}...`}
         </Card.Text>
-        <Card.Link href="#">Read more...</Card.Link>
+        <Card.Link href="#">{t('read_more')}</Card.Link>
       </Card>
     );
   };

@@ -28,19 +28,31 @@
   font-size: 2.5rem;
   font-weight: 700;
   color: #132072;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
 }
 
 .postSubtitle {
   font-size: 1.25rem;
   color: #666;
   margin-bottom: 1.5rem;
+  text-align: right;
 }
 
 .postText {
   font-size: 1.125rem;
   line-height: 1.8;
-  color: #333;
+  color: #d07601;
+}
+
+.postText img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  /* Ensures no fixed width overrides */
+  display: block;
+  /* Removes inline spacing issues */
+  box-sizing: border-box;
+  margin-bottom: 20px;
 }
 
 /* Recent Section */
@@ -136,8 +148,10 @@
   color: #013a7d;
 }
 
+
 .typeNews,
-.typeEvent {
+.typeEvent,
+.typeDhamma {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -156,6 +170,11 @@
   background: #FFD426;
 }
 
+.typeDhamma {
+  background: #960606;
+}
+
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .postTitle {
@@ -169,6 +188,9 @@
   .postText {
     font-size: 1rem;
   }
+
+
+
 
   .sectionTitle {
     font-size: 1.75rem;

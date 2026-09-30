@@ -1,12 +1,13 @@
 .mainContainer {
     position: relative;
     display: inline-block;
-    height: 630px;
     width: 456px;
     background: #ffffff 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px #00000029;
     border-radius: 44px;
     margin: 5px;
+    padding-bottom: 20px;
+    /* Added padding to ensure content isn't too close to the bottom */
 }
 
 .ourFocusCardContainer {
@@ -16,8 +17,8 @@
         "focusCardHeader"
         "focusCardDetails";
     grid-template-columns: 100%;
-    grid-template-rows: 43% 12% auto;
-    height: 100%;
+    grid-template-rows: auto auto auto;
+    /* Changed to auto to allow content-based sizing */
 }
 
 .ourFocusImageContainer {
@@ -25,6 +26,7 @@
     max-width: 392px;
     justify-self: center;
     align-self: center;
+    margin-top: 20px;
 }
 
 .ourFocusImage {
@@ -48,7 +50,7 @@
 .ourFocusDetails {
     grid-area: focusCardDetails;
     text-align: left;
-    font: normal normal normal 20px/35px Raleway;
+    font: normal normal normal 14px/25px Raleway;
     letter-spacing: 0px;
     color: #616057;
     width: 80%;
@@ -57,9 +59,12 @@
     white-space: initial;
 }
 
+.ourFocusDetails p {
+    margin: 0;
+}
+
 @media (max-width: 768px) {
     .mainContainer {
-        height: 554px;
         width: 400px;
     }
 
@@ -72,13 +77,12 @@
     }
 
     .ourFocusDetails {
-        font: normal normal normal 18px/33px Raleway;
+        font: normal normal normal 11px/24px Raleway;
     }
 }
 
 @media (max-width: 575px) {
     .mainContainer {
-        height: 540px;
         width: 390px;
     }
 
@@ -97,7 +101,6 @@
 
 @media (max-width: 420px) {
     .mainContainer {
-        height: 432px;
         width: 310px;
     }
 

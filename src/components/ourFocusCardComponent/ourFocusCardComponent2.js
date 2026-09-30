@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './ourFocusCardComponent.module.css';
+import useTranslation from 'next-translate/useTranslation';
 
 function OurFocusCardComponent2(props) {
+  const { t } = useTranslation('our-focus-card');
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.ourFocusCardContainer}>

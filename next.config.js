@@ -4,6 +4,7 @@ module.exports = {
   images: {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    domains: ['localhost', 'theravado.com', 'res.cloudinary.com', 'res.cloudinary.com', 'images.unsplash.com', 'i.imgur.com', 'upload.wikimedia.org'],
   },
   env: {
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,

@@ -11,18 +11,18 @@ import GeneralFAQ from '../components/generalfaq/GeneralFAQ';
 import fs from 'fs/promises'; // Use promises-based fs for async operations
 
 export default function Home({ faqs, testimonials, newsAndEvents }) {
-  const { t, lang } = useTranslation();
+  const { t, lang } = useTranslation('home-page');
   const router = useRouter();
 
   return (
     <div className="skeleton">
       <Head>
-        <title>Home</title>
+        <title>{t('page_title')}</title>
         <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="description"
-          content="International Institute of Theravada"
+          content={t('page_description')}
         />
       </Head>
 

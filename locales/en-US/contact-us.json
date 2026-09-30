@@ -1,0 +1,15 @@
+{
+  "name": "Name",
+  "email": "Email",
+  "phone": "Phone",
+  "subject": "Subject",
+  "message": "Message",
+  "submit": "SUBMIT",
+  "name_is_mandatory": "Name is mandatory",
+  "subject_is_mandatory": "Subject is mandatory",
+  "message_is_mandatory": "Message is mandatory",
+  "at_least_one_field_is_required": "At least one of the fields [ email or phone ] is required",
+  "email_must_be_valid": "Email must be valid",
+  "success_message": "Message sent to International Institute of Theravada successfully.",
+  "get_directions": "Get Directions"
+}

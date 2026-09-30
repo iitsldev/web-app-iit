@@ -1,11 +1,14 @@
 import React from 'react';
 import { Container, Row, Card } from 'react-bootstrap';
-import newsAndEvents from '../../data/newsAndEventsData.json';
 import styles from './Education.module.css';
 import Carousel from 'react-multi-carousel';
 import { CustomButtonGroup } from '../customarrow/CustomArrows';
+import useTranslation from 'next-translate/useTranslation';
 
 function EducationComponent() {
+  const { t } = useTranslation('education');
+  console.log('bstc_courses:', t('bstc_courses', {}, { returnObjects: true }));
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -57,16 +60,13 @@ function EducationComponent() {
       <Container>
         <div className={styles.eduIntroduction}>
           <p>
-            Comprehensive studies of Buddhist scriptures pave the foundation for
-            the prolongation of the Buddha Sāsana (dispensation). IIT capacitate
-            monks capable in attaining their own liberation, guiding others
-            towards it and prolonging the dispensation with highest erudition.
+            {t('intro')}
           </p>
         </div>
       </Container>
       <Container className={styles.relativeClass}>
         <Row className={styles.eductionHeaderContainer}>
-          <span className={styles.mainText}>Courses Conducted</span>
+          <span className={styles.mainText}>{t('courses_conducted')}</span>
         </Row>
         <Carousel
           className={styles.shsslkCardListCarousel}
@@ -91,8 +91,8 @@ function EducationComponent() {
           >
             <div className={styles.courseHeader}>
               <span className={styles.courseName}>
-                Nissayamuttaka Course{' '}
-                <span className={styles.smallText}>(NmC)</span>
+                {t('nissayamuttaka_course')}{' '}
+                <span className={styles.smallText}>{t('nmc')}</span>
               </span>
               <img
                 className="d-block w-100 course-icon-max-width-99"
@@ -101,9 +101,7 @@ function EducationComponent() {
               />
             </div>
             <div className={styles.courseDescription}>
-              Nissayamuttaka course is a series of theoretical and practical
-              lessons that will impart knowledge and develop skills required by
-              a monk who wishes to live by himself independent of a teacher.
+              {t('nissayamuttaka_description')}
             </div>
             <div className={styles.courseDetailListContainer}>
               <ul className={styles.courseDetailList}>
@@ -114,8 +112,8 @@ function EducationComponent() {
                     alt="Duration"
                   />
                   <div>
-                    <p className={styles.detailTitle}>Duration of the course</p>
-                    <p className={styles.detailDesc}>Six Years</p>
+                    <p className={styles.detailTitle}>{t('duration_of_the_course')}</p>
+                    <p className={styles.detailDesc}>{t('six_years')}</p>
                   </div>
                 </li>
                 <li className={styles.courseDetailListItem}>
@@ -125,10 +123,9 @@ function EducationComponent() {
                     alt="Subjects"
                   />
                   <div>
-                    <p className={styles.detailTitle}>Subjects</p>
+                    <p className={styles.detailTitle}>{t('subjects')}</p>
                     <p className={styles.detailDesc}>
-                      Vinaya, Suttanat, Abhidhamma, Pāḷi, Samatha, Vipassanā,
-                      History of the Sāsana, English and few more
+                      {t('nmc_subjects')}
                     </p>
                   </div>
                 </li>
@@ -139,12 +136,9 @@ function EducationComponent() {
                     alt="Practice"
                   />
                   <div>
-                    <p className={styles.detailTitle}>Practice</p>
+                    <p className={styles.detailTitle}>{t('practice')}</p>
                     <p className={styles.detailDesc}>
-                      Students undergo daily meditation practices throughout the
-                      six-year course (in addition to theoretically studying
-                      samatha and vipassanā subjects), and observation of
-                      dhutaṅga practices during an entire semester
+                      {t('nmc_practice')}
                     </p>
                   </div>
                 </li>
@@ -155,11 +149,9 @@ function EducationComponent() {
                     alt="Skills"
                   />
                   <div>
-                    <p className={styles.detailTitle}>Skills</p>
+                    <p className={styles.detailTitle}>{t('skills')}</p>
                     <p className={styles.detailDesc}>
-                      Abilities to execute formal disciplinary acts
-                      (vinayakammas), skillfulness in crafts such as robe-making
-                      and bowl-colouring and capability in preaching Dhamma
+                      {t('nmc_skills')}
                     </p>
                   </div>
                 </li>
@@ -179,9 +171,9 @@ function EducationComponent() {
           >
             <div className={styles.courseHeader}>
               <span className={styles.courseName} style={{ color: '#FFFFFF' }}>
-                Parisupaṭṭhāka Course{' '}
+                {t('parisupatthaka_course')}{' '}
                 <span className={styles.smallText} style={{ color: '#FFFFFF' }}>
-                  (PuC)
+                  {t('puc')}
                 </span>
               </span>
               <img
@@ -194,10 +186,7 @@ function EducationComponent() {
               className={styles.courseDescription}
               style={{ color: '#FFFFFF' }}
             >
-              Parisupaṭṭhāka course is a series of theoretical and practical
-              lessons aimed at facilitating the monk to become a qualified
-              mentor with adequate knowledge and spiritual qualities mentioned
-              in the Vinaya Piṭaka as required to become a teacher (preceptor).
+              {t('parisupatthaka_description')}
             </div>
             <div className={styles.courseDetailListContainer}>
               <ul className={styles.courseDetailList}>
@@ -212,13 +201,13 @@ function EducationComponent() {
                       className={styles.detailTitle}
                       style={{ color: '#FFFFFF' }}
                     >
-                      Duration of the course
+                      {t('duration_of_the_course')}
                     </p>
                     <p
                       className={styles.detailDesc}
                       style={{ color: '#FFFFFF' }}
                     >
-                      Two Years
+                      {t('two_years')}
                     </p>
                   </div>
                 </li>
@@ -233,20 +222,13 @@ function EducationComponent() {
                       className={styles.detailTitle}
                       style={{ color: '#FFFFFF' }}
                     >
-                      Subjects
+                      {t('subjects')}
                     </p>
                     <p
                       className={styles.detailDesc}
                       style={{ color: '#FFFFFF' }}
                     >
-                      Extensive studies on Pārājikāpāḷi, Pācittiyapāḷi,
-                      Vinayakammas and Khandhakavatta in Vinaya, comprehensive
-                      studies on Mahāvagga of Dīgha Nikāya, Mūlapaṇṇāsaka of
-                      Majjhima Nikāya, Mahāvagga of Saṃyutta Nikāya, first half
-                      of the Aṅguttara Nikāya, Jātakapāḷi together with its
-                      commentary and Dhammapadapāḷi together with its commentary
-                      in Suttanta and extensive lessons in meditation especially
-                      on giving meditative instructions
+                      {t('puc_subjects')}
                     </p>
                   </div>
                 </li>
@@ -261,13 +243,13 @@ function EducationComponent() {
                       className={styles.detailTitle}
                       style={{ color: '#FFFFFF' }}
                     >
-                      Practice
+                      {t('practice')}
                     </p>
                     <p
                       className={styles.detailDesc}
                       style={{ color: '#FFFFFF' }}
                     >
-                      Regular meditation during the course
+                      {t('puc_practice')}
                     </p>
                   </div>
                 </li>
@@ -282,13 +264,13 @@ function EducationComponent() {
                       className={styles.detailTitle}
                       style={{ color: '#FFFFFF' }}
                     >
-                      Skills
+                      {t('skills')}
                     </p>
                     <p
                       className={styles.detailDesc}
                       style={{ color: '#FFFFFF' }}
                     >
-                      Regular meditation during the course
+                      {t('puc_skills')}
                     </p>
                   </div>
                 </li>
@@ -308,8 +290,8 @@ function EducationComponent() {
           >
             <div className={styles.courseHeader}>
               <span className={styles.courseName}>
-                Bahussuta Course{' '}
-                <span className={styles.smallText}>(BstC)</span>
+                {t('bahussuta_course')}{' '}
+                <span className={styles.smallText}>{t('bstc')}</span>
               </span>
               <img
                 className="d-block w-100 course-icon-max-width-99"
@@ -318,11 +300,7 @@ function EducationComponent() {
               />
             </div>
             <div className={styles.courseDescription}>
-              Bahussuta courses are the advanced theoretical training courses
-              that focus upon extensive and comprehensive studies on scriptures
-              especially following ancient methods of interpretation preserved
-              in Myanmar. There are few such courses based on the subjects
-              studied.
+              {t('bahussuta_description')}
             </div>
             <div className={styles.courseDetailListContainer}>
               <ul className={styles.courseDetailList}>
@@ -333,8 +311,8 @@ function EducationComponent() {
                     alt="Duration"
                   />
                   <div>
-                    <p className={styles.detailTitle}>Duration of the course</p>
-                    <p className={styles.detailDesc}>Depends on the subject</p>
+                    <p className={styles.detailTitle}>{t('duration_of_the_course')}</p>
+                    <p className={styles.detailDesc}>{t('depends_on_the_subject')}</p>
                   </div>
                 </li>
                 <li className={styles.courseDetailListItem}>
@@ -344,22 +322,11 @@ function EducationComponent() {
                     alt="Courses"
                   />
                   <div className={styles.courseListContainer}>
-                    <p className={styles.detailTitle}>Courses</p>
+                    <p className={styles.detailTitle}>{t('courses')}</p>
                     <ul>
-                      <li>The whole Vinaya Piṭaka and related literature</li>
-                      <li>The Dīgha Nikāya and related literature</li>
-                      <li>The Majjhima Nikāya related literature</li>
-                      <li>The Aṅguttara Nikāya related literature</li>
-                      <li> The Saṃyutta Nikāya related literature</li>
-                      <li>The whole Abhidhamma Piṭaka related literature</li>
-                      <li>
-                        Visuddhimagga, Paisambhidāmagga and literature related
-                        to meditation
-                      </li>
-                      <li>
-                        Advanced Pāḷi Studies; Kaccāyana, Moggallāna, Saddanīti
-                        traditions and modern philological studies
-                      </li>
+                      {t('bstc_courses', {}, { returnObjects: true }).map((course, i) => (
+                        <li key={i}>{course}</li>
+                      ))}
                     </ul>
                   </div>
                 </li>

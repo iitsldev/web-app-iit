@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './MainLayoutSection.module.css';
+import useTranslation from 'next-translate/useTranslation';
 
 function MainCommonLayoutSection({
   title,
@@ -8,6 +9,8 @@ function MainCommonLayoutSection({
   backgroundImg,
   info,
 }) {
+  const { t } = useTranslation('main-common-layout');
+
   return (
     <div className={styles.mainHeader}>
       <div

@@ -22,7 +22,11 @@ export default async function handler(req, res) {
         }
 
         const token = jwt.sign(
-            { userId: user.id },
+            {
+                userId: user.id,
+                username: user.username,
+                role: user.role
+            }, // Include role in token
             process.env.JWT_SECRET,
             { expiresIn: '30d' }
         );
