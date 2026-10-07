@@ -92,7 +92,7 @@ function Footer() {
                 <div className={styles.liContactUs}><Link href="/contactus">{t('contact_us')}</Link></div>
                 <div className={styles.contactDetails}>
                   <Link href="mailto:info@theravado.com">info@theravado.com</Link><br />
-                  <Link href="tel:0094767253178">+(94)767253178</Link>
+                  <Link href="tel:0094702478386">+(94)70-247-8386</Link>
                 </div>
                 <br />
                 <div className={styles.contactDetails}>{t('address')}</div>
